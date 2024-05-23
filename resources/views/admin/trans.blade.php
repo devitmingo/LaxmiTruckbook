@@ -35,27 +35,43 @@
                                                         
                                                         <div class="mb-3 col-md-3">
                                                             <label for="inputPassword4" class="form-label">Type</label>
-                                                             <select id="trans_type" onchange = "getDriver()" name="trans_type" class="form-select js-example-basic-single">
-                                                                <option value="Expenses" selected="selected">Expenses</option>
+                                                            <select id="trans_type" name="trans_type" onchange="onType();" class="form-select js-example-basic-single">
+                                                                <option>--Choose Type--</option>
+                                                                <option value="Vendor">Vendor Payment</option>
+                                                                <option value="Expenses" >Expenses</option>
                                                                 <option value="Income">Income</option>
                                                             </select>
-                                                            <script>document.getElementById("trans_type").value = "{{ old('trans_type',isset($data->trans_type) ? $data->trans_type : '' )}}"; </script>
-                                                        </div>
-
-                                                        <div class="mb-3 col-md-3">
-                                                            <label for="inputPassword4" class="form-label">Head Type   <a href="#"><i class="mdi mdi-plus-box" style="font-size:20px;" onclick="AddHead()"></i></a></label>
-                                                             <select id="head_type" onchange = "getDriver()" name="head_type" class="form-select js-example-basic-single">
-                                                             
+                                                                                                                   
                                                             </select>
-                                                            <script>document.getElementById("head_type").value = "{{ old('head_type',isset($data->head_type) ? $data->trans_type : '' )}}"; </script>
+                                                            <script>document.getElementById("trans_type").value = "{{ old('trans_type',isset($data->trans_type) ? $data->trans_type : '' )}}"; </script>
+                                                         </div>
+
+                                                        <div class="mb-3 col-md-3" id="head">
+                                                            <label for="inputPassword4" class="form-label" style="margin-bottom: 0px;">Head Type<a href="#"><i class="mdi mdi-plus-box" style="font-size:20px;" onclick="AddHead()"></i></a></label>
+                                                            <select id="head_type"  name="head_type" class="form-select js-example-basic-single">
+                                                            
+                                                            </select>
+                                                            <script>document.getElementById("head_type").value = "{{ old('head_type',isset($data->head_type) ? $data->head_type : '' )}}"; </script>
+                                                        </div>
+
+                                                        <div class="mb-3 col-md-3" id="ven" style="display:none">
+                                                            <label for="inputPassword4" class="form-label">Vendor Name </label>
+                                                            <select id="vendor_name"  name="vendor_name" class="form-select js-example-basic-single">
+                                                                <option>--Choose Type--</option>   
+                                                                @foreach($vendor as $row)
+                                                                    <option value="{{ $row->id }}">{{ $row->vendorName }}</option>
+                                                                @endforeach
+                                                            </select>
+                                                            <script>document.getElementById("vendor_name").value = "{{ old('vendor_name',isset($data->head_type) ? $data->head_type : '' )}}"; </script>
                                                         </div>
 
                                                         <div class="mb-3 col-md-3">
-                                                            <label for="inputPassword4" class="form-label">Pay Type</label>
-                                                             <select id="pay_type" onchange = "getDriver()" name="pay_type" class="form-select js-example-basic-single">
+                                                            <label for="inputPassword4" class="form-label">Pay Type <a href="#"><i class="mdi mdi-plus-box" style="font-size:20px;" onclick="addpaymentTypeModel()"></i></a></label>
+                                                             <select id="pay_type"  name="pay_type" class="form-select js-example-basic-single fetchPaymentType">
+                                                             <option>--Choose Pay Type--</option>
                                                                 @foreach($pay_types as $pay)
-                                                                <option value="{{ $pay->id }}" >{{ $pay->name }}</option>
-                                                               @endforeach
+                                                                    <option value="{{ $pay->id }}" >{{ $pay->name }}</option>
+                                                                @endforeach
                                                             </select>
                                                             <script>document.getElementById("pay_type").value = "{{ old('pay_type',isset($data->pay_type) ? $data->pay_type : '' )}}"; </script>
                                                         </div>
@@ -192,5 +208,18 @@ function fetchHead(id=0){
 }   
 //onload rung party function
 fetchHead();
+
+function onType(){
+    var type =$('#trans_type').val();
+    if(type == 'Vendor'){
+            $('#ven').show();
+            $('#head').hide();
+    }else{
+        $('#ven').hide();
+        $('#head').show();
+    }
+}
+onType();
 </script>
+@include('admin.mastermodel');
 @endsection

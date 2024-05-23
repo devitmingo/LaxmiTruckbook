@@ -38,7 +38,7 @@ use App\Http\Controllers\AddShortController;
                                                         <tr>
                                                             <th>SN</th>
                                                             <th>Transaction Type</th>
-                                                            <th>Head Name</th>
+                                                            <th>Head/Vendor Name</th>
                                                             <th>Pay Type</th>
                                                             <th>Amount</th>
                                                             <th>Date</th>
@@ -52,8 +52,11 @@ use App\Http\Controllers\AddShortController;
                                                         @foreach($records as $row)
                                                         @php
                                                          $pay_type = AdminController::getValueStatic2('advance_types','name','id',$row->pay_type);
-                                                         $head_type = AdminController::getValueStatic2('heads','name','id',$row->head_type);
-                                                        
+                                                         if($row->trans_type == 'Vendor'){
+                                                            $head_type = AdminController::getValueStatic2('vendors','vendorName','id',$row->head_type);
+                                                         }else{
+                                                            $head_type = AdminController::getValueStatic2('heads','name','id',$row->head_type);
+                                                         }
                                                         @endphp
                                                         <tr>
                                                             <td>{{ $loop->index+1 }}</td>
@@ -64,9 +67,9 @@ use App\Http\Controllers\AddShortController;
                                                             <td>{{ date('d-m-Y',strtotime($row->trans_date)) }}</td>
                                                             <td>{{ $row->notes }}</td>
                                                              <td>
-                                                             <!-- <a href="{{route('trans.edit',$row->id)}}" class="btn btn-success" rel="tooltip" title="Edit">
+                                                             <a href="{{route('trans.edit',$row->id)}}" class="btn btn-success" rel="tooltip" title="Edit">
                                                                     <i class="mdi mdi-square-edit-outline"></i>
-                                                                </a> -->
+                                                                </a>
                                                                 <a href="#" class="btn" rel="tooltip" title="Delete">
                                                                 
                                                                 <form action="{{route('trans.destroy',$row->id)}}" method="post">

@@ -6,6 +6,7 @@ use App\Models\Transaction;
 use App\Models\AdvanceType;
 use App\Models\Head;
 use Illuminate\Http\Request;
+use App\Models\Vendor;
 
 class TransactionController extends Controller
 {
@@ -16,7 +17,7 @@ class TransactionController extends Controller
      */
     public function index()
     {
-        $records = Transaction::all();
+        $records = Transaction::where('status',0)->get();
        return view('admin.transView',compact('records'));
     }
 
@@ -28,8 +29,9 @@ class TransactionController extends Controller
     public function create()
     {
          $pay_types = AdvanceType::all();
+         $vendor = Vendor::where('status',1)->get();
          $heads = Head::all();
-        return view('admin.trans',compact('pay_types','heads'));
+        return view('admin.trans',compact('pay_types','heads','vendor'));
     }
 
     /**
@@ -41,16 +43,30 @@ class TransactionController extends Controller
     public function store(Request $request)
     {
        $input = $request->all();
+
+        $request->validate([
+            'trans_type'=>'required|max:10',
+            'amount'=>'pay_type',
+            'amount'=>'required',
+            'trans_date'=>'required',
+            'notes'=>'required',
+        ]);
+
        $input['trans_date']=date('Y-m-d',strtotime($request->trans_date));
        if($request->trans_type=='Income'){
         $input['page']='10';
-       }else{
+       }
+       if($request->trans_type=='Expenses'){
         $input['page']='11';
        }
+       if($request->trans_type=='Vendor'){
+        $input['page']='12';
+       }
 
-        $input['createdby'] = auth()->user()->id;
-       $input['document'] = 'ok';
-        $input;
+       $input['head_type'] = isset($request->vendor_name) ? $request->vendor_name : $request->head_type;
+       $input['comapany_id'] = isset($company) ? $company : '0';
+       $input['createdby'] = isset(auth()->user()->id) ? auth()->user()->id : 0;
+       $input['session_id'] = isset($session) ? $session : '0';
        Transaction::create($input);
 
        return redirect()->back()->with('success','Transaction add Successfully');
@@ -74,9 +90,13 @@ class TransactionController extends Controller
      * @param  \App\Models\Transaction  $transaction
      * @return \Illuminate\Http\Response
      */
-    public function edit(Transaction $transaction)
+    public function edit($id)
     {
-        //
+        $pay_types = AdvanceType::all();
+         $vendor = Vendor::where('status',1)->get();
+         $heads = Head::all();
+         $data  = Transaction::find($id);
+        return view('admin.trans',compact('pay_types','heads','vendor','data'));
     }
 
     /**
@@ -86,9 +106,35 @@ class TransactionController extends Controller
      * @param  \App\Models\Transaction  $transaction
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Transaction $transaction)
+    public function update(Request $request, $id)
     {
-        //
+        $input = $request->all();
+        $request->validate([
+            'trans_type'=>'required|max:10',
+            'amount'=>'pay_type',
+            'amount'=>'required',
+            'trans_date'=>'required',
+            'notes'=>'required',
+        ]);
+
+        $input['trans_date']=date('Y-m-d',strtotime($request->trans_date));
+        if($request->trans_type=='Income'){
+         $input['page']='10';
+        }
+        if($request->trans_type=='Expenses'){
+         $input['page']='11';
+        }
+        if($request->trans_type=='Vendor'){
+         $input['page']='12';
+        }
+ 
+        $input['head_type'] = isset($request->vendor_name) ? $request->vendor_name : $request->head_type;
+        $input['comapany_id'] = isset($company) ? $company : '0';
+        $input['createdby'] = isset(auth()->user()->id) ? auth()->user()->id : 0;
+        $input['session_id'] = isset($session) ? $session : '0';
+        Transaction::where('id',$id)->update($input);
+ 
+        return redirect(route('trams.index'))->with('success','Transaction updated successfully');
     }
 
     /**
@@ -99,7 +145,7 @@ class TransactionController extends Controller
      */
     public function destroy($id)
     {
-        Transaction::find($id)->delete();
-        return redirect()->back()->with('success','Deleted');
+        Transaction::where('id',$id)->update(['status'=>1]);
+        return redirect()->back()->with('success','Transaction deleted successfully');
     }
 }

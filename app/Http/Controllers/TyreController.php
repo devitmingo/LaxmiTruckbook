@@ -65,9 +65,9 @@ class TyreController extends Controller
         $input['old_tyre_image']=$fileName1;
         $input['status']=0;
         $input['upload_date'] = date('Y-m-d',strtotime($request->upload_date));
-        $input['comapany_id'] = isset($company) ? $company : '';
+        $input['comapany_id'] = isset($company) ? $company : '0';
         $input['created_by'] = isset(auth()->user()->id) ? auth()->user()->id : 0;
-        $input['session_id'] = isset($session) ? $session : '';
+        $input['session_id'] = isset($session) ? $session : '0';
 
 
         $tyre = Tyre::create($input);

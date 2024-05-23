@@ -168,7 +168,7 @@ class AdminController extends Controller
         $column = $request->column;            
         $collection=DB::table($table)->where('status',1)->get();
         $select_option='';
-        $select_option.="<option value='' selected>Select</option>";
+        $select_option.="<option value='' >Select</option>";
         foreach ($collection as $row) {
             $select_option.="<option value='".$row->$id."'>".$row->$column."</option>";
         }

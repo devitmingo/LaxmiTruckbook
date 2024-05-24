@@ -107,9 +107,7 @@ hr{
                             <div class="col-12">
                                 <div class="card">
                                     <div class="card-body">
-                                        <a href="{{ route('trips.create') }}"><button  type="button" class="btn btn-primary right"> + Add Trip</button></a>
-                                        <br>
-                                        </br>
+                                       
                                         <ul class="nav nav-tabs nav-bordered mb-3">
                                             
                                         </ul> <!-- end nav-->

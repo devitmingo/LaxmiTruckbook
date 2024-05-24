@@ -167,5 +167,7 @@ Route::middleware(['auth'])->group(function () {
     //Add Vendor master
      Route::resource('/admin/vendor', VendorController::class);
 
+     //Add Vendor Leger Report
+    Route::get('/admin/vendor-report', [VendorController::class, 'vendorReports'])->name('vendorReports');
   });
 

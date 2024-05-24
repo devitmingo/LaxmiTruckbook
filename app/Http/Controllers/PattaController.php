@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Vehicle;
 use App\Models\Driver;
 use App\Models\Supplier;
+use Session;
 
 class PattaController extends Controller
 {

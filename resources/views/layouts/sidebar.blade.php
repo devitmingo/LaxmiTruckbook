@@ -207,6 +207,12 @@
                                 <span> Maintenance Report</span>
                             </a>
                         </li>
+                        <li class="side-nav-item">
+                            <a href="{{ route('vendorReports') }}" class="side-nav-link">
+                                <i class="uil-calender"></i>
+                                <span> Vendor Report</span>
+                            </a>
+                        </li>
                     </ul>
 
 

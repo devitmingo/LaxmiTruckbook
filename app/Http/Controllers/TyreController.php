@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Tyre;
 use Illuminate\Http\Request;
 use App\Models\Vehicle;
+use Session;
 
 class TyreController extends Controller
 {
@@ -64,6 +65,8 @@ class TyreController extends Controller
         $input['new_tyre_image']=$fileName;
         $input['old_tyre_image']=$fileName1;
         $input['status']=0;
+        $company = Session::get('company');
+        $session = Session::get('session');
         $input['upload_date'] = date('Y-m-d',strtotime($request->upload_date));
         $input['comapany_id'] = isset($company) ? $company : '0';
         $input['created_by'] = isset(auth()->user()->id) ? auth()->user()->id : 0;

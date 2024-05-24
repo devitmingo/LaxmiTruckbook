@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Vehicle;
 use App\Models\Driver;
 use App\Models\Supplier;
-
+use Session;
 
 class GearKlatchController extends Controller
 {
@@ -65,7 +65,9 @@ class GearKlatchController extends Controller
             'mistri'=>'max:100',
             'paymentType'=>'required|max:10',
             ]);
-
+        
+        $company = Session::get('company');
+        $session = Session::get('session');
         $input['date'] = date('Y-m-d',strtotime($request->date));
         $input['created_by']=isset(auth()->user()->id) ? auth()->user()->id : 0;
         $input['comapany_id']=isset(auth()->user()->comapany_id) ? auth()->user()->comapany_id : 0;

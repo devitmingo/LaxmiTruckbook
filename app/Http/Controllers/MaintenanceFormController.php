@@ -8,6 +8,7 @@ use App\Models\Vehicle;
 use App\Models\Driver;
 use App\Models\Vendor;
 use App\Models\Maintenance;
+use Session;
 
 class MaintenanceFormController extends Controller
 {
@@ -60,7 +61,8 @@ class MaintenanceFormController extends Controller
             'notes'=>'max:255',
          ]  
         );
-
+        $company = Session::get('company');
+        $session = Session::get('session');
         $input['date'] = date('Y-m-d',strtotime($request->date));
         $input['comapany_id'] = isset($company) ? $company : '';
         $input['created_by'] = isset(auth()->user()->id) ? auth()->user()->id : 0;

@@ -7,6 +7,7 @@ use App\Models\TruckType;
 use App\Models\Driver;
 use App\Models\Supplier;
 use Illuminate\Http\Request;
+use Session;
 
 class VehicleController extends Controller
 {
@@ -128,8 +129,9 @@ class VehicleController extends Controller
          $input['permit_expiry_date'] = date('Y-m-d',strtotime($request->permit_expiry_date));
          $input['r_c_expiry_date'] = date('Y-m-d',strtotime($request->r_c_expiry_date));
          $input['status']=0;
-        
-         $input['createdby']=isset(auth()->user()->id) ? auth()->user()->id : 0;
+         $company = Session::get('company');
+         $session = Session::get('session');
+         $input['created_by']=isset(auth()->user()->id) ? auth()->user()->id : 0;
          $input['comapany_id']=isset(auth()->user()->comapany_id) ? auth()->user()->comapany_id : 0;
          $res = Vehicle::create($input);
         return redirect()->back()->with('success','Vehicle added successfully');

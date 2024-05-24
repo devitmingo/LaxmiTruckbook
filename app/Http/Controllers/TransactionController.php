@@ -7,7 +7,7 @@ use App\Models\AdvanceType;
 use App\Models\Head;
 use Illuminate\Http\Request;
 use App\Models\Vendor;
-
+use Session;
 class TransactionController extends Controller
 {
     /**
@@ -62,6 +62,9 @@ class TransactionController extends Controller
        if($request->trans_type=='Vendor'){
         $input['page']='12';
        }
+
+       $company = Session::get('company');
+         $session = Session::get('session');
 
        $input['head_type'] = isset($request->vendor_name) ? $request->vendor_name : $request->head_type;
        $input['comapany_id'] = isset($company) ? $company : '0';

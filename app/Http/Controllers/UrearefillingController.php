@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Vehicle;
 use App\Models\Driver;
 use App\Models\Supplier;
+use Session;
 
 class UrearefillingController extends Controller
 {
@@ -55,6 +56,8 @@ class UrearefillingController extends Controller
             'paymentType'=>'required',
          ]
         );
+        $company = Session::get('company');
+        $session = Session::get('session');
         $input['comapany_id'] = isset($company) ? $company : '';
         $input['created_by'] = isset(auth()->user()->id) ? auth()->user()->id : 0;
         $input['session_id'] = isset($session) ? $session : '';

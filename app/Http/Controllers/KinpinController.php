@@ -114,6 +114,8 @@ class KinpinController extends Controller
             'self_warranty'=>'max:100',
             'paymentType'=>'required|max:10',
             ]);
+        $company = Session::get('company');
+        $session = Session::get('session');
         $input['date'] = date('Y-m-d',strtotime($request->date));
         $res = Kinpin::where('id',$id)->update($input);
         $input['created_by']=isset(auth()->user()->id) ? auth()->user()->id : 0;

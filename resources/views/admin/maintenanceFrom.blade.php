@@ -170,7 +170,7 @@
 
     function SlefWrrantyOnchange(){
         var self_warranty = $('#self_warranty').val();
-        if(self_warranty=='self'){
+        if(self_warranty=='Warranty'){
             $('#amount').val('0');
             $('#amount').attr('disabled','disabled');
         }else{

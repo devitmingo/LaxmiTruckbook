@@ -10,6 +10,7 @@
       </div>
       <div class="modal-body px-4 pb-4 pt-0">
                                                 <div class="row">
+                                                  <span id = "validation-errors"></span>
                                                 <div class="col-12">
                                                         <div class="mb-3">
                                                             <label class="control-label form-label">Party Name</label>

@@ -39,6 +39,7 @@ class AddShortController extends Controller
         if($request->page=='AddExpenses'){
 
             unset($input['page']);
+            $input['status'] =1;
             ExpenseType::create($input);
             return "1";
         }
@@ -46,7 +47,13 @@ class AddShortController extends Controller
 
         if($request->page=='addParty'){
 
+            $request->validate([
+                'partyName'=>'required|max:255',
+                'mobile'=>'required|max:10|min:10|unique:parties'
+            ]);
+
             unset($input['page']);
+            $input['status'] =1;
             Party::create($input);
             return "1";
         }
@@ -60,6 +67,7 @@ class AddShortController extends Controller
             $input['driver_id']=$request->driverName;
             unset($input['driverName']);
             $input['vehicleNumber'] = \Str::upper($request->vehicleNumber);
+            $input['status'] =1;
             Vehicle::create($input);
             return "1";
         }
@@ -69,6 +77,7 @@ class AddShortController extends Controller
         if($request->page=='addHead'){
 
             unset($input['page']);
+            $input['status'] =1;
             Head::create($input);
             return "1";
         }
@@ -77,6 +86,7 @@ class AddShortController extends Controller
         if($request->page=='addState'){
 
             unset($input['page']);
+            $input['status'] =1;
             Route::create($input);
             return "1";
         }
@@ -85,6 +95,7 @@ class AddShortController extends Controller
         if($request->page=='AddExpenses'){
 
             unset($input['page']);
+            $input['status'] =1;
             ExpenseType::create($input);
             return "1";
         }
@@ -93,6 +104,7 @@ class AddShortController extends Controller
         if($request->page=='xAddAdvanceType'){
 
             unset($input['page']);
+            $input['status'] =1;
             \App\Models\AdvanceType::create($input);
             return "1";
         }
@@ -102,6 +114,7 @@ class AddShortController extends Controller
             unset($input['page']);
             $input['expensesDate'] = date('Y-m-d',strtotime($request->expensesDate));
             $input['user_id'] =auth()->user()->id;
+            $input['status'] =1;
             Expenses::create($input);
             return "1";
         }
@@ -111,6 +124,7 @@ class AddShortController extends Controller
         if($request->page=='xAddChargeType'){
 
             unset($input['page']);
+            $input['status'] =1;
             \App\Models\ChargesType::create($input);
             return "1";
         }
@@ -122,6 +136,7 @@ class AddShortController extends Controller
             unset($input['page']);
             $input['chargesDate'] = date('Y-m-d',strtotime($request->chargesDate));
             $input['user_id'] =auth()->user()->id;
+            $input['status'] =1;
             \App\Models\PartyCharges::create($input);
             return "1";
         }

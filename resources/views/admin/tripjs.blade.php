@@ -15,24 +15,28 @@ function save_material(){
     var lr_table_id = $("#lr_table_id").val();
     var materialName = $("#materialName").val();
     var note = $("#note").val();
+    var status =true;
     if(lrNo ==''){
+        status =false;
         alert('Please LR No fill');
     }
     if(materialName ==''){
+        status =false;
         alert('Please Material Name Fill');
     }
-
-  $.ajax({
-  type:'GET',
-  url:'{{ url("save_material") }}?lr_no='+lrNo+'&id='+lr_table_id+'&material='+materialName+'&details='+note,
-  success:function(response){
-    fetchMaterial();
-      $("#lrNo").val('');
-      $("#lr_table_id").val('');
-      $('#materialName').val(''); 
-      $('#note').val(''); 
-  }
-  });
+    if(status ==true){
+        $.ajax({
+        type:'GET',
+        url:'{{ url("save_material") }}?lr_no='+lrNo+'&id='+lr_table_id+'&material='+materialName+'&details='+note,
+        success:function(response){
+            fetchMaterial();
+            $("#lrNo").val('');
+            $("#lr_table_id").val('');
+            $('#materialName').val(''); 
+            $('#note').val(''); 
+        }
+        });
+    }
 
 }   
 
@@ -313,16 +317,25 @@ function SaveParty() {
 
 var mpartyName = $("#mpartyName").val();
 var mmobile = $("#mmobile").val();
-
 var status=true;
 
 if (mpartyName == '') {
     status=false;
     alert('Please Enter Name');
 }
+if (mpartyName.length > 255) {
+    status=false;
+    alert('Party Name is more then 255 char');
+}
+
 if (mmobile == '') {
     status=false;
     alert('Please Enter mobile');
+}
+
+if (mmobile.length != 10) {
+    status=false;
+    alert('Please Enter 10 digit mobile number');
 }
 
 
@@ -336,7 +349,14 @@ $.ajax({
         $("#mmobile").val('');
         $("#addPartyModel").modal('hide');
         fetchParty();
-    }
+    },
+    error: function (xhr) {
+    $('#validation-errors').html('');
+        $.each(xhr.responseJSON.errors, function(key,value) {
+            $('#validation-errors').append('<div class="alert alert-danger">'+value+'</div');
+        }); 
+    },
+
 });
 }
 }

@@ -15,6 +15,7 @@
 
                 <div class="row">
                             <div class="col-12">
+                            <x-alert/>
                                 <div class="card">
                                     <div class="card-body">
                                  
@@ -91,8 +92,8 @@
                                                                     <input type="text" name="party_unit_per" onchange="onFreightRatechange()" class="form-control" id="party_unit_per" value="{{ old('party_unit_per',isset($data->party_unit_per) ? $data->party_unit_per : '' )  }}">
                                                                 </div>
                                                                 <div class="col-md-3">
-                                                                    <label for="inputPassword4" class="form-label">Party Freight Amount*</label>
-                                                                    <input type="text" name="partyFreightAmount" class="form-control" id="partyFreightAmount" value="{{ old('partyFreightAmount',isset($data->partyFreightAmount) ? $data->partyFreightAmount : '' )  }}">
+                                                                    <label for="inputPassword4" class="form-label">Freight Amount*</label>
+                                                                    <input type="text" name="partyFreightAmount"  class="form-control" id="partyFreightAmount" value="{{ old('partyFreightAmount',isset($data->partyFreightAmount) ? $data->partyFreightAmount : '' )  }}">
                                                                 </div>
                                                             
                                                             <span style="display:none">
@@ -154,7 +155,7 @@
                                                                 <label for="inputPassword4" class="form-label">Diesel Advance from Transport</label>
                                                                 <input type="text" name="diesel_adv_transport"  id="diesel_adv_transport" class="form-control" 
                                                                 value="{{ old('diesel_adv_transport',isset($data->diesel_adv_transport) ? $data->diesel_adv_transport :'' )  }}"
-                                                                >
+                                                                disabled>
                                                             </div>
 
 

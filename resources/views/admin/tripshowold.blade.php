@@ -104,7 +104,7 @@ tr:nth-child(even) {
 
                                                        <!--<div class="mb-2 col-md-2">-->
                                                        <!--     <label for="inputPassword4" class="form-label">Status</label>-->
-                                                       <!--      <select id="status" name="status" class="form-select js-example-basic-single">-->
+                                                       <!--      <select id="status1" name="status" class="form-select js-example-basic-single">-->
                                                        <!--         <option value="">Select</option>-->
                                                        <!--         <option value="1">Start</option>-->
                                                        <!--         <option value="2">Complete Trip</option>-->
@@ -112,7 +112,7 @@ tr:nth-child(even) {
                                                        <!--         <option value="4">POD Submited</option>-->
                                                        <!--         <option value="5">Settlement</option>-->
                                                        <!--     </select>-->
-                                                       <!--      <script> $("#status").val(<?php echo isset($_GET['status']) ? $_GET['status'] : ''  ?>);</script>-->
+                                                       <!--      <script> $("#status").val(<?php echo isset($_GET['status1']) ? $_GET['status'] : ''  ?>);</script>-->
                                                       
                                                        <!-- </div>-->
 

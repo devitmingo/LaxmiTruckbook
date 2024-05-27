@@ -13,6 +13,7 @@ use Session;
 use Validator;
 use Auth;
 use DB;
+use App\Models\Vehicle;
 
 class AdminController extends Controller
 {
@@ -120,7 +121,10 @@ class AdminController extends Controller
 
     public function dashboard()
     {
-        return view('admin.dashboard');
+
+        $vehicles = Vehicle::all();
+        $drivers = Driver::all();
+        return view('admin.dashboard',compact('vehicles','drivers'));
     }
 
 

@@ -38,7 +38,7 @@
                                                         
                                                         <div class="mb-3 col-md-3">
                                                              <label for="inputPassword4" class="form-label">Date</label>
-                                                             <input type="date" class="form-control" name="date" id="date" value="{{ old('date',isset($data->date) ? $data->date : '' )}}">
+                                                             <input type="text" class="form-control datepicker" name="date" id="date" value="{{ old('date',isset($data->date) ? $data->date : '' )}}">
                                                         </div>
                                                         <div class="mb-3 col-md-3">
                                                              <label for="inputPassword4" class="form-label">Maintenance Type</label>
@@ -174,6 +174,7 @@
             $('#amount').val('0');
             $('#amount').attr('disabled','disabled');
         }else{
+            $('#amount').val('');
             $('#amount').removeAttr('disabled');
         }
 

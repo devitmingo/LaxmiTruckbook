@@ -35,11 +35,11 @@ use App\Http\Controllers\AddShortController;
                                     <div class="card-body">
                                         <div class="row">
                                             <div class="mb-2 col-md-2">
-                                                <input class="form-control" type="date" name="from_date" id="from_date" value="<?php echo isset($_GET['from_date']) ? date('m/d/Y',strtotime($_GET['from_date'])) : ''  ?>" />
+                                                <input class="form-control datepicker" type="text" name="from_date" id="from_date" value="<?php echo isset($_GET['from_date']) ? date('m/d/Y',strtotime($_GET['from_date'])) : ''  ?>" />
                                             </div>
 
                                             <div class="mb-2 col-md-2">
-                                                <input  class="form-control" type="date" name="to_date" id="to_date" value="<?php echo isset($_GET['to_date']) ? date('m/d/Y',strtotime($_GET['to_date'])) : ''  ?>"/>
+                                                <input  class="form-control datepicker" type="text" name="to_date" id="to_date" value="<?php echo isset($_GET['to_date']) ? date('m/d/Y',strtotime($_GET['to_date'])) : ''  ?>"/>
                                             </div>
 
                                             <div class="mb-2 col-md-2">

@@ -122,7 +122,7 @@ class VehicleController extends Controller
          $input['tax_pay_document']=$tax_pay_document;
          $input['permit_document']=$permit_document;
          $input['insurance_document']=$insurance_document;
-         $input['insurance_start_date'] = date('Y-m-d',strtotime($request->insurance_start_date));
+         //$input['insurance_start_date'] = date('Y-m-d',strtotime($request->insurance_start_date));
          $input['insurance_expiry_date'] = date('Y-m-d',strtotime($request->insurance_expiry_date));
          $input['fitness_expiry_date'] = date('Y-m-d',strtotime($request->fitness_expiry_date));
          $input['tax_pay_expiry_date'] = date('Y-m-d',strtotime($request->tax_pay_expiry_date));
@@ -183,9 +183,7 @@ class VehicleController extends Controller
            'vehicle_model'=>'max:20',
            'manufacturer_company'=>'max:70',
            'chassis_no'=>'max:30',
-           'engine_no'=>'max:30',
-           'insurance_start_date'=>'date',
-           'insurance_expiry_date'=>'date'
+           'engine_no'=>'max:30'
         ]
            
        );
@@ -237,7 +235,7 @@ class VehicleController extends Controller
        $insurance_document ='';
        if ($request->hasFile('insurance_document')) {
            $rand_val = date('YMDHIS') . rand(11111, 99999);
-           $image_file_name = md5($rand_val);
+           $image_file_name = md5($rand_val); 
            $file = $request->file('insurance_document');
            $insurance_document = $image_file_name . '.' . $file->getClientOriginalExtension();
            $destinationPath = public_path() . '/vehicle_doc';
@@ -250,7 +248,7 @@ class VehicleController extends Controller
         $input['driver_id']=$request->driverName;
         unset($input['driverName']);
         
-        $input['insurance_start_date'] = date('Y-m-d',strtotime($request->insurance_start_date));
+        //$input['insurance_start_date'] = date('Y-m-d',strtotime($request->insurance_start_date));
         $input['insurance_expiry_date'] = date('Y-m-d',strtotime($request->insurance_expiry_date));
         $input['fitness_expiry_date'] = date('Y-m-d',strtotime($request->fitness_expiry_date));
         $input['tax_pay_expiry_date'] = date('Y-m-d',strtotime($request->tax_pay_expiry_date));

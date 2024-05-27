@@ -139,11 +139,11 @@
                                                          </div>
                                                          <div class="mb-3 col-md-3">
                                                             <label for="inputPassword4" class="form-label">RC Expiry Date</label>
-                                                           <input type="date" class="form-control" name="r_c_expiry_date" id="r_c_expiry_date" value="{{ old('r_c_expiry_date',isset($data->r_c_expiry_date) ? $data->r_c_expiry_date : '' )}}">
+                                                           <input type="text" class="form-control datepicker" name="r_c_expiry_date" id="r_c_expiry_date" value="{{ old('r_c_expiry_date',isset($data->r_c_expiry_date) ? $data->r_c_expiry_date : '' )}}">
                                                          </div>
                                                          <div class="mb-3 col-md-3" style="display:none;">
                                                             <label for="inputPassword4" class="form-label">Insurance Start Date</label>
-                                                           <input type="date" class="form-control"  name="insurance_start_date" id="insurance_start_date" value="{{ old('insurance_start_date',isset($data->insurance_start_date) ? $data->insurance_start_date : '' )}}" >
+                                                           <input type="text" class="form-control datepicker"  name="insurance_start_date" id="insurance_start_date" value="{{ old('insurance_start_date',isset($data->insurance_start_date) ? $data->insurance_start_date : '' )}}" >
                                                          </div>
                                                          <div class="mb-3 col-md-3">
                                                             <label for="inputPassword4" class="form-label">Insurance Document</label>
@@ -151,7 +151,7 @@
                                                          </div>
                                                          <div class="mb-3 col-md-3">
                                                             <label for="inputPassword4" class="form-label">Insurance Expiry Date</label>
-                                                           <input type="date" class="form-control" name="insurance_expiry_date" id="insurance_expiry_date" value="{{ old('insurance_expiry_date',isset($data->insurance_expiry_date) ? $data->insurance_expiry_date : '' )}}">
+                                                           <input type="text" class="form-control datepicker" name="insurance_expiry_date" id="insurance_expiry_date" value="{{ old('insurance_expiry_date',isset($data->insurance_expiry_date) ? $data->insurance_expiry_date : '' )}}">
                                                          </div>
 
                                                          <div class="mb-3 col-md-3">
@@ -160,7 +160,7 @@
                                                          </div>
                                                          <div class="mb-3 col-md-3">
                                                             <label for="inputPassword4" class="form-label">Fitness Expiry Date</label>
-                                                           <input type="date" class="form-control" name="fitness_expiry_date" id="fitness_expiry_date" value="{{ old('fitness_expiry_date',isset($data->fitness_expiry_date) ? $data->fitness_expiry_date : '' )}}">
+                                                           <input type="text" class="form-control datepicker" name="fitness_expiry_date" id="fitness_expiry_date" value="{{ old('fitness_expiry_date',isset($data->fitness_expiry_date) ? $data->fitness_expiry_date : '' )}}">
                                                          </div>
 
                                                          <div class="mb-3 col-md-3">
@@ -170,7 +170,7 @@
 
                                                          <div class="mb-3 col-md-3">
                                                             <label for="inputPassword4" class="form-label">Tax Pay Expiry Date</label>
-                                                           <input type="date" class="form-control" name="tax_pay_expiry_date" id="tax_pay_expiry_date" value="{{ old('tax_pay_expiry_date',isset($data->tax_pay_expiry_date) ? $data->tax_pay_expiry_date : '' )}}">
+                                                           <input type="text" class="form-control datepicker" name="tax_pay_expiry_date" id="tax_pay_expiry_date" value="{{ old('tax_pay_expiry_date',isset($data->tax_pay_expiry_date) ? $data->tax_pay_expiry_date : '' )}}">
                                                          </div>
 
                                                          <div class="mb-3 col-md-3">
@@ -180,7 +180,7 @@
 
                                                          <div class="mb-3 col-md-3">
                                                             <label for="inputPassword4" class="form-label">Permit Expiry Date</label>
-                                                           <input type="date" class="form-control" name="permit_expiry_date" id="permit_expiry_date" value="{{ old('permit_expiry_date',isset($data->permit_expiry_date) ? $data->permit_expiry_date : '' )}}">
+                                                           <input type="text" class="form-control datepicker" name="permit_expiry_date" id="permit_expiry_date" value="{{ old('permit_expiry_date',isset($data->permit_expiry_date) ? $data->permit_expiry_date : '' )}}">
                                                          </div>
                                                          <div class="mb-3 col-md-3">
                                                              <label for="inputPassword4" class="form-label">Status</label>
@@ -190,7 +190,7 @@
                                                                  <option value="1">Enable</option>
                                                                                                                    
                                                             </select>
-                                                            <script>document.getElementById("status").value = "{{ old('status',isset($data->status) ? $data->statuss : '1' )}}"; </script>
+                                                            <script>document.getElementById("status").value = "{{ old('status',isset($data->status) ? $data->status : '1' )}}"; </script>
                                                         </div>
                                                          <div class="mb-3 col-md-3">
                                                          </br>   

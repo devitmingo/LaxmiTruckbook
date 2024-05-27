@@ -32,7 +32,7 @@
                                                     <div class="col-12">
                                                         <div class="mb-3">
                                                             <label class="control-label form-label">Payment Date</label>
-                                                            <input type="date" class="form-control" name="spayDate" id="spayDate" required />
+                                                            <input type="text" class="form-control datepicker" name="spayDate" id="spayDate" required />
                                                          </div>
                                                     </div>
                                                     <div class="col-12">
@@ -73,7 +73,7 @@
                                                     <div class="col-12">
                                                         <div class="mb-3">
                                                             <label class="control-label form-label">Unloading Date</label>
-                                                            <input type="date" class="form-control" placeholder="End Date"  name="endDate" id="endDate" required />
+                                                            <input type="text" class="form-control datepicker" placeholder="End Date"  name="endDate" id="endDate" required />
                                                         </div>
                                                     </div>
                                                     <div class="col-6">
@@ -196,7 +196,7 @@
                                                     <div class="col-12">
                                                         <div class="mb-3">
                                                             <label class="control-label form-label">POD Receive Date</label>
-                                                            <input type="date" class="form-control" placeholder="POD Receive Date"  name="pod_receuve_date" id="pod_receuve_date" required />
+                                                            <input type="text" class="form-control datepicker" placeholder="POD Receive Date"  name="pod_receuve_date" id="pod_receuve_date" required />
                                                         </div>
                                                     </div>
 
@@ -244,7 +244,7 @@
                                                     <div class="col-12">
                                                         <div class="mb-3">
                                                             <label class="control-label form-label">POD Receive Date</label>
-                                                            <input type="date" class="form-control" placeholder="POD Receive Date"  name="pod_receuve_date" id="pod_receuve_date" required />
+                                                            <input type="text" class="form-control datepicker" placeholder="POD Receive Date"  name="pod_receuve_date" id="pod_receuve_date" required />
                                                         </div>
                                                     </div>
 
@@ -292,7 +292,7 @@
                                                     <div class="col-12">
                                                         <div class="mb-3">
                                                             <label class="control-label form-label">POD Submit Date</label>
-                                                            <input type="date" class="form-control" placeholder="POD Submit Date"  name="pod_submitted_date" id="pod_submitted_date" required />
+                                                            <input type="text" class="form-control datepicker" placeholder="POD Submit Date"  name="pod_submitted_date" id="pod_submitted_date" required />
                                                         </div>
                                                     </div>
 

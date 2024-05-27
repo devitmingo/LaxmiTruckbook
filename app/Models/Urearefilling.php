@@ -8,5 +8,5 @@ use Illuminate\Database\Eloquent\Model;
 class Urearefilling extends Model
 {
     use HasFactory;
-    protected $fillable =[ 'vehicle_id', 'driver_id', 'place', 'meter_reading', 'refilling_date', 'liter', 'amount', 'created_by', 'comapany_id', 'created_at', 'updated_at', 'paymentType', 'vendorName', 'session_id'];
+    protected $fillable =[ 'id', 'date', 'maintenance', 'vehicleNumber', 'driverName', 'meterReading', 'productType', 'place', 'shop_name', 'staff', 'self_warranty', 'amount', 'paymentType', 'vendorName', 'notes', 'created_by', 'session_id', 'comapany_id', 'created_at', 'updated_at', 'type', 'page'];
 }

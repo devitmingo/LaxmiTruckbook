@@ -52,7 +52,7 @@ class UrearefillingController extends Controller
             'meter_reading'=>'required|max:255',
             'refilling_date'=>'date',
             'liter'=>'required|max:30',
-            'amount'=>'required',
+            'amount'=>'sometimes|required',
             'paymentType'=>'required',
          ]
         );
@@ -61,6 +61,8 @@ class UrearefillingController extends Controller
         $input['comapany_id'] = isset($company) ? $company : '';
         $input['created_by'] = isset(auth()->user()->id) ? auth()->user()->id : 0;
         $input['session_id'] = isset($session) ? $session : '';
+        $input['refilling_date'] = date('Y-m-d',strtotime($request->refilling_date));
+        $input['amount'] = isset($request->amount) ? $request->amount : '0';
         Urearefilling::create($input);
         return redirect(route('urea.index'))->with('success','Urea Refilling added successfully');
     }
@@ -112,6 +114,7 @@ class UrearefillingController extends Controller
            'paymentType'=>'required',
         ]
        );
+       $input['refilling_date'] = date('Y-m-d',strtotime($request->refilling_date));
        $input['created_by']=isset(auth()->user()->id) ? auth()->user()->id : 0;
        $input['comapany_id']=isset(auth()->user()->comapany_id) ? auth()->user()->comapany_id : 0;
        unset($input['_method']);

@@ -120,7 +120,7 @@
                                                             <hr>
                                                             <div class="col-md-4">
                                                                 <label for="inputPassword4" class="form-label">Start Date*</label>
-                                                                <input type="date" name="startDate"  id="startDate" class="form-control" id="inputCity" 
+                                                                <input type="text" name="startDate"  id="startDate" class="form-control datepicker" id="inputCity" 
                                                                 value="{{ old('startDate',isset($data->startDate) ? $data->startDate : date('m-d-Y') )  }}">
                                                             </div>
 

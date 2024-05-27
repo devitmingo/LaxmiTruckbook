@@ -126,19 +126,27 @@ class VendorController extends Controller
         $toDate = date('Y-m-d', strtotime(date('Y-m-d'))); 
        }
 
-        $condition="date between '".$fromDate."' AND '".$toDate."'";
-        $condition2="trans_date between '".$fromDate."' AND '".$toDate."'";
-
-        $condition3="AND  vendorName = '".$request->vendorName."'";
-        $condition4="AND trans_type = 'Vendor' AND head_type ='".$request->vendorName."'";
+       //condition
+        $condition="date between '".$fromDate."' AND '".$toDate."' AND paymentType='credit' AND vendorName = '".$request->vendorName."'";
         
-         $openingBalance = $this->VendorOpening($fromDate,$request->vendorName);
+        $condition2="trans_date between '".$fromDate."' AND '".$toDate."' AND trans_type = 'Vendor' AND head_type ='".$request->vendorName."'";
+        
+        $condition3="refilling_date between '".$fromDate."' AND '".$toDate."' AND paymentType='credit' AND vendorName = '".$request->vendorName."'";
+
+        $condition4 ="upload_date between '".$fromDate."' AND '".$toDate."' AND paymentType='credit' AND vendor_name = '".$request->vendorName."'";
+        
+        $openingBalance = $this->VendorOpening($fromDate,$request->vendorName);
 
         
 
-         $records = DB::select("SELECT id AS id, date as date, vehicleNumber as name, amount AS amount ,paymentType,type FROM maintenance_forms  WHERE $condition $condition3
+
+        $records = DB::select("SELECT id AS id, date as date, vehicleNumber as name, amount AS amount ,paymentType,type,page FROM maintenance_forms  WHERE $condition
         UNION 
-        SELECT id AS id,trans_date AS date,head_type as name ,amount AS amount, pay_type as paymentType,type FROM transactions WHERE $condition2 $condition4 order by date
+        SELECT id AS id, refilling_date as date, vehicle_id as name, amount AS amount ,paymentType,type,page FROM urearefillings  WHERE $condition3
+        UNION
+        SELECT id AS id, upload_date as date, vechicle_id as name, amount AS amount ,paymentType,type,page FROM tyres  WHERE $condition4
+        UNION 
+        SELECT id AS id,trans_date AS date,head_type as name ,amount AS amount, pay_type as paymentType,type,page FROM transactions WHERE $condition2 order by date
          ");  
       
        

@@ -64,13 +64,13 @@ hr{
                                                             <input type="hidden" id="myInput" class="form-control" onkeyup="myFunction()" placeholder="Search..">
                                                        
                                                             <label for="inputPassword4" class="form-label">From Date</label>
-                                                             <input type="date" name="from_date"  id="from_date" class="form-control" 
+                                                             <input type="text" name="from_date"  id="from_date" class="form-control datepicker" 
                                                             value="{{ isset($_GET['from_date']) ? $_GET['from_date'] : ''  }}">
                                                         </div>
                                                         
                                                        <div class="col-md-2">
                                                             <label for="inputPassword4" class="form-label">To Date</label>
-                                                            <input type="date" name="to_date"  id="to_date" class="form-control" id="inputCity"
+                                                            <input type="text" name="to_date"  id="to_date" class="form-control datepicker" id="inputCity"
                                                              value="{{ isset($_GET['to_date']) ? $_GET['to_date'] : ''  }}">
                                                        </div>
                                                         
@@ -139,18 +139,11 @@ hr{
                                                             <th>Loading Date<hr>Unloading Date</th>
                                                             <th>From<hr>To</th>
                                                             <th>Trip Details</th>
-                                                           
                                                             <th>Shortage Amount</th>
-                                                           
                                                             <th>Advance</th>
-                                                            
-                                                           
                                                             <th>Extra</th>
-                                                           
                                                             <th>Total Party</th>
                                                             <th>Total Saving</th>
-                                                            
-                                                            
                                                             <th>Action</th>
                                                         </tr>
                                                     </thead>
@@ -188,10 +181,6 @@ hr{
                                                   $partyBalance =$rate*$loadig_weight -$short_amount - $shortage_amount- $diesel_adv_transport  - $driver_cash_transport-$builty_commission;
                                                   $total_saving = $partyBalance - $extra_diesel_amout - $extra_expenses-$toll_amount;
                                                 @endphp
-
-                                                    
-
-
                                                         <tr>
                                                             <td>{{ isset($vehicleNumber) ? $vehicleNumber : ''  }} 
                                                                 <!-- <span style="color:blue;">( {{ isset($ownership) ? $ownership : ''  }} )</span> -->

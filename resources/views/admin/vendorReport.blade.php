@@ -64,13 +64,13 @@ hr{
                                                             <input type="hidden" id="myInput" class="form-control" onkeyup="myFunction()" placeholder="Search..">
                                                        
                                                             <label for="inputPassword4" class="form-label">From Date</label>
-                                                             <input type="date" name="fromDate"  id="fromDate" class="form-control" 
+                                                             <input type="text" name="fromDate"  id="fromDate" class="form-control datepicker" 
                                                             value="{{ isset($_GET['fromDate']) ? $_GET['fromDate'] : ''  }}">
                                                         </div>
                                                         
                                                        <div class="col-md-2">
                                                             <label for="inputPassword4" class="form-label">To Date</label>
-                                                            <input type="date" name="toDate"  id="toDate" class="form-control" id="inputCity"
+                                                            <input type="text" name="toDate"  id="toDate" class="form-control datepicker" 
                                                              value="{{ isset($_GET['toDate']) ? $_GET['toDate'] : ''  }}">
                                                        </div>
                                                         

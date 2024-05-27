@@ -85,7 +85,7 @@
 
                                                         <div class="mb-3 col-md-3">
                                                              <label for="inputPassword4" class="form-label">Date</label>
-                                                             <input type="date" class="form-control" name="trans_date" id="trans_date"
+                                                             <input type="text" class="form-control datepicker" name="trans_date" id="trans_date"
                                                              value="{{ old('trans_date',isset($data->trans_date) ? $data->trans_date : '' )}}">
                                                         </div>
 

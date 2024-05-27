@@ -53,7 +53,7 @@
 
                                                         <div class="mb-3 col-md-3">
                                                              <label for="inputPassword4" class="form-label">Date of Joining</label>
-                                                             <input type="date" placeholder="Date of Joining" class="form-control" name="date_of_joining" id="date_of_joining"
+                                                             <input type="text" placeholder="Date of Joining" class="form-control datepicker" name="date_of_joining" id="date_of_joining"
                                                              value="{{ old('date_of_joining',isset($data->date_of_joining) ? $data->date_of_joining : '' )}}">
                                                         </div>
 
@@ -89,7 +89,7 @@
 
                                                         <div class="mb-3 col-md-3">
                                                              <label for="inputPassword4" class="form-label">Driving Licence Expiry</label>
-                                                             <input type="date" class="form-control" name="driving_licence_expiry" id="driving_licence_expiry"
+                                                             <input type="text" class="form-control datepicker" name="driving_licence_expiry" id="driving_licence_expiry"
                                                              value="{{ old('driving_licence_expiry',isset($data->driving_licence_expiry) ? $data->driving_licence_expiry : '' )}}">
                                                         </div>
 
@@ -107,12 +107,12 @@
 
                                                         <div class="mb-3 col-md-3">
                                                              <label for="inputPassword4" class="form-label">Date of Leaving</label>
-                                                             <input type="date" class="form-control"  placeholder="Date of Leaving" name="date_of_leave" id="date_of_leave"
+                                                             <input type="text" class="form-control datepicker"  placeholder="Date of Leaving" name="date_of_leave" id="date_of_leave"
                                                              value="{{ old('date_of_leave',isset($data->date_of_leave) ? $data->date_of_leave : '' )}}">
                                                         </div>
-                                                        <div class="mb-3 col-md-3">
+                                                        <div class="col-md-3">
                                                              <label for="inputPassword4" class="form-label">Status</label>
-                                                             <select id="status" name="status" class="form-select js-example-basic-single">
+                                                             <select  name="status" class="form-select js-example-basic-single">
                                                                 <option>--Choose Status--</option>
                                                                  <option value="0">Disable</option>
                                                                  <option value="1">Enable</option>

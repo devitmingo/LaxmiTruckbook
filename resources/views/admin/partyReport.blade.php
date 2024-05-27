@@ -25,10 +25,6 @@ use App\Http\Controllers\AddShortController;
                             <div class="col-12">
                                 <div class="card">
                                     <div class="card-body">
-                                      
-                                        <ul class="nav nav-tabs nav-bordered mb-3">
-                                            
-                                        </ul> <!-- end nav-->
                                         <div class="tab-content">
                                             <div class="tab-pane show active" id="buttons-table-preview">
                                                 <table  class="table table-striped dt-responsive nowrap w-100">
@@ -45,10 +41,11 @@ use App\Http\Controllers\AddShortController;
                                                   
                                                 
                                                    <tbody>
-                                                        @php
-                                                    $total_PartyBalance=0;
-                                                   @endphp
-                                                      @foreach($records as $row)
+                                                    @php
+                                                        $i=1;
+                                                        $total_PartyBalance=0;
+                                                    @endphp
+                                                    @foreach($records as $row)
                                                         @php 
                                                 
                                                         $partyBalance= AddShortController::totalPartyBalance($row->id);
@@ -57,14 +54,15 @@ use App\Http\Controllers\AddShortController;
                                                         @endphp
                                                         @if($partyBalance!=0)
                                                         
-                                                         <tr>
-                                                            <td>{{ $loop->index+1 }}</td>
-                                                            <td> <a href="{{ route('partyBalanceList',$row->id) }}" >{{ isset($row->partyName) ? $row->partyName : ''  }}</a></td>
-                                                            <td><a href="{{ route('partyBalanceList',$row->id) }}" class="btn btn-primary" > 
-                                                            {{ isset($partyBalance) ? round($partyBalance) : ''  }}  </a></td>
-                                                             </tr>
-                                                            
+                                                            <tr>
+                                                                <td>{{ $i }}</td>
+                                                                <td> <a href="{{ route('partyBalanceList',$row->id) }}" >{{ isset($row->partyName) ? $row->partyName : ''  }}</a></td>
+                                                                <td><a href="{{ route('partyBalanceList',$row->id) }}" class="btn btn-primary" > 
+                                                                {{ isset($partyBalance) ? round($partyBalance) : ''  }}  </a></td>
+                                                            </tr>
+                                                            @php $i++; @endphp
                                                         @endif
+                                                       
                                                     @endforeach
                                                     </tbody>
                                                     <tfoot>

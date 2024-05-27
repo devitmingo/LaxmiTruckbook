@@ -64,12 +64,21 @@
 
                                                         <div class="mb-3 col-md-3">
                                                             <label for="inputPassword4" class="form-label">Refilling Date</label>
-                                                            <input type="date" class="form-control" name="refilling_date" id="refilling_date" value="{{ old('refilling_date',isset($data->refilling_date) ? $data->refilling_date : '' )}}">
+                                                            <input type="text" class="form-control datepicker" name="refilling_date" id="refilling_date" value="{{ old('refilling_date',isset($data->refilling_date) ? $data->refilling_date : '' )}}">
                                                         </div>
 
                                                         <div class="mb-3 col-md-3">
                                                             <label for="inputPassword4" class="form-label">Liter</label>
                                                             <input type="text" class="form-control" name="liter" id="liter" value="{{ old('liter',isset($data->liter) ? $data->liter : '' )}}">
+                                                        </div>
+                                                        <div class="mb-3 col-md-3">
+                                                            <label for="inputPassword4" class="form-label" on>Self/Warranty Type</label>
+                                                            <select id="self_warranty" class="form-select" name="self_warranty" onchange="SlefWrrantyOnchange()">
+                                                                <option value="">-Select-</option>
+                                                                <option value="self">Self</option>
+                                                                <option value="Warranty">Warranty</option>
+                                                            </select>
+                                                            <script>document.getElementById("self_warranty").value = "{{ old('self_warranty',isset($data->self_warranty) ? $data->self_warranty : '' )}}"; </script>
                                                         </div>
                                                         <div class="mb-3 col-md-3">
                                                             <label for="inputPassword4" class="form-label">Amount</label>
@@ -127,5 +136,17 @@
                 }
     }
     paymentOnchange();
+
+    function SlefWrrantyOnchange(){
+        var self_warranty = $('#self_warranty').val();
+        if(self_warranty=='Warranty'){
+            $('#amount').val('0');
+            $('#amount').attr('disabled','disabled');
+        }else{
+            $('#amount').val('');
+            $('#amount').removeAttr('disabled');
+        }
+
+    }
 </script>
 @endsection

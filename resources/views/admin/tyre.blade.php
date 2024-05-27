@@ -600,7 +600,7 @@
                                                     <div class="col-6">
                                                         <div class="mb-3">
                                                             <label class="control-label form-label">Upload Date</label>
-                                                            <input class="form-control" placeholder="Upload Date" type="date" name="upload_date" id="upload_date" required />
+                                                            <input class="form-control datepicker" placeholder="Upload Date" type="text" name="upload_date" id="upload_date" required />
                                                             
                                                         </div>
                                                     </div>

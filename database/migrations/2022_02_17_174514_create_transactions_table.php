@@ -25,6 +25,7 @@ class CreateTransactionsTable extends Migration
             $table->integer('page')->comment('10:expenses,11:income');
             $table->integer('status')->comment('1:delete,0:not-delete')->default(0);
             $table->tinyInteger('createdby');
+            $table->string('type',2)->default('dr');
             $table->timestamps();
         });
     }

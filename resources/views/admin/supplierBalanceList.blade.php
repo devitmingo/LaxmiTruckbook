@@ -114,7 +114,7 @@ use App\Http\Controllers\AddShortController;
                                                 </table>    
                                                 </div> <!-- end preview-->  
                                                 <div class="mb-3 col-md-3">
-                                                     <input  type="date" class="form-control" name="paymentDate">
+                                                     <input  type="text" class="form-controldatepicker" name="paymentDate">
                                                 </div>
                                                 <div class="mb-3 col-md-3">
                                                              <select class="form-select advanceType" name="spayType" id="spayType" >

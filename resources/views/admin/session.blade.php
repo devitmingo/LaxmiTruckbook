@@ -34,12 +34,12 @@
                                                         <div class="mb-3 col-md-3">
                                                            
                                                              <label for="inputPassword4" class="form-label">From Date</label>
-                                                             <input type="date" class="form-control" name="from_date" id="inputCity" value="{{ old('from_date',isset($data->from_date) ? $data->from_date : '' )}}">
+                                                             <input type="text" class="form-control datepicker" name="from_date" id="inputCity" value="{{ old('from_date',isset($data->from_date) ? $data->from_date : '' )}}">
                                                         
                                                         </div>
                                                         <div class="mb-3 col-md-3">
                                                              <label for="inputPassword4" class="form-label">To Date</label>
-                                                             <input type="date" class="form-control" name="to_date" id="inputCity"
+                                                             <input type="text" class="form-control datepicker" name="to_date" id="inputCity"
                                                              value="{{ old('to_date',isset($data->to_date) ? $data->to_date : '' )}}"
                                                              
                                                              >

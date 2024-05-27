@@ -32,6 +32,8 @@ class CreateMaintenanceFormsTable extends Migration
             $table->integer('created_by')->nullable();
             $table->integer('session_id')->nullable();
             $table->integer('comapany_id')->nullable();
+            $table->integer('page')->nullable();
+            $table->string('type',2)->default('cr');
             $table->timestamps();
         });
     }

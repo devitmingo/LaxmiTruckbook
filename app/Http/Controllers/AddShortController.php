@@ -252,7 +252,7 @@ class AddShortController extends Controller
        
         for($i=0; $i<$sizeof; $i++){
             if($p[$i]!=0){
-            DB::table('party_payments')
+                DB::table('party_payments')
                         ->insert([
                             'trip_id'=>$ids[$i],
                             'advanceType'=>$request->spayType,
@@ -321,7 +321,7 @@ class AddShortController extends Controller
     }
 
     public static function totalPartyBalance($id){
-        $records = Trip::where('partyName',$id)->where('status','5')->get();
+        $records = Trip::where('partyName',$id)->where('status','>','2')->get();
         $partyFreightAmount = 0;
         $totalChargesAdd =0;
         $totalChargesDection =0;
@@ -357,7 +357,7 @@ class AddShortController extends Controller
   
         }
         
-return $partyBalance;
+        return $partyBalance;
    }
 
     function supplierReport(Request $request){

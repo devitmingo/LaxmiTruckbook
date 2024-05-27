@@ -299,7 +299,7 @@ use App\Http\Controllers\AdminController;
                                                     <div class="col-12">
                                                         <div class="mb-3">
                                                             <label class="control-label form-label">Payment Date</label>
-                                                            <input type="date" class="form-control" name="payDate" id="payDate" required />
+                                                            <input type="text" class="form-control datepicker" name="payDate" id="payDate" required />
                                                          </div>
                                                     </div>
                                                     <div class="col-12">
@@ -392,7 +392,7 @@ use App\Http\Controllers\AdminController;
                                                     <div class="col-12">
                                                         <div class="mb-3">
                                                             <label class="control-label form-label">Advnace Date</label>
-                                                            <input type="date" class="form-control" name="sadvanceDate" id="sadvanceDate" required />
+                                                            <input type="text" class="form-control datepicker" name="sadvanceDate" id="sadvanceDate" required />
                                                          </div>
                                                     </div>
                                                     <div class="col-12">
@@ -483,7 +483,7 @@ use App\Http\Controllers\AdminController;
                                                     <div class="col-12">
                                                         <div class="mb-3">
                                                             <label class="control-label form-label">Advnace Date</label>
-                                                            <input type="date" class="form-control" name="advanceDate" id="advanceDate" required />
+                                                            <input type="text" class="form-control datepicker" name="advanceDate" id="advanceDate" required />
                                                          </div>
                                                     </div>
                                                     <div class="col-12">
@@ -626,7 +626,7 @@ use App\Http\Controllers\AdminController;
                                                     <div class="col-12">
                                                         <div class="mb-3">
                                                             <label class="control-label form-label">Charge Date</label>
-                                                            <input type="date" class="form-control" name="schargesDate" id="schargesDate" required />
+                                                            <input type="text" class="form-control datepicker" name="schargesDate" id="schargesDate" required />
                                                          </div>
                                                     </div>
                                                     <div class="col-12">
@@ -743,7 +743,7 @@ use App\Http\Controllers\AdminController;
                                                     <div class="col-12">
                                                         <div class="mb-3">
                                                             <label class="control-label form-label">Charge Date</label>
-                                                            <input type="date" class="form-control" name="chargesDate" id="chargesDate" required />
+                                                            <input type="text" class="form-control datepicker" name="chargesDate" id="chargesDate" required />
                                                          </div>
                                                     </div>
                                                     <div class="col-12">
@@ -864,7 +864,7 @@ use App\Http\Controllers\AdminController;
                                                     <div class="col-12">
                                                         <div class="mb-3">
                                                             <label class="control-label form-label">Expenses Date</label>
-                                                            <input type="date" class="form-control" placeholder="Expenses Amount" type="expensesDate" name="expensesDate" id="expensesDate" required />
+                                                            <input type="text" class="form-control datepicker" placeholder="Expenses Amount" type="expensesDate" name="expensesDate" id="expensesDate" required />
                                                         </div>
                                                     </div>
 

@@ -32,8 +32,10 @@ use App\Http\Controllers\AddShortController;
                                                             <th>Meter Reading</th>
                                                             <th>Refilling Date</th>
                                                             <th>Liter</th>
+                                                            <th>Self/Warranty</th>
                                                             <th>Amount</th>
-                                                            
+                                                            <th>Payment Type</th>
+                                                            <th>Vendor Name</th>
                                                             <th>Action</th>
                                                         </tr>
                                                     </thead>
@@ -42,8 +44,11 @@ use App\Http\Controllers\AddShortController;
                                                    <tbody>
                                                         @foreach($records as $row)
                                                         @php
-                                                            $vehicle = AdminController::getValueStatic2('vehicles','vehicleNumber','id',$row->id);
-                                                            $driver = AdminController::getValueStatic2('drivers','driverName','id',$row->id);
+                                                            $vehicle = AdminController::getValueStatic2('vehicles','vehicleNumber','id',$row->vehicle_id);
+                                                            $driver = AdminController::getValueStatic2('drivers','driverName','id',$row->driver_id);
+                                                            if(isset($row->vendorName)){
+                                                                $vendor = AdminController::getValueStatic2('vendors','vendorName','id',$row->vendorName);
+                                                            }
                                                         @endphp
                                                         <tr>
                                                             <td>{{ $loop->index+1 }}</td>
@@ -53,7 +58,10 @@ use App\Http\Controllers\AddShortController;
                                                             <td>{{ isset($row->meter_reading) ? $row->meter_reading : '' }}</td>
                                                             <td>{{ isset($row->refilling_date) ? date('d-m-Y',strtotime($row->refilling_date)) : '' }}</td>
                                                             <td>{{ isset($row->liter) ? $row->liter : '' }}</td>
+                                                            <td>{{ isset($row->self_warranty) ? $row->self_warranty : '' }}</td>
                                                             <td>{{ isset($row->amount) ? number_format($row->amount,2) : ''  }}</td>
+                                                            <td>{{ isset($row->paymentType) ? $row->paymentType : '' }}</td>
+                                                            <td>{{ isset($row->vendor) ? $row->vendor : '' }}</td>
                                                            <td><a href="{{route('urea.edit',$row->id)}}" class="btn btn-success" rel="tooltip" title="Edit">
                                                                     <i class="mdi mdi-square-edit-outline"></i>
                                                                 </a>

@@ -25,6 +25,12 @@ class CreateUrearefillingsTable extends Migration
             $table->integer('created_by')->nullable();
             $table->integer('comapany_id')->nullable();
             $table->integer('session_id')->nullable();
+            $table->string('paymentType')->nullable();
+            $table->string('self_warranty',10)->nullable();
+            $table->integer('vendorName')->nullable();
+            $table->integer('page')->nullable();
+            $table->string('type',2)->default('cr');
+            $table->integer('session_id')->nullable();
             $table->timestamps();
         });
     }

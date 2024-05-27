@@ -81,7 +81,8 @@
                                                         <div class="mb-3">
                                                             <label class="control-label form-label">Owner Ship</label>
                                                             <select id="m_ownership" onchange = "getDriver()" name="ownership" class="form-select ">
-                                                                <option value="My Truck" selected="selected">My Truck</option>
+                                                                <option value=""> Select </option>    
+                                                                <option value="My Truck" >My Truck</option>
                                                                 <option value="Market Truck">Market Truck</option>
                                                             
                                                             </select>

@@ -33,6 +33,11 @@ class CreateTyresTable extends Migration
             $table->integer('created_by')->nullable();
             $table->integer('comapany_id')->nullable();
             $table->integer('session_id')->nullable();
+            $table->string('self_warranty',10)->nullable();
+            $table->double('amount',16,2)->nullable();
+            $table->integer('vendor_name')->nullable();
+            $table->integer('page')->nullable();
+            $table->string('type',2)->default('cr');
             $table->timestamps();
         });
     }

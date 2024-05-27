@@ -51,7 +51,7 @@ use App\Http\Controllers\AddShortController;
 
 
                                             <!--<div class="mb-2 col-md-2">-->
-                                            <!--    <select class="form-select js-example-basic-single" name="status" id="status" >-->
+                                            <!--    <select class="form-select js-example-basic-single" name="status" id="status1" >-->
                                             <!--        <option value="" selected>Selected Status</option>-->
                                             <!--        <option value="1" >Start</option>-->
                                             <!--        <option value="2" >Complete Trip</option>-->
@@ -60,7 +60,7 @@ use App\Http\Controllers\AddShortController;
                                             <!--        <option value="5" >Settlement</option>-->
                                             <!--    </select>-->
                                             <!--</div>-->
-                                            <!--<script> $("#status").val(<?php echo isset($_GET['status']) ? $_GET['status'] : ''  ?>);-->
+                                            <!--<script> $("#status").val(<?php echo isset($_GET['status1']) ? $_GET['status'] : ''  ?>);-->
                                             <!--</script>-->
                                             <div class="mb-2 col-md-2">
                                                 <button class="btn btn-primary pull-right">Search</button>  

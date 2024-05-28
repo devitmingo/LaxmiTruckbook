@@ -7,7 +7,23 @@
   if(isset($data->vehicleNumber)){
    $ownership = AdminController::getValueStatic2('vehicles','ownership','id',$data->vehicleNumber);
   }
-  
+  use App\Models\BillingType;
+
+        $party_rate_per = $data->party_rate_per;
+        $party_unit_per = $data->party_unit_per;
+        $billingType = BillingType::where('id',$data->billingType)->first();
+
+        $partyFreightAmount = $data->partyFreightAmount;
+        $diesel_adv_transport = $data->diesel_adv_transport;
+        $driver_cash_transport = $data->driver_cash_transport;
+        $unload_rate_per = $data->unload_rate_per;
+        $unload_unit_per = $data->unload_unit_per;
+        $shortage_qty = $data->shortage_qty;
+        $shortage_amount = $data->shortage_amount;
+        $extra_diesel_amout = $data->extra_diesel_amout;
+        $builty_commission = $data->builty_commission;
+        $unload_weight_per = $data->unload_weight_per;
+        $short_amount = isset($unload_weight_per) ? $partyFreightAmount - $unload_rate_per*$unload_weight_per : 0;
    ?>
 <!DOCTYPE html>
 <html>
@@ -79,7 +95,7 @@
                 </tr>
 
                 <tr >
-                    <th colspan="10" rowspan="4" style="border: 0.5px solid black">Bill To <br> {{ AdminController::getValueStatic2('parties','partyName','id',$data->partyName) }}</th>
+                    <th colspan="10" rowspan="3" style="border: 0.5px solid black">Bill To <br> {{ AdminController::getValueStatic2('parties','partyName','id',$data->partyName) }}</th>
                     <th colspan="5" style=" border-bottom: 0.5px solid black; border-left: 0.5px solid black" >{{ AdminController::getValueStatic2('routes','name','id',$data->origin) }} <br><span> {{ date('d-m-Y',strtotime($data->startDate)) }} </span></th>
                     <th colspan="1" style=" border-bottom: 0.5px solid black" >To</th>
                     <th colspan="4" style=" border-bottom: 0.5px solid black" >{{ AdminController::getValueStatic2('routes','name','id',$data->destination) }}</th>
@@ -87,26 +103,18 @@
 
                 </tr>
                 <tr>
-                  <th colspan="10" style=" border: 0.5px solid black" > Truck : {{ AdminController::getValueStatic2('vehicles','vehicleNumber','id',$data->vehicleNumber) }}</th>
+                  <th colspan="10" style=" border: 0.5px solid black" > Truck No. : {{ AdminController::getValueStatic2('vehicles','vehicleNumber','id',$data->vehicleNumber) }}</th>
                   </tr>
                   @if($ownership != "Market Truck")
                   <tr>
-                     <th colspan="10" style=" border: 0.5px solid black" > Driver : {{ AdminController::getValueStatic2('drivers','driverName','id',$data->supplierName) }}</th>
+                     <th colspan="10" style=" border: 0.5px solid black" > Driver Name : {{ AdminController::getValueStatic2('drivers','driverName','id',$data->supplierName) }}</th>
                   </tr>
                   @endif
-                  <tr>
-                  <th colspan="10" style=" border: 0.5px solid black" > Trip Status : 
-                  @if($paymentBal!=0)
-                     {{ "Started" }}
-                                        @else
-                   Settled
-                   @endif
-                    </th>
-                </tr>
+                 
                 <tr style="background:black;color:white;">
                   <th colspan="20" style=" border: 0.5px solid black" > Material  Details </th>
                 </tr>
-                <tr>
+                <tr style="background:#ccc;">
                   <th colspan="2" >SN</th>
                   <th colspan="6"  >LR No</th>
                   <th colspan="12" >Material</th>
@@ -130,17 +138,60 @@
             <thead>
                <tr style="background:black;color:white;">
                   <th colspan="20" style=" border-bottom: 0.5px solid black">
-                     <b>Payment Details</b>
+                     <b>Bill Details</b>
                   </th>
                </tr>
             </thead>
             <tbody>
                <tr>
                   <th colspan="14" style=" border: 0.5px solid black;padding-left:4px;">
+                        Loading 
+                        ({{ $party_rate_per }} x {{ $party_unit_per }} {{ $billingType->name }} )
+                  </th>
+                  <th colspan="6" style=" border: 0.5px solid black; text-align:right; padding-right:4px;">
+                        {{ number_format($party_rate_per * $party_unit_per,2) }}
+                  </th>
+               </tr>
+
+               <tr>
+                  <th colspan="14" style=" border: 0.5px solid black;padding-left:4px;">
+                     Unloading 
+                        ({{ $unload_rate_per }} x {{ $unload_weight_per }} {{ $billingType->name }} )
+                  </th>
+                  <th colspan="6" style=" border: 0.5px solid black; text-align:right; padding-right:4px;">
+                        {{ number_format($unload_rate_per * $unload_weight_per,2) }}
+                  </th>
+               </tr>
+               <tr>
+                  <th colspan="14" style=" border: 0.5px solid black;padding-left:4px;">
                         Freight Amount
                   </th>
                   <th colspan="6" style=" border: 0.5px solid black; text-align:right; padding-right:4px;">
-                        {{ $data->partyFreightAmount }}
+                        {{ number_format($partyFreightAmount-$short_amount,2) }}
+                  </th>
+               </tr>
+               <tr>
+                  <th colspan="14" style=" border: 0.5px solid black;padding-left:4px;">
+                   Driver Cash 
+                  </th>
+                  <th colspan="6" style=" border: 0.5px solid black; text-align:right; padding-right:4px;">
+                        {{ number_format($driver_cash_transport,2) }}
+                  </th>
+               </tr>
+               <tr>
+                  <th colspan="14" style=" border: 0.5px solid black;padding-left:4px;">
+                  Shortage Amount
+                  </th>
+                  <th colspan="6" style=" border: 0.5px solid black; text-align:right; padding-right:4px;">
+                        {{ number_format($shortage_amount,2) }}
+                  </th>
+               </tr>
+               <tr>
+                  <th colspan="14" style=" border: 0.5px solid black;padding-left:4px;">
+                  Builty Commission
+                  </th>
+                  <th colspan="6" style=" border: 0.5px solid black; text-align:right; padding-right:4px;">
+                        {{ number_format($builty_commission,2) }}
                   </th>
                </tr>
                <?php
@@ -163,7 +214,7 @@
                   On {{ date('d-m-Y',strtotime($advx->paymentDate)) }}
                   </th>
                   <th colspan="6" style=" border: 0.5px solid black; text-align:right; padding-right:4px;">
-                        {{ $advx->amount }}
+                        {{ number_format($advx->amount,2) }}
                   </th>
                </tr>
                @endforeach
@@ -181,30 +232,30 @@
                
               
                 @foreach ($chargeAdds as $chags)
-               <tr>
-               <th colspan="8" style=" border: 0.5px solid black;padding-left:4px; text-align:center;">
-                 Via  {{ AdminController::getValueStatic2('advance_types','name','id',$chags->chargesType)  }}
-                  </th>
-                  <th colspan="6" style=" border: 0.5px solid black;padding-left:4px; text-align:center;">
+                  <tr>
+                  <th colspan="8" style=" border: 0.5px solid black;padding-left:4px; text-align:center;">
+                  Via  {{ AdminController::getValueStatic2('advance_types','name','id',$chags->chargesType)  }}
+                     </th>
+                     <th colspan="6" style=" border: 0.5px solid black;padding-left:4px; text-align:center;">
 
-                  On {{ date('d-m-Y',strtotime($chags->chargesDate)) }}
-                  </th>
-                  <th colspan="6" style=" border: 0.5px solid black; text-align:right; padding-right:4px;">
-                        {{ $chags->chargesAmount }}
-                  </th>
-               </tr>
-               @endforeach
+                     On {{ date('d-m-Y',strtotime($chags->chargesDate)) }}
+                     </th>
+                     <th colspan="6" style=" border: 0.5px solid black; text-align:right; padding-right:4px;">
+                           {{ number_format($chags->chargesAmount,2) }}
+                     </th>
+                  </tr>
+                @endforeach
                @endif
                
                <?php
                   $chargeAdds =  AdminController::getRecords2('party_charges','trip_id',$data->id,'billType',2);
                ?>
                @if(!$chargeAdds->isEmpty())
-               <tr>
-               <th colspan="20" style=" border: 0.5px solid black;padding-left:4px;">
-                       Deductions(-)
-                  </th>
-               </tr>
+                  <tr>
+                  <th colspan="20" style=" border: 0.5px solid black;padding-left:4px;">
+                        Deductions(-)
+                     </th>
+                  </tr>
               
                 @foreach ($chargeAdds as $chags)
                <tr>
@@ -216,7 +267,7 @@
                   On {{ date('d-m-Y',strtotime($chags->chargesDate)) }}
                   </th>
                   <th colspan="6" style=" border: 0.5px solid black; text-align:right; padding-right:4px;">
-                        {{ $chags->chargesAmount }}
+                        {{ number_format($chags->chargesAmount,2) }}
                   </th>
                </tr>
                @endforeach
@@ -241,7 +292,7 @@
                   On {{ date('d-m-Y',strtotime($payadd->paymentDate)) }}
                   </th>
                   <th colspan="6" style=" border: 0.5px solid black; text-align:right; padding-right:4px;">
-                        {{ $payadd->amount }}
+                        {{ number_format($payadd->amount,2) }}
                   </th>
                </tr>
                @endforeach
@@ -253,7 +304,7 @@
                   </th>
 
                   <th colspan="6" style=" border: 0.5px solid black;padding-left:4px;text-align:right;">
-                  {{   $paymentBal }}
+                  {{   number_format($paymentBal,2) }}
                   </th>
                </tr>
             </tbody>

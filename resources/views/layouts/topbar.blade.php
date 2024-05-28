@@ -3,9 +3,15 @@
                 <div class="content">
                     <!-- Topbar Start -->
                     <div class="navbar-custom">
+                        
                         <ul class="list-unstyled topbar-menu float-end mb-0">
 
-
+                        <li style="    margin: 20px;">
+                           
+                            <center>    
+                                <?php echo date('d-m-Y h:i:s'); ?>
+                            </center>
+                        </li>
                             <li class="dropdown notification-list">
                                 <a class="nav-link dropdown-toggle nav-user arrow-none me-0" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="false"
                                     aria-expanded="false">

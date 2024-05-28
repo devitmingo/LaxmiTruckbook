@@ -47,8 +47,8 @@
                 <footer class="footer">
                     <div class="container-fluid">
                         <div class="row">
-                            <div class="col-md-6" style="color:black;">
-                                <script>document.write(new Date().getFullYear())</script> © IT Mingo - +91 9584587577
+                            <div class="col-md-6" style="color:black;text-align:right;" >
+                                <b><script>document.write(new Date().getFullYear())</script> © <a href="https://itmingo.com/" target="_blank" > IT Mingo LLP</a></b>
                             </div>
 
                         </div>

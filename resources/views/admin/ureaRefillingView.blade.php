@@ -61,7 +61,7 @@ use App\Http\Controllers\AddShortController;
                                                             <td>{{ isset($row->self_warranty) ? $row->self_warranty : '' }}</td>
                                                             <td>{{ isset($row->amount) ? number_format($row->amount,2) : ''  }}</td>
                                                             <td>{{ isset($row->paymentType) ? $row->paymentType : '' }}</td>
-                                                            <td>{{ isset($row->vendor) ? $row->vendor : '' }}</td>
+                                                            <td>{{ isset($vendor) ? $vendor  : '' }}</td>
                                                            <td><a href="{{route('urea.edit',$row->id)}}" class="btn btn-success" rel="tooltip" title="Edit">
                                                                     <i class="mdi mdi-square-edit-outline"></i>
                                                                 </a>
@@ -78,6 +78,7 @@ use App\Http\Controllers\AddShortController;
                                                                 </a>
                                                             </td>
                                                         </tr>
+                                                        @php $vendor = ''; @endphp
                                                         @endforeach
                                                     </tbody>
                                                 </table>                                           

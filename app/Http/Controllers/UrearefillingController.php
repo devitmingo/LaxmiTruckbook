@@ -6,7 +6,7 @@ use App\Models\Urearefilling;
 use Illuminate\Http\Request;
 use App\Models\Vehicle;
 use App\Models\Driver;
-use App\Models\Supplier;
+use App\Models\Vendor;
 use Session;
 
 class UrearefillingController extends Controller
@@ -31,8 +31,8 @@ class UrearefillingController extends Controller
     {
         $vehicle = Vehicle::select('id','vehicleNumber')->where('ownership','My Truck')->get();
         $driver = Driver::orderBy('id','DESC')->get();
-        $supp = Supplier::orderBy('id','DESC')->get();
-        return view('admin.ureaRilling',compact('vehicle','driver','supp'));
+        $vendor = Vendor::orderBy('id','DESC')->get();
+        return view('admin.ureaRilling',compact('vehicle','driver','vendor'));
     }
 
     /**
@@ -89,7 +89,8 @@ class UrearefillingController extends Controller
         $data = Urearefilling::find($id);
         $vehicle = Vehicle::select('id','vehicleNumber')->where('ownership','My Truck')->get();
         $driver = Driver::orderBy('id','DESC')->get();
-        return view('admin.ureaRilling',compact('data','vehicle','driver'));
+        $vendor = Vendor::orderBy('id','DESC')->get();
+        return view('admin.ureaRilling',compact('data','vehicle','driver','vendor'));
     }
 
     /**

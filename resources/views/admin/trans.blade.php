@@ -56,7 +56,7 @@
 
                                                         <div class="mb-3 col-md-3" id="ven" style="display:none">
                                                             <label for="inputPassword4" class="form-label">Vendor Name </label>
-                                                            <select id="vendor_name"  name="vendor_name" class="form-select js-example-basic-single">
+                                                            <select id="vendor_name"  name="vendor_name" class="form-select js-example-basic-single" onchange="getVendorBal();">
                                                                 <option>--Choose Type--</option>   
                                                                 @foreach($vendor as $row)
                                                                     <option value="{{ $row->id }}">{{ $row->vendorName }}</option>
@@ -78,9 +78,10 @@
 
 
                                                         <div class="mb-3 col-md-3">
-                                                             <label for="inputPassword4" class="form-label">amount</label>
+                                                             <label for="inputPassword4" class="form-label">Amount  </label>
                                                              <input type="number" class="form-control" name="amount" id="amount"
                                                              value="{{ old('amount',isset($data->amount) ? $data->amount : '' )}}">
+                                                             <span id="venBalHtml" style="color:red;"></span>
                                                         </div>
 
                                                         <div class="mb-3 col-md-3">
@@ -220,6 +221,17 @@ function onType(){
     }
 }
 onType();
+
+function getVendorBal(){
+   var vendor_name  = $('#vendor_name').val();
+   $.ajax({
+  type:'GET',
+  url:'{{ url("/admin/get-ven-bal") }}?vendor_name='+vendor_name,
+  success:function(response){
+    $('#venBalHtml').html("Vendor Credit Balance :"+response);
+  }
+  });
+}
 </script>
 @include('admin.mastermodel');
 @endsection

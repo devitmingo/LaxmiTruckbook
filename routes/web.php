@@ -169,5 +169,7 @@ Route::middleware(['auth'])->group(function () {
 
      //Add Vendor Leger Report
     Route::get('/admin/vendor-report', [VendorController::class, 'vendorReports'])->name('vendorReports');
+     //Add Vendor Leger Report
+     Route::get('/admin/get-ven-bal', [VendorController::class, 'CurrentVendorOpning'])->name('CurrentVendorOpning');
   });
 

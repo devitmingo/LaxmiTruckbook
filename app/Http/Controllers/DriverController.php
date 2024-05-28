@@ -80,7 +80,10 @@ class DriverController extends Controller
         $input['driver_photo']=$driver_photo;
         $input['aadhar_document']=$aadhar_document;
         $input['driving_licence_document']=$driving_licence_document;
-      
+        $input['date_of_joining'] = date('Y-m-d',strtotime($request->date_of_joining));
+        $input['driving_licence_expiry'] = date('Y-m-d',strtotime($request->driving_licence_expiry));
+        $input['date_of_leave'] = date('Y-m-d',strtotime($request->date_of_leave));
+        $input['status'] = isset($request->status) ? $request->status : 1 ;
         $res = Driver::create($input);
         return redirect()->back()->with('success','Driver Added successfully');
     }
@@ -158,7 +161,9 @@ class DriverController extends Controller
             $file->move($destinationPath, $fileName2);
             $input['driving_licence_document']=$fileName2;
         }
-
+        $input['date_of_joining'] = date('Y-m-d',strtotime($request->date_of_joining));
+        $input['driving_licence_expiry'] = date('Y-m-d',strtotime($request->driving_licence_expiry));
+        $input['date_of_leave'] = date('Y-m-d',strtotime($request->date_of_leave));
         unset($input['_method']);
         unset($input['_token']);
         $res = Driver::where('id',$id)->update($input);

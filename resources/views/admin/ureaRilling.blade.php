@@ -99,8 +99,8 @@
                                                             <label for="inputPassword4" class="form-label">Vendor Name</label>
                                                             <select id="vendorName" class="form-select js-example-basic-single" name="vendorName">
                                                                 <option value="">-Select-</option>
-                                                                    @foreach($supp as $row)
-                                                                        <option value="{{ $row->id }}">{{ $row->supplierName }}</option>
+                                                                    @foreach($vendor as $row)
+                                                                        <option value="{{ $row->id }}">{{ $row->vendorName }}</option>
                                                                     @endforeach
                                                             </select>
                                                             <script>document.getElementById("vendorName").value = "{{ old('vendorName',isset($data->vendorName) ? $data->vendorName : '' )}}"; </script>

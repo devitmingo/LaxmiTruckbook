@@ -64,7 +64,9 @@ use App\Http\Controllers\AddShortController;
                                                         $driverName = AdminController::getValueStatic2('drivers','driverName','id',$row->driverName);
                                                         $maintenances = AdminController::getValueStatic2('maintenances','name','id',$row->maintenance);
                                                         if($row->vendorName!=''){
-                                                            $vendorName = AdminController::getValueStatic2('suppliers','supplierName','id',$row->vendorName);
+                                                            $vendorName = AdminController::getValueStatic2('vendors','vendorName','id',$row->vendorName);
+                                                        }else{
+                                                            $vendorName = '';
                                                         }
                                                         @endphp
                                                         <tr>

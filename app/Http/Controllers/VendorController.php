@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use App\Models\Transaction;
 use App\Models\MaintenanceForm;
 use DB;
+use App\Models\Tyre;
+use App\Models\Urearefilling;
 
 class VendorController extends Controller
 {
@@ -113,7 +115,9 @@ class VendorController extends Controller
         $openBal = 0;
         $trans = Transaction::where('trans_type','Vendor')->where('head_type',$id)->where('trans_date','<=', $newDate)->sum('amount');
         $main = MaintenanceForm::where('date','<=', $newDate)->where('vendorName',$id)->sum('amount');
-        return $total = $main - $trans ;
+        $urearefilling = Urearefilling::where('refilling_date','<=', $newDate)->where('vendorName',$id)->sum('amount');
+        $tyre = Tyre::where('upload_date','<=', $newDate)->where('vendor_name',$id)->sum('amount');
+        return $total = $main + $tyre + $urearefilling - $trans ;
     }
     public function vendorReports(Request $request){
 
@@ -151,5 +155,14 @@ class VendorController extends Controller
       
        
         return  view('admin.vendorReport',compact('records','openingBalance'));
+    }
+
+    public function CurrentVendorOpning(Request $request){
+        $id = $request->vendor_name;
+        $trans = Transaction::where('trans_type','Vendor')->where('head_type',$id)->sum('amount');
+        $main = MaintenanceForm::where('vendorName',$id)->sum('amount');
+        $urearefilling = Urearefilling::where('vendorName',$id)->sum('amount');
+        $tyre = Tyre::where('vendor_name',$id)->sum('amount');
+        return $total = $main + $tyre + $urearefilling - $trans ;
     }
 }

@@ -1,6 +1,7 @@
 
 @extends('layouts.app')
 @section('body')
+<?php  $date = date('d-m-Y'); ?>
    <!-- Start Content-->
   <div class="container-fluid">
 
@@ -31,25 +32,25 @@
                                                     @csrf
                                                     <div class="row g-2">
                                                         
-                                                        <div class="mb-3 col-md-3">
+                                                        <div class="col-md-1">
                                                            
                                                              <label for="inputPassword4" class="form-label">From Date</label>
-                                                             <input type="text" class="form-control datepicker" name="from_date" id="inputCity" value="{{ old('from_date',isset($data->from_date) ? $data->from_date : '' )}}">
+                                                             <input type="text" class="form-control datepicker" name="from_date"  value="{{ old('from_date',isset($data->from_date) ? $data->from_date : $date )}}">
                                                         
                                                         </div>
-                                                        <div class="mb-3 col-md-3">
+                                                        <div class="col-md-1">
                                                              <label for="inputPassword4" class="form-label">To Date</label>
                                                              <input type="text" class="form-control datepicker" name="to_date" id="inputCity"
-                                                             value="{{ old('to_date',isset($data->to_date) ? $data->to_date : '' )}}"
+                                                             value="{{ old('to_date',isset($data->to_date) ? $data->to_date : $date )}}"
                                                              
                                                              >
                                                         </div>
 
-                                                          <div class="mb-3 col-md-3">
+                                                          <div class="col-md-3">
                                                             <label for="inputPassword4" class="form-label">Session Name</label>
                                                              <input type="text" class="form-control" name="session_name" id="inputCity" value="{{ old('session_name',isset($data->session_name) ? $data->session_name : '' )}}">
                                                         </div>
-                                                        <div class="mb-3 col-md-3">
+                                                        <div class="col-md-2">
                                                              <label for="inputPassword4" class="form-label">Status</label>
                                                              <select id="status1" name="status" class="form-select js-example-basic-single">
                                                                 <option>--Choose Status--</option>
@@ -59,7 +60,7 @@
                                                             </select>
                                                             <script>document.getElementById("status1").value = "{{ old('status',isset($data->status) ? $data->status : '1' )}}"; </script>
                                                         </div>
-                                                         <div class="mb-3 col-md-3">
+                                                         <div class="col-md-3">
                                                          </br>   
                                                             <button type="submit" class="btn btn-primary">{{ isset($data) ? "Update" : "Submit" }}</button>
                                                          </div>

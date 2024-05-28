@@ -4,6 +4,7 @@ use App\Http\Controllers\AddShortController;
 @endphp
 @extends('layouts.app')
 @section('body')
+<?php  $date = date('d-m-Y'); ?>
 <script>
 $(document).ready(function(){
   $("#myInput").on("keyup", function() {
@@ -65,13 +66,13 @@ hr{
                                                        
                                                             <label for="inputPassword4" class="form-label">From Date</label>
                                                              <input type="text" name="fromDate"  id="fromDate" class="form-control datepicker" 
-                                                            value="{{ isset($_GET['fromDate']) ? $_GET['fromDate'] : ''  }}">
+                                                            value="{{ isset($_GET['fromDate']) ? $_GET['fromDate'] : $date  }}">
                                                         </div>
                                                         
                                                        <div class="col-md-2">
                                                             <label for="inputPassword4" class="form-label">To Date</label>
                                                             <input type="text" name="toDate"  id="toDate" class="form-control datepicker" 
-                                                             value="{{ isset($_GET['toDate']) ? $_GET['toDate'] : ''  }}">
+                                                             value="{{ isset($_GET['toDate']) ? $_GET['toDate'] : $date  }}">
                                                        </div>
                                                         
                                                        <div class="col-md-2">
@@ -118,6 +119,7 @@ hr{
                                                         <tr>
                                                             <th>Date</th>
                                                             <th>Maintenance/Vendor Name</th>
+                                                            <th>Description</th>
                                                             <th>Cr Amount</th>
                                                             <th>Dr Amount</th>
                                                             <th>Balance</th>
@@ -141,14 +143,26 @@ hr{
                                                             $vehicle = AdminController::getValueStatic2('vendors','vendorName','id',$row->name);
                                                             $openingBalance -= $row->amount;
                                                         }
-
+                                                        if($row->page==8){
+                                                            $type='Urea Refilling';
+                                                        }elseif($row->page==7){
+                                                            $type = 'Tyre';
+                                                        }elseif($row->page==12){
+                                                            $type = 'Vendor Payment';
+                                                        }elseif($row->page==9){
+                                                            $maintenance = AdminController::getValueStatic2('maintenance_forms','maintenance','id',$row->id);
+                                                            $maintenance_name = AdminController::getValueStatic2('maintenances','name','id',$maintenance);
+                                                            $type = $maintenance_name ;
+                                                        }else{
+                                                            $type = '';
+                                                        }
                                                     @endphp
 
 
                                                         <tr>
                                                         <td>{{ date('d-m-Y',strtotime($row->date)) }} </td>
                                                         <td> {{ isset($vehicle) ? $vehicle : ''  }}</td>
-                                                       
+                                                        <td> {{ isset($type) ? $type : ''  }}</td>
                                                         @if($row->type=='cr')
                                                         <td> {{ isset($row->amount) ? number_format($row->amount,2)  : ''  }} {{ isset($row->type) ? $row->type : '' }}</td>
                                                         <td> </td>

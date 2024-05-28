@@ -26,11 +26,11 @@ use App\Http\Controllers\AddShortController;
                                     <div class="card-body">
                                         <div class="row">
                                             <div class="mb-2 col-md-2">
-                                                <input class="form-control datepicker" type="text" name="from_date" id="from_date" value="<?php echo isset($_GET['from_date']) ? date('m/d/Y',strtotime($_GET['from_date'])) : ''  ?>" />
+                                                <input class="form-control datepicker" type="text" name="from_date" id="from_date" value="<?php echo isset($_GET['from_date']) ? date('d-m-Y',strtotime($_GET['from_date'])) :  date('d-m-Y') ?>" />
                                             </div>
 
                                             <div class="mb-2 col-md-2">
-                                                <input  class="form-control datepicker" type="test" name="to_date" id="to_date" value="<?php echo isset($_GET['to_date']) ? date('m/d/Y',strtotime($_GET['to_date'])) : ''  ?>"/>
+                                                <input  class="form-control datepicker" type="test" name="to_date" id="to_date" value="<?php echo isset($_GET['to_date']) ? date('d-m-Y',strtotime($_GET['to_date'])) :  date('d-m-Y') ?>"/>
                                             </div>
 
                                             <div class="mb-3 col-md-3">
@@ -204,7 +204,7 @@ use App\Http\Controllers\AddShortController;
             success:function(response){
                 console.log(response);
                 $(".advanceType").html(response);
-                $(".advanceType").val(id);
+                $(".advanceType").val(<?php echo isset($_GET['id']) ? $_GET['id'] : ''; ?>);
                 $('.advanceType').trigger('change'); 
             }
             });

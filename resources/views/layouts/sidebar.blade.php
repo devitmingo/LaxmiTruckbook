@@ -3,7 +3,7 @@
                 <!-- LOGO -->
                 <a href="{{ route('admin.dashboard') }}" class="logo text-center logo-light">
                     <span class="logo-lg " style="color:white;" >
-                        <h1>TruckBook</h1>
+                        <h3>TruckBook</h3>
                     </span>
                     <span class="logo-sm">
                         <img src="{{asset('dashboard/assets/images/logo_sm.png')}}" alt="" height="16">
@@ -13,7 +13,7 @@
                 <!-- LOGO -->
                 <a href="{{ route('admin.dashboard') }}" class="logo text-center logo-dark">
                     <span class="logo-lg " style="color:white;" >
-                        <h1>TruckBook</h1>
+                        <h3>TruckBook</h3>
                     </span>
                     <span class="logo-sm">
                         <img src="{{asset('dashboard/assets/images/logo_sm_dark.png') }}" alt="" height="16">

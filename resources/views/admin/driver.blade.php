@@ -112,13 +112,13 @@
                                                         </div>
                                                         <div class="col-md-3">
                                                              <label for="inputPassword4" class="form-label">Status</label>
-                                                             <select  name="status" class="form-select js-example-basic-single">
-                                                                <option>--Choose Status--</option>
-                                                                 <option value="0">Disable</option>
-                                                                 <option value="1">Enable</option>
+                                                             <select  name="status" id="status1" class="form-select js-example-basic-single">
+                                                                <option value="">--Choose Status--</option>
+                                                                <option value="1">Enable</option>
+                                                                <option value="0">Disable</option>
                                                                                                                    
                                                             </select>
-                                                            <script>document.getElementById("status").value = "{{ old('status',isset($data->status) ? $data->status : '1' )}}"; </script>
+                                                            <script>document.getElementById("status1").value = "{{ old('status',isset($data->status) ? $data->status : '1' )}}"; </script>
                                                         </div>
                                                          <div class="mb-3 col-md-3">
                                                          </br>   

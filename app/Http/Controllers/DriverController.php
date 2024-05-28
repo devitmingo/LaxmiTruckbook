@@ -43,6 +43,7 @@ class DriverController extends Controller
             'mobile2'=>'max:10|min:10',
             'aadhar_number'=>'max:30',
             'driving_licence_number'=>'max:30',
+            'status' =>'required'
         ]);
         $driver_photo ='';
         if ($request->hasFile('driver_photo')) {
@@ -128,6 +129,7 @@ class DriverController extends Controller
             'mobile2'=>'max:10|min:10',
             'aadhar_number'=>'max:30',
             'driving_licence_number'=>'max:30',
+            'status'=>'required',
         ]);
 
         $fileName ='';

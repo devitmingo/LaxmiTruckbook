@@ -34,12 +34,12 @@
                                                         
                                                         <div class="col-md-1">
                                                            
-                                                             <label for="inputPassword4" class="form-label">From Date</label>
+                                                             <label for="inputPassword4" class="form-label">From Date <span class="imp">*</span></label>
                                                              <input type="text" class="form-control datepicker" name="from_date"  value="{{ old('from_date',isset($data->from_date) ? $data->from_date : $date )}}">
                                                         
                                                         </div>
                                                         <div class="col-md-1">
-                                                             <label for="inputPassword4" class="form-label">To Date</label>
+                                                             <label for="inputPassword4" class="form-label">To Date <span class="imp">*</span></label>
                                                              <input type="text" class="form-control datepicker" name="to_date" id="inputCity"
                                                              value="{{ old('to_date',isset($data->to_date) ? $data->to_date : $date )}}"
                                                              
@@ -47,13 +47,13 @@
                                                         </div>
 
                                                           <div class="col-md-3">
-                                                            <label for="inputPassword4" class="form-label">Session Name</label>
+                                                            <label for="inputPassword4" class="form-label">Session Name <span class="imp">*</span></label>
                                                              <input type="text" class="form-control" name="session_name" id="inputCity" value="{{ old('session_name',isset($data->session_name) ? $data->session_name : '' )}}">
                                                         </div>
                                                         <div class="col-md-2">
-                                                             <label for="inputPassword4" class="form-label">Status</label>
+                                                             <label for="inputPassword4" class="form-label">Status <span class="imp">*</span></label>
                                                              <select id="status1" name="status" class="form-select js-example-basic-single">
-                                                                <option>--Choose Status--</option>
+                                                                <option value="">--Choose Status--</option>
                                                                  <option value="0">Disable</option>
                                                                  <option value="1">Enable</option>
                                                                                                                    

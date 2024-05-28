@@ -28,6 +28,9 @@
         .select2-container .select2-selection--single {
             height: 37px!important;
          }
+         .imp{
+            color:red;
+         }
     </style>
     </head>
 

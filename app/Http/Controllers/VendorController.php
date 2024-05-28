@@ -47,6 +47,7 @@ class VendorController extends Controller
             'vendorName'=>'required|max:255',
             'mobile'=>'required|max:10|min:10|unique:vendors',
             'mobile2'=>'required|max:10|min:10',
+            'address'=>'required|max:255',
             'status'=>'required'
             ]);
 
@@ -92,6 +93,7 @@ class VendorController extends Controller
             'vendorName'=>'required|max:255',
             'mobile'=>'required|max:10|min:10|unique:vendors,id,'.$id,
             'mobile2'=>'required|max:10|min:10',
+            'address'=>'required|max:255',
             'status'=>'required'
             ]);
 

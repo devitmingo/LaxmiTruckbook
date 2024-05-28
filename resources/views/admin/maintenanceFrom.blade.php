@@ -37,11 +37,11 @@
                                                     <div class="row g-2">
                                                         
                                                         <div class="mb-3 col-md-3">
-                                                             <label for="inputPassword4" class="form-label">Date</label>
+                                                             <label for="inputPassword4" class="form-label">Date <span class="imp">*</span></label>
                                                              <input type="text" class="form-control datepicker" name="date" id="date" value="{{ old('date',isset($data->date) ? $data->date : '' )}}">
                                                         </div>
                                                         <div class="mb-3 col-md-3">
-                                                             <label for="inputPassword4" class="form-label">Maintenance Type</label>
+                                                             <label for="inputPassword4" class="form-label">Maintenance Type <span class="imp">*</span></label>
                                                              <select id="maintenance" name="maintenance" class="form-select js-example-basic-single">
                                                                 <option>--Choose Maintenance--</option>
                                                                 @foreach($maintenance as $row)
@@ -52,7 +52,7 @@
                                                         </div>
 
                                                         <div class="mb-3 col-md-3">
-                                                             <label for="inputPassword4" class="form-label">Vehicle Number</label>
+                                                             <label for="inputPassword4" class="form-label">Vehicle Number <span class="imp">*</span></label>
                                                              <select id="vehicleNumber" name="vehicleNumber" class="form-select js-example-basic-single">
                                                                 <option>--Choose Vehicle--</option>
                                                                 @foreach($vehicle as $row)
@@ -63,7 +63,7 @@
                                                         </div>
 
                                                         <div class="mb-3 col-md-3">
-                                                             <label for="inputPassword4" class="form-label">Driver Name</label>
+                                                             <label for="inputPassword4" class="form-label">Driver Name <span class="imp">*</span></label>
                                                              <select id="driverName" name="driverName" class="form-select js-example-basic-single">
                                                                 <option>--Choose Supplier--</option>
                                                                 @foreach($driver as $row)
@@ -75,11 +75,11 @@
 
                                                         
                                                         <div class="mb-3 col-md-3">
-                                                             <label for="inputPassword4" class="form-label">Meter Reading</label>
+                                                             <label for="inputPassword4" class="form-label">Meter Reading <span class="imp">*</span></label>
                                                              <input type="text" class="form-control" name="meterReading" id="meterReading" value="{{ old('meterReading',isset($data->meterReading) ? $data->meterReading : '' )}}">
                                                         </div>
                                                         <div class="mb-3 col-md-3">
-                                                             <label for="inputPassword4" class="form-label">Product Type</label>
+                                                             <label for="inputPassword4" class="form-label">Product Type <span class="imp">*</span></label>
                                                              <select id="productType" name="productType" class="form-select js-example-basic-single">
                                                                 <option>--Choose Supplier--</option>
                                                                 <option value="New">New</option>
@@ -88,7 +88,7 @@
                                                             <script>document.getElementById("productType").value = "{{ old('productType',isset($data->productType) ? $data->productType : '' )}}"; </script>
                                                         </div>
                                                         <div class="mb-3 col-md-3">
-                                                             <label for="inputPassword4" class="form-label">Shop Name</label>
+                                                             <label for="inputPassword4" class="form-label">Shop Name<span class="imp">*</span></label>
                                                              <input type="text" class="form-control" name="shop_name" id="shop_name" value="{{ old('shop_name',isset($data->shop_name) ? $data->shop_name : '' )}}">
                                                         </div>
                                                         <div class="mb-3 col-md-3">
@@ -100,7 +100,7 @@
                                                              <input type="text" class="form-control" name="staff" id="staff" value="{{ old('staff',isset($data->staff) ? $data->staff : '' )}}">
                                                         </div>
                                                         <div class="mb-3 col-md-3">
-                                                            <label for="inputPassword4" class="form-label" on>Self/Warranty Type</label>
+                                                            <label for="inputPassword4" class="form-label" on>Self/Warranty Type<span class="imp">*</span></label>
                                                             <select id="self_warranty" class="form-select" name="self_warranty" onchange="SlefWrrantyOnchange()">
                                                                 <option value="">-Select-</option>
                                                                 <option value="self">Self</option>
@@ -109,7 +109,7 @@
                                                             <script>document.getElementById("self_warranty").value = "{{ old('self_warranty',isset($data->self_warranty) ? $data->self_warranty : '' )}}"; </script>
                                                         </div>
                                                         <div class="mb-3 col-md-3">
-                                                             <label for="inputPassword4" class="form-label">Amount</label>
+                                                             <label for="inputPassword4" class="form-label">Amount<span class="imp">*</span></label>
                                                              <input type="number" class="form-control" name="amount" id="amount" value="{{ old('amount',isset($data->amount) ? $data->amount : '' )}}">
                                                         </div>
                                                         <div class="mb-3 col-md-3">
@@ -124,7 +124,7 @@
                                                         </div>
 
                                                         <div class="mb-3 col-md-3" id="vendor_div">
-                                                            <label for="inputPassword4" class="form-label">Vendor Name</label>
+                                                            <label for="inputPassword4" class="form-label">Vendor Name<span class="imp">*</span></label>
                                                             <select id="vendorName" class="form-select js-example-basic-single" name="vendorName">
                                                                 <option value="">-Select-</option>
                                                                     @foreach($supp as $row)

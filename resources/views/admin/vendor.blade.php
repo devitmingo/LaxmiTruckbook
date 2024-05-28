@@ -35,19 +35,19 @@
                                                         
                                                         <div class="mb-3 col-md-3">
                                                            
-                                                             <label for="inputPassword4" class="form-label">Vendor Name</label>
+                                                             <label for="inputPassword4" class="form-label">Vendor Name<span class="imp">*</span></label>
                                                              <input type="text" class="form-control" name="vendorName" id="inputCity" value="{{ old('vendorName',isset($data->vendorName) ? $data->vendorName : '' )}}">
                                                         
                                                         </div>
                                                         <div class="mb-3 col-md-3">
-                                                             <label for="inputPassword4" class="form-label">Mobile</label>
+                                                             <label for="inputPassword4" class="form-label">Mobile<span class="imp">*</span></label>
                                                              <input type="number" class="form-control" name="mobile" id="mobile"
                                                              value="{{ old('mobile',isset($data->mobile) ? $data->mobile : '' )}}"
                                                              
                                                              >
                                                         </div>
                                                         <div class="mb-3 col-md-3">
-                                                             <label for="inputPassword4" class="form-label">Mobile 2</label>
+                                                             <label for="inputPassword4" class="form-label">Mobile 2<span class="imp">*</span></label>
                                                              <input type="number" class="form-control" name="mobile2" id="mobile2"
                                                              value="{{ old('mobile2',isset($data->mobile2) ? $data->mobile2 : '' )}}"
                                                              
@@ -55,7 +55,7 @@
                                                         </div>
 
                                                         <div class="mb-3 col-md-3">
-                                                             <label for="inputPassword4" class="form-label">Address</label>
+                                                             <label for="inputPassword4" class="form-label">Address<span class="imp">*</span></label>
                                                              <input type="test" class="form-control" name="address" id="address"
                                                              value="{{ old('address',isset($data->address) ? $data->address : '' )}}"
                                                              
@@ -63,9 +63,9 @@
                                                         </div>
 
                                                         <div class="mb-3 col-md-3">
-                                                             <label for="inputPassword4" class="form-label">Status</label>
+                                                             <label for="inputPassword4" class="form-label">Status<span class="imp">*</span></label>
                                                              <select id="status1" name="status" class="form-select js-example-basic-single">
-                                                                <option>--Choose Status--</option>
+                                                                <option value="">--Choose Status--</option>
                                                                  <option value="0">Disable</option>
                                                                  <option value="1">Enable</option>
                                                                                                                    

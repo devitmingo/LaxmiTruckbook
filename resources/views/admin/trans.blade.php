@@ -34,7 +34,7 @@
                                                     <div class="row g-2">
                                                         
                                                         <div class="mb-3 col-md-3">
-                                                            <label for="inputPassword4" class="form-label">Type</label>
+                                                            <label for="inputPassword4" class="form-label">Type<span class="imp">*</span></label>
                                                             <select id="trans_type" name="trans_type" onchange="onType();" class="form-select js-example-basic-single">
                                                                 <option>--Choose Type--</option>
                                                                 <option value="Vendor">Vendor Payment</option>
@@ -47,7 +47,7 @@
                                                          </div>
 
                                                         <div class="mb-3 col-md-3" id="head">
-                                                            <label for="inputPassword4" class="form-label" style="margin-bottom: 0px;">Head Type<a href="#"><i class="mdi mdi-plus-box" style="font-size:20px;" onclick="AddHead()"></i></a></label>
+                                                            <label for="inputPassword4" class="form-label" style="margin-bottom: 0px;">Head Type<span class="imp">*</span><a href="#"><i class="mdi mdi-plus-box" style="font-size:20px;" onclick="AddHead()"></i></a></label>
                                                             <select id="head_type"  name="head_type" class="form-select js-example-basic-single">
                                                             
                                                             </select>
@@ -55,7 +55,7 @@
                                                         </div>
 
                                                         <div class="mb-3 col-md-3" id="ven" style="display:none">
-                                                            <label for="inputPassword4" class="form-label">Vendor Name </label>
+                                                            <label for="inputPassword4" class="form-label">Vendor Name <span class="imp">*</span></label>
                                                             <select id="vendor_name"  name="vendor_name" class="form-select js-example-basic-single" onchange="getVendorBal();">
                                                                 <option>--Choose Type--</option>   
                                                                 @foreach($vendor as $row)
@@ -66,7 +66,7 @@
                                                         </div>
 
                                                         <div class="mb-3 col-md-3">
-                                                            <label for="inputPassword4" class="form-label">Pay Type <a href="#"><i class="mdi mdi-plus-box" style="font-size:20px;" onclick="addpaymentTypeModel()"></i></a></label>
+                                                            <label for="inputPassword4" class="form-label">Pay Type <span class="imp">*</span><a href="#"><i class="mdi mdi-plus-box" style="font-size:20px;" onclick="addpaymentTypeModel()"></i></a></label>
                                                              <select id="pay_type"  name="pay_type" class="form-select js-example-basic-single fetchPaymentType">
                                                              <option>--Choose Pay Type--</option>
                                                                 @foreach($pay_types as $pay)
@@ -78,14 +78,14 @@
 
 
                                                         <div class="mb-3 col-md-3">
-                                                             <label for="inputPassword4" class="form-label">Amount  </label>
+                                                             <label for="inputPassword4" class="form-label">Amount <span class="imp">*</span> </label>
                                                              <input type="number" class="form-control" name="amount" id="amount"
                                                              value="{{ old('amount',isset($data->amount) ? $data->amount : '' )}}">
                                                              <span id="venBalHtml" style="color:red;"></span>
                                                         </div>
 
                                                         <div class="mb-3 col-md-3">
-                                                             <label for="inputPassword4" class="form-label">Date</label>
+                                                             <label for="inputPassword4" class="form-label">Date <span class="imp">*</span></label>
                                                              <input type="text" class="form-control datepicker" name="trans_date" id="trans_date"
                                                              value="{{ old('trans_date',isset($data->trans_date) ? $data->trans_date : '' )}}">
                                                         </div>

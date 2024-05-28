@@ -35,12 +35,12 @@
                                                         
                                                         <div class="mb-3 col-md-3">
                                                            
-                                                             <label for="inputPassword4" class="form-label">Vehicle Number</label>
+                                                             <label for="inputPassword4" class="form-label">Vehicle Number<span class="imp">*</span></label>
                                                              <input type="text" class="form-control" name="vehicleNumber" id="inputCity" value="{{ old('vehicleNumber',isset($data->vehicleNumber) ? $data->vehicleNumber : '' )}}">
                                                         
                                                         </div>
                                                         <div class="mb-3 col-md-3">
-                                                             <label for="inputPassword4" class="form-label">Vehicle Type</label>
+                                                             <label for="inputPassword4" class="form-label">Vehicle Type<span class="imp">*</span></label>
                                                              <select name="vehicleType" id="vehicleType" class="form-select js-example-basic-single">
                                                                 <option>--Choose Vehicle--</option>
                                                                 @foreach($vehicleType as $type)
@@ -52,7 +52,7 @@
                                                         </div>
 
                                                          <div class="mb-3 col-md-3">
-                                                             <label for="inputPassword4" class="form-label">OwnerShip</label>
+                                                             <label for="inputPassword4" class="form-label">OwnerShip<span class="imp">*</span></label>
                                                             <select id="ownership" onchange = "getDriver()" name="ownership" class="form-select js-example-basic-single">
                                                                 <option value="My Truck" selected="selected">My Truck</option>
                                                                 <option value="Market Truck">Market Truck</option>
@@ -63,7 +63,7 @@
 
 
                                                         <div class="mb-3 col-md-3" id="dri_name">
-                                                             <label for="inputPassword4" class="form-label">Driver</label>
+                                                             <label for="inputPassword4" class="form-label">Driver<span class="imp">*</span></label>
                                                             <select id="driverName" name="driverName" class="form-select ">
                                                                 <option value="">--Choose Driver--</option>
                                                                 @foreach($drivers as $driver)
@@ -75,9 +75,9 @@
                                                         </div>
 
                                                          <div class="mb-3 col-md-3" id="supp_name">
-                                                             <label for="inputPassword4" class="form-label">Supplier</label>
+                                                             <label for="inputPassword4" class="form-label">Supplier<span class="imp">*</span></label>
                                                             <select id="supplierName" name="supplierName" class="form-select ">
-                                                                <option>--Choose Supplier--</option>
+                                                                <option value="">--Choose Supplier--</option>
                                                                 @foreach($suppliers as $supplier)
                                                                 <option value="{{ $supplier->id }}">{{ $supplier->supplierName }} {{ $supplier->mobile }}</option>
                                                                 @endforeach                                                           
@@ -100,7 +100,7 @@
                                                         </div>
                                                         <div class="mb-3 col-md-3">
                                                            
-                                                           <label for="inputPassword4" class="form-label">Vehice Tyre No</label>
+                                                           <label for="inputPassword4" class="form-label">Vehice Tyre No<span class="imp">*</span></label>
                                                            <input type="number" class="form-control" name="vehicle_tyre" id="vehicle_tyre" value="{{ old('vehicle_tyre',isset($data->vehicle_tyre) ? $data->vehicle_tyre : '' )}}">
                                                       
                                                          </div>
@@ -183,9 +183,9 @@
                                                            <input type="text" class="form-control datepicker" name="permit_expiry_date" id="permit_expiry_date" value="{{ old('permit_expiry_date',isset($data->permit_expiry_date) ? $data->permit_expiry_date : '' )}}">
                                                          </div>
                                                          <div class="mb-3 col-md-3">
-                                                             <label for="inputPassword4" class="form-label">Status</label>
+                                                             <label for="inputPassword4" class="form-label">Status<span class="imp">*</span></label>
                                                              <select id="status1" name="status" class="form-select js-example-basic-single">
-                                                                <option>--Choose Status--</option>
+                                                                <option value="">--Choose Status--</option>
                                                                  <option value="0">Disable</option>
                                                                  <option value="1">Enable</option>
                                                                                                                    

@@ -46,7 +46,7 @@ class TransactionController extends Controller
 
         $request->validate([
             'trans_type'=>'required|max:10',
-            'amount'=>'pay_type',
+            'pay_type'=>'required',
             'amount'=>'required',
             'trans_date'=>'required',
             'notes'=>'required',
@@ -114,7 +114,7 @@ class TransactionController extends Controller
         $input = $request->all();
         $request->validate([
             'trans_type'=>'required|max:10',
-            'amount'=>'pay_type',
+            'pay_type'=>'required',
             'amount'=>'required',
             'trans_date'=>'required',
             'notes'=>'required',

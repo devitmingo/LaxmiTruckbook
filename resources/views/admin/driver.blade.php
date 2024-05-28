@@ -35,12 +35,12 @@
                                                         
                                                         <div class="mb-3 col-md-3">
                                                            
-                                                             <label for="inputPassword4" class="form-label">Driver Name</label>
+                                                             <label for="inputPassword4" class="form-label">Driver Name <span class="imp">*</span></label>
                                                              <input type="text" class="form-control" name="driverName" id="inputCity" value="{{ old('driverName',isset($data->driverName) ? $data->driverName : '' )}}">
                                                         
                                                         </div>
                                                         <div class="mb-3 col-md-3">
-                                                             <label for="inputPassword4" class="form-label">Mobile</label>
+                                                             <label for="inputPassword4" class="form-label">Mobile <span class="imp">*</span></label>
                                                              <input type="number" class="form-control" name="mobile" id="inputCity"
                                                              value="{{ old('mobile',isset($data->mobile) ? $data->mobile : '' )}}">
                                                         </div>

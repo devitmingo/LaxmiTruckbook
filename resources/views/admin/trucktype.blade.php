@@ -15,6 +15,7 @@
                         <!-- end page title --> 
 
                        <div class="row">
+                            <x-alert/>
                             <div class="col-12">
                                 <div class="card">
                                     <div class="card-body">
@@ -32,13 +33,13 @@
                                                     <div class="row g-2">
                                                         
                                                         <div class="mb-3 col-md-3">
-                                                            <label for="inputPassword4" class="form-label">Vehicle Name</label>
+                                                            <label for="inputPassword4" class="form-label">Vehicle Name<span class="imp">*</span></label>
                                                              <input type="text" class="form-control" name="truckName" id="inputCity" value="{{ old('truckName',isset($data->truckName) ? $data->truckName : '' )}}">
                                                         </div>
                                                         <div class="mb-3 col-md-3">
-                                                             <label for="inputPassword4" class="form-label">Status</label>
+                                                             <label for="inputPassword4" class="form-label">Status<span class="imp">*</span></label>
                                                              <select id="status1" name="status" class="form-select js-example-basic-single">
-                                                                <option>--Choose Status--</option>
+                                                                <option value="">--Choose Status--</option>
                                                                  <option value="0">Disable</option>
                                                                  <option value="1">Enable</option>
                                                                                                                    

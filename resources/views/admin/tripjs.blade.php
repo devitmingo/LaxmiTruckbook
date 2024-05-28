@@ -140,7 +140,7 @@ function fetchParty(id=0){
                 $("#partyName").html(response);
                 $("#partyName").val(id);
                 $('#partyName').trigger('change'); 
-                document.getElementById("partyName").value = "<?php echo isset($data->partyName) ? $data->partyName : '' ?>";
+                document.getElementById("partyName").value = "<?php echo  old('partyName',isset($data->partyName) ? $data->partyName : ''); ?>";
 
             }
             });
@@ -161,7 +161,7 @@ function fetchVehicle(id=0){
                 $("#vehicleNumber").val(id);
                 $('#vehicleNumber').trigger('change'); 
                 
-                document.getElementById("vehicleNumber").value = "<?php echo isset($data->vehicleNumber) ? $data->vehicleNumber : '' ?>";
+                document.getElementById("vehicleNumber").value = "<?php echo old('vehicleNumber',isset($data->vehicleNumber) ? $data->vehicleNumber : ''); ?>";
                 onVehiclechange();
                
             }
@@ -185,7 +185,7 @@ fetchVehicle();
                 $("#supplierName").html(response);
                 $("#supplierName").val(id);
                 $('#supplierName').trigger('change'); 
-                document.getElementById("supplierName").value = "<?php echo isset($data->supplierName) ? $data->supplierName : '' ?>";
+                document.getElementById("supplierName").value = "<?php echo old('supplierName',isset($data->supplierName) ? $data->supplierName : ''); ?>";
             }
             });
         }   
@@ -205,7 +205,7 @@ fetchSupplier();
                 $("#driverName").html(response);
                 $("#driverName").val(id);
                 $('#driverName').trigger('change'); 
-                document.getElementById("driverName").value = "<?php echo isset($data->driver_id) ? $data->driver_id : '' ?>";
+                document.getElementById("driverName").value = "<?php echo old('driverName',isset($data->driver_id) ? $data->driver_id : ''); ?>";
             }
             });
         }   
@@ -226,8 +226,8 @@ fetchDriver();
                 $(".routes").html(response);
                 $(".routes").val(id);
                 $('.routes').trigger('change'); 
-                document.getElementById("origin").value = "<?php echo isset($data->origin) ? $data->origin : '' ?>";
-                document.getElementById("destination").value = "<?php echo isset($data->destination) ? $data->destination : '' ?>";
+                document.getElementById("origin").value = "<?php echo old('origin',isset($data->origin) ? $data->origin : ''); ?>";
+                document.getElementById("destination").value = "<?php echo old('destination',isset($data->destination) ? $data->destination : ''); ?>";
             }
             });
         }   
@@ -249,7 +249,7 @@ fetchOrigin();
                 $(".supbillType").val(id);
                 $('.supbillType').trigger('change'); 
                 
-                $("#supplierBillingType").val(<?php echo isset($data->supplierBillingType) ? $data->supplierBillingType : '' ?>);
+                $("#supplierBillingType").val(<?php echo old('supplierBillingType',isset($data->supplierBillingType) ? $data->supplierBillingType : ''); ?>);
                 onSupplierBillingType();
             }
             });
@@ -268,7 +268,7 @@ fetchSuppBillingType();
                 $(".partybillType").val(id);
                 $('.partybillType').trigger('change'); 
                 
-                $("#billingType").val(<?php echo isset($data->billingType) ? $data->billingType : '' ?>);
+                $("#billingType").val(<?php echo old('billingType',isset($data->billingType) ? $data->billingType : ''); ?>);
                 onPartyBillingTypechange();
             }
             });
@@ -524,8 +524,8 @@ fetchState();
 
 
     $("#supp_name").hide();
-   $(function() {
-    $('#startDate').datepicker({ dateFormat: 'dd-mm-yy' }).val();
+        $(function() {
+        $('#startDate').datepicker({ dateFormat: 'dd-mm-yy' }).val();
     });
 
 

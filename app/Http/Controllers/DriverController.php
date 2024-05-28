@@ -40,8 +40,8 @@ class DriverController extends Controller
         $request->validate([
             'driverName'=>'required|max:255',
             'mobile'=>'required|max:10|min:10|unique:drivers',
-            'mobile2'=>'max:10|min:10',
-            'aadhar_number'=>'max:30',
+            'mobile2'=>'sometimes|max:10',
+            'aadhar_number'=>'max:12',
             'driving_licence_number'=>'max:30',
             'status' =>'required'
         ]);
@@ -126,8 +126,8 @@ class DriverController extends Controller
         $request->validate([
             'driverName'=>'required|max:255',
             'mobile'=>'required|max:10|min:10|unique:drivers,id,'.$id,
-            'mobile2'=>'max:10|min:10',
-            'aadhar_number'=>'max:30',
+            'mobile2'=>'max:10',
+            'aadhar_number'=>'max:12',
             'driving_licence_number'=>'max:30',
             'status'=>'required',
         ]);

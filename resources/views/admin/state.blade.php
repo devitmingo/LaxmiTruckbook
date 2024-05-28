@@ -34,13 +34,13 @@
                                                         
                                                        
                                                           <div class="mb-3 col-md-3">
-                                                            <label for="inputPassword4" class="form-label">State Name</label>
+                                                            <label for="inputPassword4" class="form-label">State Name<span class="imp">*</span></label>
                                                              <input type="text" class="form-control" name="name" id="name" value="{{ old('name',isset($data->name) ? $data->name : '' )}}">
                                                         </div>
                                                         <div class="mb-3 col-md-3">
-                                                             <label for="inputPassword4" class="form-label">Status</label>
+                                                             <label for="inputPassword4" class="form-label">Status<span class="imp">*</span></label>
                                                              <select id="status1" name="status" class="form-select js-example-basic-single">
-                                                                <option>--Choose Status--</option>
+                                                                <option value="">--Choose Status--</option>
                                                                  <option value="0">Disable</option>
                                                                  <option value="1">Enable</option>
                                                                                                                    

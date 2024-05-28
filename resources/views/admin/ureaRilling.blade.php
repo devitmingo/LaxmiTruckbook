@@ -33,7 +33,7 @@
                                                     <div class="row g-2">
                                                         
                                                         <div class="mb-3 col-md-3">
-                                                            <label for="inputPassword4" class="form-label">Vehicle Number</label>
+                                                            <label for="inputPassword4" class="form-label">Vehicle Number <span class="imp">*</span></label>
                                                             <select id="vehicle_id" class="form-select js-example-basic-single" name="vehicle_id">
                                                                 <option value="">-Select-</option>
                                                                 @foreach($vehicle as $row)
@@ -43,7 +43,7 @@
                                                             <script>document.getElementById("vehicle_id").value = "{{ old('vehicle_id',isset($data->vehicle_id) ? $data->vehicle_id : '' )}}"; </script>
                                                         </div>
                                                         <div class="mb-3 col-md-3">
-                                                            <label for="inputPassword4" class="form-label">Driver Name</label>
+                                                            <label for="inputPassword4" class="form-label">Driver Name <span class="imp">*</span></label>
                                                             <select id="driver_id" class="form-select js-example-basic-single" name="driver_id">
                                                                 <option value="">-Select-</option>
                                                                 @foreach($driver as $row)
@@ -53,26 +53,26 @@
                                                             <script>document.getElementById("driver_id").value = "{{ old('driver_id',isset($data->driver_id) ? $data->driver_id : '' )}}"; </script>
                                                         </div>
                                                         <div class="mb-3 col-md-3">
-                                                            <label for="inputPassword4" class="form-label">Place</label>
+                                                            <label for="inputPassword4" class="form-label">Place <span class="imp">*</span></label>
                                                             <input type="text" class="form-control" name="place" id="place" value="{{ old('place',isset($data->place) ? $data->place : '' )}}">
                                                         </div>
 
                                                         <div class="mb-3 col-md-3">
-                                                            <label for="inputPassword4" class="form-label">Meter Reading</label>
+                                                            <label for="inputPassword4" class="form-label">Meter Reading <span class="imp">*</span></label>
                                                             <input type="text" class="form-control" name="meter_reading" id="meter_reading" value="{{ old('meter_reading',isset($data->meter_reading) ? $data->meter_reading : '' )}}">
                                                         </div>
 
                                                         <div class="mb-3 col-md-3">
-                                                            <label for="inputPassword4" class="form-label">Refilling Date</label>
+                                                            <label for="inputPassword4" class="form-label">Refilling Date <span class="imp">*</span></label>
                                                             <input type="text" class="form-control datepicker" name="refilling_date" id="refilling_date" value="{{ old('refilling_date',isset($data->refilling_date) ? $data->refilling_date : '' )}}">
                                                         </div>
 
                                                         <div class="mb-3 col-md-3">
-                                                            <label for="inputPassword4" class="form-label">Liter</label>
+                                                            <label for="inputPassword4" class="form-label">Liter <span class="imp">*</span></label>
                                                             <input type="text" class="form-control" name="liter" id="liter" value="{{ old('liter',isset($data->liter) ? $data->liter : '' )}}">
                                                         </div>
                                                         <div class="mb-3 col-md-3">
-                                                            <label for="inputPassword4" class="form-label" on>Self/Warranty Type</label>
+                                                            <label for="inputPassword4" class="form-label" on>Self/Warranty Type <span class="imp">*</span></label>
                                                             <select id="self_warranty" class="form-select" name="self_warranty" onchange="SlefWrrantyOnchange()">
                                                                 <option value="">-Select-</option>
                                                                 <option value="self">Self</option>
@@ -81,11 +81,11 @@
                                                             <script>document.getElementById("self_warranty").value = "{{ old('self_warranty',isset($data->self_warranty) ? $data->self_warranty : '' )}}"; </script>
                                                         </div>
                                                         <div class="mb-3 col-md-3">
-                                                            <label for="inputPassword4" class="form-label">Amount</label>
+                                                            <label for="inputPassword4" class="form-label">Amount <span class="imp">*</span></label>
                                                             <input type="text" class="form-control" name="amount" id="amount" value="{{ old('amount',isset($data->amount) ? $data->amount : '' )}}">
                                                         </div>
                                                         <div class="mb-3 col-md-3">
-                                                            <label for="inputPassword4" class="form-label" on>Payment Type</label>
+                                                            <label for="inputPassword4" class="form-label" on>Payment Type <span class="imp">*</span></label>
                                                             <select id="paymentType" class="form-select" name="paymentType" onchange="paymentOnchange()">
                                                                 <option value="">-Select-</option>
                                                                 <option value="cash">Cash</option>
@@ -96,7 +96,7 @@
                                                         </div>
 
                                                         <div class="mb-3 col-md-3" id="vendor_div">
-                                                            <label for="inputPassword4" class="form-label">Vendor Name</label>
+                                                            <label for="inputPassword4" class="form-label">Vendor Name <span class="imp">*</span></label>
                                                             <select id="vendorName" class="form-select js-example-basic-single" name="vendorName">
                                                                 <option value="">-Select-</option>
                                                                     @foreach($vendor as $row)

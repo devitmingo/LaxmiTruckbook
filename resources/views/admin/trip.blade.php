@@ -37,7 +37,7 @@
                                                              <select id="partyName" name="partyName" class="form-select js-example-basic-single">
                                                                
                                                             </select>
-                                                        </div>
+                                                         </div>
                                                         <div class="mb-2 col-md-2">
                                                             <label for="inputPassword4" class="form-label">Select Truck No.* 
                                                             <a href="#"><i class="mdi mdi-plus-box" style="font-size:20px;" onclick="AddVehicle()"></i></a>
@@ -45,6 +45,7 @@
                                                              <select id="vehicleNumber" onchange="onVehiclechange()" name="vehicleNumber" class="form-select js-example-basic-single">
                                                                
                                                             </select>
+                                                            <script>document.getElementById("vehicleNumber").value = "{{ old('vehicleNumber',isset($data->vehicleNumber) ? $data->vehicleNumber : '' )}}"; </script>
                                                         </div>
 
 
@@ -57,13 +58,14 @@
                                                              <select id="origin" name="origin" class="form-select js-example-basic-single routes">
                                                                 
                                                             </select>
+                                                            <script>document.getElementById("origin").value = "{{ old('origin',isset($data->origin) ? $data->origin : '' )}}"; </script>
                                                         </div>
                                                         <div class="mb-3 col-md-3">
                                                             <label for="inputPassword4" class="form-label">Select Destination*</label>
                                                              <select id="destination" name="destination" class="form-select js-example-basic-single routes">
                                                                 
                                                             </select>
-                                                       
+                                                            <script>document.getElementById("destination").value = "{{ old('destination',isset($data->destination) ? $data->destination : '' )}}"; </script>
                                                     </div>
 
 
@@ -220,7 +222,7 @@
         var diesel = diesel_rate*diesel_ltr;
         $('#diesel_adv_transport').val(diesel);
     }
-
+    diesal_cal();
 </script>
 @include('admin.tripjs');
 @include('admin.tripModel');

@@ -91,7 +91,7 @@ class TripController extends Controller
             'destination'=>'required',
             'billingType'=>'required',
             'partyFreightAmount'=>'required',
-            'startDate'=>'required|date',
+            'startDate'=>'required',
         ]);
         $company = Session::get('company');
         $session = Session::get('session');
@@ -106,6 +106,7 @@ class TripController extends Controller
         unset($input['materialName']);
         unset($input['note']);
          unset($input['supplier_name']);
+         $input['startDate'] = date('Y-m-d',strtotime($request->startDate));
         $res = Trip::create($input);
         
         LRList::where('trip_id',0)->update(['trip_id'=>$res->id]);
@@ -161,7 +162,7 @@ class TripController extends Controller
             'destination'=>'required',
             'billingType'=>'required',
             'partyFreightAmount'=>'required',
-            'startDate'=>'required|date',
+            'startDate'=>'required|',
         ]);
         
         $input['supplierName'] = $request->supplier_name;

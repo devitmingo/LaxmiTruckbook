@@ -255,7 +255,7 @@ class VehicleController extends Controller
         $input['permit_expiry_date'] = date('Y-m-d',strtotime($request->permit_expiry_date));
         $input['r_c_expiry_date'] = date('Y-m-d',strtotime($request->r_c_expiry_date));
 
-        $input['status']=0;
+        $input['status']=isset($request->status) ? $request->status : '' ;
         $input['comapany_id'] = isset($company) ? $company : '0';
         $input['created_by'] = isset(auth()->user()->id) ? auth()->user()->id : 0;
         $input['session_id'] = isset($session) ? $session : '0';

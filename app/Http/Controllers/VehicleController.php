@@ -128,7 +128,7 @@ class VehicleController extends Controller
          $input['tax_pay_expiry_date'] = date('Y-m-d',strtotime($request->tax_pay_expiry_date));
          $input['permit_expiry_date'] = date('Y-m-d',strtotime($request->permit_expiry_date));
          $input['r_c_expiry_date'] = date('Y-m-d',strtotime($request->r_c_expiry_date));
-         $input['status']=0;
+         $input['status']=isset($request->status) ? $request->status : '1' ;;
          $company = Session::get('company');
          $session = Session::get('session');
          $input['created_by']=isset(auth()->user()->id) ? auth()->user()->id : 0;

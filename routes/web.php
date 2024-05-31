@@ -171,5 +171,11 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/admin/vendor-report', [VendorController::class, 'vendorReports'])->name('vendorReports');
      //Add Vendor Leger Report
      Route::get('/admin/get-ven-bal', [VendorController::class, 'CurrentVendorOpning'])->name('CurrentVendorOpning');
+    
+     //Truck Profit report
+    Route::get('/admin/truckReports',[AddShortController::class, 'truckReports'])->name('truckReports');
+
+     //Truck Profit ledger
+     Route::get('/admin/truckReportLedger',[AddShortController::class, 'truckReportLedger'])->name('truckReportLedger');
   });
 

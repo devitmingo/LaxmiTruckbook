@@ -18,6 +18,7 @@ use App\Models\PartyPayment;
 use App;
 use PDF;
 use Session;
+use App\Models\Vehicle;
 
 class TripController extends Controller
 {
@@ -174,6 +175,7 @@ class TripController extends Controller
         unset($input['note']);
         unset($input['supplier_name']);
         unset($input['_method']);
+        $input['startDate'] = date('Y-m-d',strtotime($request->startDate));
         $res = Trip::where('id',$id)->update($input);
         
        
@@ -238,6 +240,4 @@ class TripController extends Controller
         $pdf->setPaper('A4');
         return $pdf->stream();
     }
-
-    
 }

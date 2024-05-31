@@ -147,11 +147,11 @@ class VendorController extends Controller
         
 
 
-        $records = DB::select("SELECT id AS id, date as date, vehicleNumber as name, amount AS amount ,paymentType,type,page FROM maintenance_forms  WHERE $condition
+        $records = DB::select("SELECT id AS id, date as date, vehicleNumber as name, amount AS amount,paymentType,type,page FROM maintenance_forms  WHERE $condition
         UNION 
-        SELECT id AS id, refilling_date as date, vehicle_id as name, amount AS amount ,paymentType,type,page FROM urearefillings  WHERE $condition3
+        SELECT id AS id, refilling_date as date, vehicle_id as name, amount AS amount,paymentType,type,page FROM urearefillings  WHERE $condition3
         UNION
-        SELECT id AS id, upload_date as date, vechicle_id as name, amount AS amount ,paymentType,type,page FROM tyres  WHERE $condition4
+        SELECT id AS id, upload_date as date, vechicle_id as name, amount AS amount,paymentType,type,page FROM tyres  WHERE $condition4
         UNION 
         SELECT id AS id,trans_date AS date,head_type as name ,amount AS amount, pay_type as paymentType,type,page FROM transactions WHERE $condition2 order by date
          ");  

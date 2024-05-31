@@ -213,6 +213,18 @@
                                 <span> Vendor Report</span>
                             </a>
                         </li>
+                        <li class="side-nav-item">
+                            <a href="{{ route('truckReports') }}" class="side-nav-link">
+                                <i class="uil-calender"></i>
+                                <span> Truck Profit Report</span>
+                            </a>
+                        </li>
+                        <li class="side-nav-item">
+                            <a href="{{ route('truckReportLedger') }}" class="side-nav-link">
+                                <i class="uil-calender"></i>
+                                <span> Truck Profit Ledger</span>
+                            </a>
+                        </li>
                     </ul>
 
 

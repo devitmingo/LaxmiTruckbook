@@ -18,6 +18,9 @@ class CreateDiesalRateLtrTripTable extends Migration
             $table->double('diesel_ltr',16,2);
             $table->double('extra_diesel_rate',16,2);
             $table->double('extra_diesel_ltr',16,2);
+            $table->integer('page')->nullable();
+            $table->string('type',2)->default('cr');
+            $table->string('paymentType',10)->nullable();
            
         });
     }

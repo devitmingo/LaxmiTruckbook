@@ -6,6 +6,7 @@ use App\Models\Tyre;
 use Illuminate\Http\Request;
 use App\Models\Vehicle;
 use Session;
+use App\Models\Vendor;
 
 class TyreController extends Controller
 {
@@ -28,7 +29,8 @@ class TyreController extends Controller
     public function create()
     {
         $records = Vehicle::select('id','vehicleNumber','vehicle_tyre','status','ownership')->where('status',1)->whereIn('vehicle_tyre',['10','12','14','16'])->where('ownership','My Truck')->get();
-        return view('admin.tyre',compact('records'));
+        $vendor = Vendor::where('status',1)->get();
+        return view('admin.tyre',compact('records','vendor'));
     }
 
     /**

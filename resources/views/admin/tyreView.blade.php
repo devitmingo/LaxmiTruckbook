@@ -43,7 +43,9 @@ use App\Http\Controllers\AdminController;
                                                             <th>Tyre Company Name</th>
                                                             <th>Meter Reading</th>
                                                             <th>Date</th>
-
+                                                            <th>Amount</th>
+                                                            <th>Payment Type</th>
+                                                            <th>Vendor Name</th>
                                                             <th>Tyre Model</th>
                                                             <th>Image</th>
                                                             <th>Action</th>
@@ -55,7 +57,10 @@ use App\Http\Controllers\AdminController;
                                                         @foreach($records as $row)
 
                                                         @php 
-                                                       $meter_reading= isset($row->meter_reading) ? $row->meter_reading : '0';
+                                                        if($row->vendor_name!=''){
+                                                            $vendor_name = AdminController::getValueStatic2('vendors','vendorName','id',$row->vendor_name);
+                                                        } 
+                                                        $meter_reading= isset($row->meter_reading) ? $row->meter_reading : '0';
                                                         $end_meter_reading = isset($row->ending_meter_reading) ? $row->ending_meter_reading :'0';
                                                         $tota_run_meter = $end_meter_reading-$meter_reading;
                                                         @endphp
@@ -69,8 +74,11 @@ use App\Http\Controllers\AdminController;
                                                             
                                                             <td>{{ $meter_reading }} {{ isset($row->ending_meter_reading) ? "=>".$end_meter_reading : '' }} <span style="color:red;"> {{ isset($row->ending_meter_reading) ? "(".$tota_run_meter.")" : '' }}</span></td>
                                                             <td>{{ isset($row->upload_date) ? date('d-m-Y',strtotime($row->upload_date)) : '' }} {{ isset($row->remove_upload_date) ? "=>".date('d-m-Y',strtotime($row->remove_upload_date)) : '' }}</td>
+                                                            <td>{{ isset($row->amount) ? $row->amount : '' }}</td>
+                                                            <td>{{ isset($row->paymentType) ? $row->paymentType : '' }}</td>
+                                                            <td>{{ isset($vendor_name) ? $$vendor_name : '' }}</td>
                                                             <td>{{ isset($row->tyre_model) ? $row->tyre_model : '' }}</td>
-                                                            <td><a href="{{ url('tyres/'.$row->new_tyre_image) }}" target="_blank">View Image</a></td>
+                                                            <td><a href="{{ url('tyres/'.$row->new_tyre_image) }}" target="_blank"> @if($row->new_tyre_image) {{ "View Image" }} @endif</a></td>
                                                            
 
                                                              <td>

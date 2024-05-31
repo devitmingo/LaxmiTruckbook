@@ -57,7 +57,7 @@ hr{
                                  
                                         <div class="tab-content">
                                             <div class="tab-pane show active" id="form-row-preview">
-                                               <form action="" method="get">
+                                               <form action="" method="get" autocomplete="off">
                                                
                                                @csrf
                                                     <div class="row g-2">
@@ -77,10 +77,10 @@ hr{
                                                         
                                                        <div class="col-md-2">
                                                             <label for="inputEmail4" class="form-label">Select Vendor</label>
-                                                             <select id="vendorName" name="vendorName" class="form-select js-example-basic-single">
+                                                             <select id="vehicleNumber" name="vehicleNumber" class="form-select js-example-basic-single">
                                                                
                                                             </select>
-                                                             <script> $("#vendorName").val(<?php echo isset($_GET['vendorName']) ? $_GET['vendorName'] : ''  ?>);</script>
+                                                             <script> $("#vehicleNumber").val(<?php echo isset($_GET['vehicleNumber']) ? $_GET['vehicleNumber'] : ''  ?>);</script>
                                                         </div>
                                                        
                                                         <div class="col-md-2">
@@ -124,26 +124,28 @@ hr{
                                                             <th>Dr Amount</th>
                                                             <th>Balance</th>
                                                         </tr>
-                                                        <tr>
-                                                            <th colspan="4" style="text-align:right;">Opening Bal</th>
-                                                            <th>{{ isset($openingBalance) ? number_format($openingBalance,2) : '' }}</th>
-                                                        </tr>
+                                                        
                                                     </thead>
                                                 
                                                 
                                                    <tbody>
+                                                    @php $balance = 0; @endphp
                                                    @foreach($records as $row)
                                                     @php
                                                         if($row->type=='cr'){
                                                             $vehicle = AdminController::getValueStatic2('vehicles','vehicleNumber','id',$row->name);
-                                                            $openingBalance += $row->amount;
+                                                           
                                                         }
 
                                                         if($row->type=='dr'){
                                                             $vehicle = AdminController::getValueStatic2('vendors','vendorName','id',$row->name);
-                                                            $openingBalance -= $row->amount;
+                                                            
                                                         }
-                                                        if($row->page==8){
+                                                        if($row->page==1){
+                                                            $trip_profit = AddShortController::truckProfit($row->id, date('Y-m-d',strtotime($_GET['fromDate'])),  date('Y-m-d',strtotime($_GET['toDate'])));
+                                                            $type='Trip';
+                                                            
+                                                        }elseif($row->page==8){
                                                             $type='Urea Refilling';
                                                         }elseif($row->page==7){
                                                             $type = 'Tyre';
@@ -156,6 +158,7 @@ hr{
                                                         }else{
                                                             $type = '';
                                                         }
+                                                        $dr = array("8", "7", "9");
                                                     @endphp
 
 
@@ -163,25 +166,24 @@ hr{
                                                         <td>{{ date('d-m-Y',strtotime($row->date)) }} </td>
                                                         <td> {{ isset($vehicle) ? $vehicle : ''  }}</td>
                                                         <td> {{ isset($type) ? $type : ''  }}</td>
-                                                        @if($row->type=='cr')
-                                                        <td> {{ isset($row->amount) ? number_format($row->amount,2)  : ''  }} {{ isset($row->type) ? $row->type : '' }}</td>
+                                                        @if($row->page=='1')
+                                                        <td> {{ isset($trip_profit) ? number_format($trip_profit,2)  : ''  }} </td>
                                                         <td> </td>
+                                                        @php $balance += $trip_profit; @endphp
                                                         @endif
-                                                        @if($row->type=='dr')
+                                                        @if(in_array($row->page, $dr))
                                                         <td> </td>
-                                                        <td> {{ isset($row->amount) ? number_format($row->amount,2) : ''  }} {{ isset($row->type) ? $row->type : '' }}</td>
+                                                        <td> {{ isset($row->amount) ? number_format($row->amount,2) : ''  }} </td>
+                                                        @php $balance -= $row->amount; @endphp
                                                         @endif
-                                                        <td> {{ isset($openingBalance) ? number_format($openingBalance,2) : ''  }}</td>
+                                                        <td> {{ isset($balance) ? number_format($balance,2) : ''  }}</td>
                                                         </tr>
-
-
-                                                    
                                                     @endforeach
                                                     </tbody>
                                                     <tfoot>
                                                         <tr>
-                                                            <th colspan="4" style="text-align:right;">Closing Bal</th>
-                                                            <th>{{ number_format($openingBalance,2) }}</th>
+                                                            <th colspan="5" style="text-align:right;">Closing Bal</th>
+                                                            <th>{{ number_format($balance,2) }}</th>
                                                         </tr>
                                                     </tfoot>
                                                 </table>                                           
@@ -198,25 +200,25 @@ hr{
                     @endif
   </div>         
   <script>
-    //Fetch Parties list 
+        //Fetch Parties list 
 
-    function fetchParty(id=0){
-    
-                $.ajax({
-                type:'GET',
-                url:'{{ url("common-get-select2") }}?table=vendors&id=id&column=vendorName',
-                success:function(response){
-                    console.log(response);
-                    $("#vendorName").html(response);
-                    $("#vendorName").val(id);
-                    $('#vendorName').trigger('change'); 
-                    document.getElementById("vendorName").value = "<?php echo isset($_GET['vendorName']) ? $_GET['vendorName'] : ''?>";
+        function fetchParty(id=0){
+        
+                    $.ajax({
+                    type:'GET',
+                    url:'{{ url("common-get-select2") }}?table=vehicles&id=id&column=vehicleNumber',
+                    success:function(response){
+                        console.log(response);
+                        $("#vehicleNumber").html(response);
+                        $("#vehicleNumber").val(id);
+                        $('#vehicleNumber').trigger('change'); 
+                        document.getElementById("vehicleNumber").value = "<?php echo isset($_GET['vehicleNumber']) ? $_GET['vehicleNumber'] : ''?>";
 
-                }
-                });
-            }   
-    //onload rung party function
-    fetchParty();
+                    }
+                    });
+                }   
+        //onload rung party function
+        fetchParty();
 
   </script>  
   

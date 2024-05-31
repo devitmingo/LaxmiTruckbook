@@ -131,7 +131,8 @@ class VendorController extends Controller
         $fromDate = date('Y-m-d', strtotime(date('Y-m-d')));
         $toDate = date('Y-m-d', strtotime(date('Y-m-d'))); 
        }
-
+    
+    if(isset($request->vendorName)){
        //condition
         $condition="date between '".$fromDate."' AND '".$toDate."' AND paymentType='credit' AND vendorName = '".$request->vendorName."'";
         
@@ -154,9 +155,10 @@ class VendorController extends Controller
         UNION 
         SELECT id AS id,trans_date AS date,head_type as name ,amount AS amount, pay_type as paymentType,type,page FROM transactions WHERE $condition2 order by date
          ");  
-      
+         return  view('admin.vendorReport',compact('records','openingBalance'));
+    }
        
-        return  view('admin.vendorReport',compact('records','openingBalance'));
+        return  view('admin.vendorReport');
     }
 
     public function CurrentVendorOpning(Request $request){

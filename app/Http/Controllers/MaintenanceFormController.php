@@ -30,7 +30,7 @@ class MaintenanceFormController extends Controller
      */
     public function create()
     {
-        $vehicle = Vehicle::where('status',0)->get();
+        $vehicle = Vehicle::where('status',1)->get();
         $driver = Driver::where('status',1)->get();
         $supp = Vendor::where('status',1)->get();
         $maintenance =Maintenance::where('status',1)->get();

@@ -126,7 +126,7 @@ hr{
                                                         </tr>
                                                         <tr>
                                                             <th colspan="4" style="text-align:right;">Opening Bal</th>
-                                                            <th>{{ number_format($openingBalance,2) }}</th>
+                                                            <th>{{ isset($openingBalance) ? number_format($openingBalance,2) : '' }}</th>
                                                         </tr>
                                                     </thead>
                                                 

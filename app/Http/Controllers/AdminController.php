@@ -62,11 +62,11 @@ class AdminController extends Controller
         
             Session::put('session', $request->session);
             Session::put('company', $request->company);
-            return redirect(route('trips.index'));
+            return redirect(route('admin.dashboard'));
             $count = $user->count();
             if ($count != 0) {
                 Session::put('id', $user->id);
-                return redirect(route('trips.indexAll',1));
+                return redirect(route('admin.dashboard'));
             } else {
                 return redirect()->back()->with('error', 'Email and Password does not match.');
             }

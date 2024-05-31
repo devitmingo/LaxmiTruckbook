@@ -62,7 +62,8 @@ class UrearefillingController extends Controller
         $input['created_by'] = isset(auth()->user()->id) ? auth()->user()->id : 0;
         $input['session_id'] = isset($session) ? $session : '';
         $input['refilling_date'] = date('Y-m-d',strtotime($request->refilling_date));
-        $input['amount'] = isset($request->amount) ? $request->amount : '0';
+        $input['amount'] = isset($request->amount) ? $request->amount : '';
+        $input['paymentType'] = isset($request->paymentType) ? $request->paymentType : '';
         Urearefilling::create($input);
         return redirect(route('urea.index'))->with('success','Urea Refilling added successfully');
     }

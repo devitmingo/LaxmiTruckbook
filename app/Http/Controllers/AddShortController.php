@@ -29,6 +29,9 @@ use App\Models\BillingType;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Models\PaymentType;
 use DB;
+use App\Models\Tyre;
+use App\Models\Urearefilling;
+use App\Models\MaintenanceForm;
 
 class AddShortController extends Controller
 {
@@ -548,12 +551,12 @@ class AddShortController extends Controller
         $builty_commission = $data->builty_commission;
         $unload_weight_per = $data->unload_weight_per;
 
-        $totalChargesAdd =$this->sumfucntion('party_charges','trip_id','chargesAmount',$data->id,'billtype',1);
-        $totalChargesDection =$this->sumfucntion('party_charges','trip_id','chargesAmount',$data->id,'billtype',2);
-        $totalExpenses = $this->sumfucntion2('expenses','trip_id','expensesAmount',$data->id);
-        $totalPartyAdvance = $this->sumfucntion2('party_advances','trip_id','amount',$data->id);
-        $totalPartypayment = $this->sumfucntion2('party_payments','trip_id','amount',$data->id);
-        $totalSupplierPayment = $this->sumfucntion2('supplier_payments','trip_id','amount',$data->id);
+        $totalChargesAdd =AddShortController::sumfucntion('party_charges','trip_id','chargesAmount',$data->id,'billtype',1);
+        $totalChargesDection =AddShortController::sumfucntion('party_charges','trip_id','chargesAmount',$data->id,'billtype',2);
+        $totalExpenses = AddShortController::sumfucntion2('expenses','trip_id','expensesAmount',$data->id);
+        $totalPartyAdvance = AddShortController::sumfucntion2('party_advances','trip_id','amount',$data->id);
+        $totalPartypayment = AddShortController::sumfucntion2('party_payments','trip_id','amount',$data->id);
+        $totalSupplierPayment = AddShortController::sumfucntion2('supplier_payments','trip_id','amount',$data->id);
         
         $short_amount = isset($unload_weight_per) ? $partyFreightAmount - $unload_rate_per*$unload_weight_per : 0;
         $partyBalance = $partyFreightAmount - $diesel_adv_transport -$short_amount -$shortage_amount -$builty_commission - $driver_cash_transport + $totalChargesAdd - $totalChargesDection - $totalPartyAdvance - $totalPartypayment ;
@@ -563,10 +566,10 @@ class AddShortController extends Controller
         $supchargesdections = SupplierCharges::where('trip_id',$request->trip_id)->where('billType',2)->get();
         $suppartyAdvances = SupplierAdvance::where('trip_id',$request->trip_id)->get();
 
-        $suptotalChargesAdd =$this->sumfucntion('supplier_charges','trip_id','chargesAmount',$data->id,'billtype',1);
-        $suptotalChargesDection =$this->sumfucntion('supplier_charges','trip_id','chargesAmount',$data->id,'billtype',2);
-        $suptotalExpenses = $this->sumfucntion2('expenses','trip_id','expensesAmount',$data->id);
-        $suptotalPartyAdvance = $this->sumfucntion2('supplier_advances','trip_id','amount',$data->id);
+        $suptotalChargesAdd =AddShortController::sumfucntion('supplier_charges','trip_id','chargesAmount',$data->id,'billtype',1);
+        $suptotalChargesDection =AddShortController::sumfucntion('supplier_charges','trip_id','chargesAmount',$data->id,'billtype',2);
+        $suptotalExpenses = AddShortController::sumfucntion2('expenses','trip_id','expensesAmount',$data->id);
+        $suptotalPartyAdvance = AddShortController::sumfucntion2('supplier_advances','trip_id','amount',$data->id);
         $total_revenue=0;
         $total_revenue= $partyFreightAmount + $totalChargesAdd - $totalChargesDection ;
         $supBalance = $truckHireAmount - $suptotalPartyAdvance-$totalSupplierPayment + $suptotalChargesAdd - $suptotalChargesDection ;
@@ -812,12 +815,12 @@ class AddShortController extends Controller
         $extra_diesel_amout = $data->extra_diesel_amout;
         $builty_commission = $data->builty_commission;
 
-        $totalChargesAdd =$this->sumfucntion('party_charges','trip_id','chargesAmount',$data->id,'billtype',1);
-        $totalChargesDection =$this->sumfucntion('party_charges','trip_id','chargesAmount',$data->id,'billtype',2);
-        $totalExpenses = $this->sumfucntion2('expenses','trip_id','expensesAmount',$data->id);
-        $totalPartyAdvance = $this->sumfucntion2('party_advances','trip_id','amount',$data->id);
-        $totalPartypayment = $this->sumfucntion2('party_payments','trip_id','amount',$data->id);
-        $totalSupplierPayment = $this->sumfucntion2('supplier_payments','trip_id','amount',$data->id);
+        $totalChargesAdd =AddShortController::sumfucntion('party_charges','trip_id','chargesAmount',$data->id,'billtype',1);
+        $totalChargesDection =AddShortController::sumfucntion('party_charges','trip_id','chargesAmount',$data->id,'billtype',2);
+        $totalExpenses = AddShortController::sumfucntion2('expenses','trip_id','expensesAmount',$data->id);
+        $totalPartyAdvance = AddShortController::sumfucntion2('party_advances','trip_id','amount',$data->id);
+        $totalPartypayment = AddShortController::sumfucntion2('party_payments','trip_id','amount',$data->id);
+        $totalSupplierPayment = AddShortController::sumfucntion2('supplier_payments','trip_id','amount',$data->id);
         
         $partyBalance = $partyFreightAmount - $diesel_adv_transport - $extra_diesel_amout - $builty_commission - $driver_cash_transport + $totalChargesAdd - $totalChargesDection - $totalPartyAdvance - $totalPartypayment ;
 
@@ -826,10 +829,10 @@ class AddShortController extends Controller
         $supchargesdections = SupplierCharges::where('trip_id',$request->trip_id)->where('billType',2)->get();
         $suppartyAdvances = SupplierAdvance::where('trip_id',$request->trip_id)->get();
 
-        $suptotalChargesAdd =$this->sumfucntion('supplier_charges','trip_id','chargesAmount',$data->id,'billtype',1);
-        $suptotalChargesDection =$this->sumfucntion('supplier_charges','trip_id','chargesAmount',$data->id,'billtype',2);
-        $suptotalExpenses = $this->sumfucntion2('expenses','trip_id','expensesAmount',$data->id);
-        $suptotalPartyAdvance = $this->sumfucntion2('supplier_advances','trip_id','amount',$data->id);
+        $suptotalChargesAdd =AddShortController::sumfucntion('supplier_charges','trip_id','chargesAmount',$data->id,'billtype',1);
+        $suptotalChargesDection =AddShortController::sumfucntion('supplier_charges','trip_id','chargesAmount',$data->id,'billtype',2);
+        $suptotalExpenses = AddShortController::sumfucntion2('expenses','trip_id','expensesAmount',$data->id);
+        $suptotalPartyAdvance = AddShortController::sumfucntion2('supplier_advances','trip_id','amount',$data->id);
         $total_revenue=0;
         $total_revenue= $partyFreightAmount + $totalChargesAdd - $totalChargesDection ;
         $supBalance = $truckHireAmount - $suptotalPartyAdvance-$totalSupplierPayment + $suptotalChargesAdd - $suptotalChargesDection ;
@@ -1116,5 +1119,106 @@ class AddShortController extends Controller
         return DB::table($request->table)->where($request->key,$request->value)->first();
     }
 
-   
+    public function truckReports(Request $request){
+        if(isset($request->fromDate) && isset($request->toDate))
+        {
+            $fromDate = date('Y-m-d', strtotime($request->fromDate));
+            $toDate = date('Y-m-d', strtotime($request->toDate));
+            }else{
+            $fromDate = date('Y-m-d', strtotime(date('Y-m-d')));
+            $toDate = date('Y-m-d', strtotime(date('Y-m-d'))); 
+        }
+        $vehicles = Vehicle::where('status',1)->get();
+        $records = Vehicle::where('status',1)->get();
+        if(isset($request->id)){
+            $records = $records->Where('id',$request->id);
+        }
+        
+        foreach($records as $row){
+            $row['total_truck_profit'] = AddShortController::truckProfit($row->id,$fromDate,$toDate);
+            $row['no_of_trip'] = Trip::where('id',$row->id)->whereBetween('startDate',[$fromDate,$toDate])->count();
+            $row['total_tyre_amount'] = Tyre::where('vechicle_id',$row->id)->whereBetween('upload_date',[$fromDate,$toDate])->sum('amount');
+            $row['total_urearefilling_amount'] = Urearefilling::where('vehicle_id',$row->id)->whereBetween('refilling_date',[$fromDate,$toDate])->sum('amount');
+            $row['total_maintenanceForm_amount'] = MaintenanceForm::where('vehicleNumber',$row->id)->whereBetween('date',[$fromDate,$toDate])->sum('amount');
+            $row['net_profit'] = $row['total_truck_profit'] - $row['total_tyre_amount'] - $row['total_urearefilling_amount']-$row['total_maintenanceForm_amount'];
+        }
+        
+        return view('admin.tripReports',compact('records','vehicles'));
+    }
+
+    static  function truckProfit($id,$fromDate,$toDate){
+        $trips = Trip::where('id',$id)->whereBetween('startDate',[$fromDate,$toDate])->get();
+        $partyBalance=0;
+        foreach($trips as $data){
+            $status = $data->status; 
+            $expenses = Expenses::where('trip_id',$data->id)->get();
+            $chargeAdds = PartyCharges::where('trip_id',$data->id)->where('billtype',1)->get();
+            $chargesdections = PartyCharges::where('trip_id',$data->id)->where('billtype',2)->get();
+            $partyAdvances = PartyAdvance::where('trip_id',$data->id)->get();
+            $party_rate_per = $data->party_rate_per;
+            $party_unit_per = $data->party_unit_per;
+            $partyFreightAmount = $data->partyFreightAmount;
+            $diesel_adv_transport = $data->diesel_adv_transport;
+            $driver_cash_transport = $data->driver_cash_transport;
+            $unload_rate_per = $data->unload_rate_per;
+            $unload_unit_per = $data->unload_unit_per;
+            $shortage_qty = $data->shortage_qty;
+            $shortage_amount = $data->shortage_amount;
+            $extra_diesel_amout = $data->extra_diesel_amout;
+            $builty_commission = $data->builty_commission;
+            $unload_weight_per = $data->unload_weight_per;
+            $totalChargesAdd =AddShortController::sumfucntion('party_charges','trip_id','chargesAmount',$data->id,'billtype',1);
+            $totalChargesDection =AddShortController::sumfucntion('party_charges','trip_id','chargesAmount',$data->id,'billtype',2);
+            $totalExpenses = AddShortController::sumfucntion2('expenses','trip_id','expensesAmount',$data->id);
+            $totalPartyAdvance = AddShortController::sumfucntion2('party_advances','trip_id','amount',$data->id);
+            $toll_amount= $data->toll_amount;
+            $extra_expenses= $data->extra_expenses;
+            
+            $totalSupplierPayment = AddShortController::sumfucntion2('supplier_payments','trip_id','amount',$data->id);            
+            $short_amount = isset($unload_weight_per) ? $partyFreightAmount - $unload_rate_per*$unload_weight_per : 0;
+            $partyBalance += $partyFreightAmount - $diesel_adv_transport -$short_amount -$shortage_amount -$builty_commission 
+                        - $driver_cash_transport + $totalChargesAdd - $totalChargesDection - $totalPartyAdvance-$toll_amount
+                        -$extra_expenses-$extra_diesel_amout;
+           
+        }
+
+        return $partyBalance;
+
+    }
+
+   public function truckReportLedger(Request $request){
+       
+    if(isset($request->fromDate) && isset($request->toDate))
+    {
+     $fromDate = date('Y-m-d', strtotime($request->fromDate));
+     $toDate = date('Y-m-d', strtotime($request->toDate));
+    }else{
+     $fromDate = date('Y-m-d', strtotime(date('Y-m-d')));
+     $toDate = date('Y-m-d', strtotime(date('Y-m-d'))); 
+    }
+ 
+    if(isset($request->vehicleNumber)){
+        //condition
+        $condition="date between '".$fromDate."' AND '".$toDate."' AND vehicleNumber = '".$request->vehicleNumber."'";
+        $condition2="trans_date between '".$fromDate."' AND '".$toDate."' AND head_type ='".$request->vehicleNumber."'";
+        $condition3="refilling_date between '".$fromDate."' AND '".$toDate."' AND vehicle_id = '".$request->vehicleNumber."'";
+        $condition4 ="upload_date between '".$fromDate."' AND '".$toDate."' AND vechicle_id = '".$request->vehicleNumber."'";
+        $condition5 ="startDate between '".$fromDate."' AND '".$toDate."' AND vehicleNumber = ".$request->vehicleNumber."";
+        
+        $openingBalance =0;
+ "SELECT id AS id, startDate as date, vehicleNumber as name, partyFreightAmount AS amount,paymentType,type,page FROM trips  WHERE $condition5";
+
+        $records = DB::select("SELECT id AS id, startDate as date, vehicleNumber as name, partyFreightAmount AS amount,paymentType,type,page FROM trips  WHERE $condition5
+        UNION 
+        SELECT id AS id, date as date, vehicleNumber as name, amount AS amount,paymentType,type,page FROM maintenance_forms  WHERE $condition
+        UNION 
+        SELECT id AS id, refilling_date as date, vehicle_id as name, amount AS amount,paymentType,type,page FROM urearefillings  WHERE $condition3
+        UNION
+        SELECT id AS id, upload_date as date, vechicle_id as name, amount AS amount,paymentType,type,page FROM tyres  WHERE $condition4
+        ");  
+        return  view('admin.tripReportLedger',compact('records','openingBalance'));
+    }
+    
+        return view('admin.tripReportLedger');
+   }
 }

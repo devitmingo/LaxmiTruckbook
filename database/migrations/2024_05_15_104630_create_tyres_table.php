@@ -38,6 +38,7 @@ class CreateTyresTable extends Migration
             $table->integer('vendor_name')->nullable();
             $table->integer('page')->nullable();
             $table->string('type',2)->default('cr');
+            $table->string('paymentType',10)->nullable();
             $table->timestamps();
         });
     }

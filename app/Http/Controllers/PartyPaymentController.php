@@ -28,6 +28,7 @@ class PartyPaymentController extends Controller
     {
         $input = $request->all();
         $input['user_id'] =auth()->user()->id;
+        $input['paymentDate'] = date('Y-m-d',strtotime($request->paymentDate));
         $data = PartyPayment::create($input);
 
         $paymentBal =  AddShortController::partyBalance($data->trip_id);

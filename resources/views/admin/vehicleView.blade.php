@@ -70,33 +70,40 @@ use App\Http\Controllers\AdminController;
                                                             
                                                             <td>{{ isset($row->chassis_no) ? $row->chassis_no : '' }}</td>
                                                             <td>{{ isset($row->engine_no) ? $row->engine_no : '' }}</td>
-                                                            <td>R C Expiry Date - {{ isset($row->r_c_expiry_date) ? $row->r_c_expiry_date : '' }}
-                                                                <hr>
-                                                                Insurance  Expiry Date - {{ isset($row->insurance_expiry_date) ? $row->insurance_expiry_date : '' }}
-                                                                <hr>
-                                                                Tax Pay Expiry Date - {{ isset($row->tax_pay_expiry_date) ? $row->tax_pay_expiry_date : '' }}
-                                                                <hr>
-                                                                Fitness Expiry Date - {{ isset($row->fitness_expiry_date) ? $row->fitness_expiry_date : '' }}
-                                                                <hr>
-                                                                Permit Expiry Date - {{ isset($row->permit_expiry_date) ? $row->permit_expiry_date : '' }}
+                                                            <td>
+                                                                @if(isset($row->insurance_expiry_date) && $row->insurance_expiry_date !='1970-01-01' )
+                                                                    {{ "Insurance  Expiry Date".date('d-m-Y',strtotime($row->insurance_expiry_date))."<hr>" }} 
+                                                                 @endif
                                                                 
+                                                                @if(isset($row->tax_pay_expiry_date) && $row->tax_pay_expiry_date !='1970-01-01' ) 
+                                                                    {{ "Tax Pay Expiry Date - ".$row->tax_pay_expiry_date."<hr>" }} 
+                                                                @endif
+                                                                
+                                                                 @if(isset($row->fitness_expiry_date) && $row->fitness_expiry_date !='1970-01-01' )
+                                                                    {{ "Fitness Expiry Date -".$row->fitness_expiry_date."<hr>" }}
+                                                                @endif
+
+                                                                @if(isset($row->permit_expiry_date) && $row->permit_expiry_date !='1970-01-01' )
+                                                                    {{ "Permit Expiry Date -".$row->permit_expiry_date."<hr>" }}
+                                                                @endif
                                                             </td>
-                                                            <td><a href="{{ url('vehicle_doc/'.$row->r_c_document) }}" target="_blank">R C Documents </a>
+                                                            <td><a href="{{ url('vehicle_doc/'.$row->r_c_document) }}" target="_blank">@if($row->r_c_document) {{"R C Documents" }} @endif </a>
                                                                 <hr>
-                                                                <a href="{{ url('vehicle_doc/'.$row->insurance_document) }}" target="_blank">Insurance Documents</a>
+                                                                <a href="{{ url('vehicle_doc/'.$row->insurance_document) }}" target="_blank">@if($row->insurance_document) {{ "Insurance Documents" }} @endif</a>
                                                                     <hr>
-                                                                <a href="{{ url('vehicle_doc/'.$row->tax_pay_document) }}" target="_blank">Tax Pay Documents</a>
+                                                                <a href="{{ url('vehicle_doc/'.$row->tax_pay_document) }}" target="_blank">@if($row->insurance_document) {{ "Tax Pay Documents" }} @endif</a>
                                                                 <hr>
-                                                                <a href="{{ url('vehicle_doc/'.$row->fitness_document) }}" target="_blank">Fitness Documents</a>
+                                                                <a href="{{ url('vehicle_doc/'.$row->fitness_document) }}" target="_blank">@if($row->fitness_document) {{ "Fitness Documents" }} @endif</a>
                                                                 <hr>
-                                                                <a href="{{ url('vehicle_doc/'.$row->permit_document) }}" target="_blank">Permit Documents</a>
+                                                                <a href="{{ url('vehicle_doc/'.$row->permit_document) }}" target="_blank">@if($row->permit_document) {{ "Permit Documents"  }} @endif</a>
                                                             </td>
                                                             <td>@if($row->status==1)  Enable @else Disable  @endif </td>
 
-                                                             <td><a href="{{route('vehicle.edit',$row->id)}}" class="btn btn-success" rel="tooltip" title="Edit">
+                                                             <td>
+                                                                <a href="{{route('vehicle.edit',$row->id)}}" class="btn btn-success" rel="tooltip" title="Edit">
                                                                     <i class="mdi mdi-square-edit-outline"></i>
                                                                 </a>
-                                                                <a href="#" class="btn" rel="tooltip" title="Delete">
+                                                                <!-- <a href="#" class="btn" rel="tooltip" title="Delete">
                                                                 
                                                                 <form action="{{route('vehicle.destroy',$row->id)}}" method="post">
                                                                     @csrf
@@ -106,7 +113,7 @@ use App\Http\Controllers\AdminController;
                                                                     <i class="mdi mdi-window-close" onclick="return confirm('Are you sure to Delete?')"></i>
                                                                     </button>
                                                                 </form>
-                                                                </a>
+                                                                </a> -->
                                                             </td>
                                                         </tr>
                                                         @endforeach

@@ -63,16 +63,19 @@
                                                             <td>{{ isset($row->aadhar_number) ? $row->aadhar_number : '' }}</a></td>
                                                             
                                                             <td>{{ isset($row->driving_licence_number) ? $row->driving_licence_number : '' }}</td>
-                                                            <td>{{ isset($row->driving_licence_expiry) ? date('d-m-Y',strtotime($row->driving_licence_expiry)) : '' }}</td>
+                                                            <td>@if(isset($row->driving_licence_expiry) && $row->driving_licence_expiry!='1970-01-01') {{ isset($row->driving_licence_expiry) ? date('d-m-Y',strtotime($row->driving_licence_expiry)) : '' }} @endif</td>
                                                             <td>{{ isset($row->salary) ? $row->salary : '' }}</td>
                                                             <td>{{ isset($row->address) ? $row->address : '' }}</td>
                                                             <td>@if($row->status==1)  Enable @else Disable  @endif </td>
-                                                            <td><a href="{{ url('driver/'.$row->aadhar_document) }}" target="_blank">{{ isset($row->aadhar_document) ? 'Aadhar Card ,' : '' }}
-                                                            <a href="{{ url('driver/'.$row->driver_photo) }}" target="_blank">{{ isset($row->driver_photo) ? 'Driver Photo,' : '' }}
-                                                            <a href="{{ url('driver/'.$row->driving_licence_document) }}" target="_blank">{{ isset($row->driving_licence_document) ? 'Driving Licence' : '' }}
+                                                            <td><a href="{{ url('driver/'.$row->aadhar_document) }}" target="_blank">@if($row->aadhar_document) {{'Aadhar Card ,' }} @endif
+                                                            <a href="{{ url('driver/'.$row->driver_photo) }}" target="_blank">@if($row->driver_photo)? {{'Driver Photo,' }} @endif
+                                                            <a href="{{ url('driver/'.$row->driving_licence_document) }}" target="_blank">@if($row->driving_licence_document) {{ 'Driving Licence' }} @endif
 
                                                             </td>
-                                                            <td>{{ isset($row->date_of_leave) ? date('d-m-Y',strtotime($row->date_of_leave)) : '' }}</td>
+                                                            <td>@if(isset($row->date_of_leave) && $row->date_of_leave!='1970-01-01') 
+                                                                    {{ date('d-m-Y',strtotime($row->date_of_leave)) }}
+                                                                @endif
+                                                            </td>
                                                             <td><a href="{{route('driver.edit',$row->id)}}" class="btn btn-success" rel="tooltip" title="Edit">
                                                                     <i class="mdi mdi-square-edit-outline"></i>
                                                                 </a>

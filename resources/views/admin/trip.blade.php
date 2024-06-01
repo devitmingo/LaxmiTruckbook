@@ -22,10 +22,10 @@
                                         <div class="tab-content">
                                             <div class="tab-pane show active" id="form-row-preview">
                                                  @if(isset($data))
-                                                <form action="{{ route('trips.update',$data->id) }}" method="post">
+                                                <form action="{{ route('trips.update',$data->id) }}" method="post" autocomplete="off">
                                                 @method('PATCH')
                                                 @else
-                                                <form action="{{ route('trips.store') }}" method="post">
+                                                <form action="{{ route('trips.store') }}" method="post" autocomplete="off">
                                                 @endif
                                                     @csrf
                                                     <div class="row g-2">

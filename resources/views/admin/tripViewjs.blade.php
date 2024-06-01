@@ -57,6 +57,8 @@
             $("#builty_commission").val(response.builty_commission);
             $("#toll_amount").val(response.toll_amount);
             $("#extra_expenses").val(response.extra_expenses);
+            $("#extra_diesel_rate").val(response.extra_diesel_rate);
+            $("#extra_diesel_ltr").val(response.extra_diesel_ltr);
             $("#onCompleteModel").modal('show');
         }
         });

@@ -1,8 +1,13 @@
+.env
 public/dashboard
+public/driver
+public/tyres
+public/uploadFiles
+public/vehicle_doc
 dashboard
 .env
 composer.json
 composer.lock
-vendor
+vendor/*
 index.php
 server.php

@@ -119,6 +119,9 @@
             $( function() {
                 $( ".datepicker" ).datepicker({ dateFormat: 'dd-mm-yy' });
             } );
+            $( document ).ready(function() {
+                 $('input').attr('autocomplete','off');
+                });
         </script>
     </body>
 

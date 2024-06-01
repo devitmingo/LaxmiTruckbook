@@ -10,7 +10,7 @@
                         <!-- Logo -->
                         <div class="auth-brand text-center text-lg-start">
                             <a href="{{ route('login') }}" class="logo-dark">
-                                <h4>ERP TruckBook</h4>
+                                <h4>Shiva Tradelink</h4>
                             </a>
                             
                            

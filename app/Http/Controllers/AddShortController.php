@@ -1257,4 +1257,63 @@ class AddShortController extends Controller
     
         return view('admin.tripReportLedger');
    }
+   public function pdfTripReports(Request $request){
+
+    $id=1;
+    $records = Trip::orderBy('id','Desc')->get();
+    
+    if(isset($request->from_date) && isset($request->to_date)){
+        $records = $records->WhereBetween('startDate',[$request->from_date,$request->to_date]);
+    }
+    
+    if(isset($request->partyName)){
+        $records = $records->Where('partyName',$request->partyName);
+    }
+    
+    if(isset($request->origin) AND isset($request->destination)){
+        $records = $records->Where('origin',$request->origin)->Where('destination',$request->destination);
+    }
+    if(isset($request->vehicleNumber)){
+        $records = $records->Where('vehicleNumber',$request->vehicleNumber);
+    }
+    
+    
+    
+     if(isset($request->status)){
+        $records = $records->Where('status',$request->status);
+    }
+
+    $pdf=App::make('dompdf.wrapper');
+    $com = Company::first();
+    view()->share(compact('com','records'),$com,$records);
+    $pdf = PDF::loadView('admin.trip_pdf_report');
+    $pdf->setPaper('A4','landscape');
+    return $pdf->stream();
+   }
+
+
+   public function pdfUreaReports(Request $request){
+    $records = Urearefilling::get();
+    if(isset($request->from_date) && isset($request->to_date))
+    {
+        $fromDate = date('Y-m-d', strtotime($request->from_date));
+        $toDate = date('Y-m-d', strtotime($request->to_date));
+        }else{
+        $startDate = now()->subDays(30);
+        $fromDate = date('Y-m-d', strtotime($startDate));
+        $toDate = date('Y-m-d', strtotime(date('Y-m-d'))); 
+    }
+  
+    $records = $records->WhereBetween('refilling_date',[$fromDate,$toDate]);
+    if(isset($request->vehicleNumber)){
+        $records = $records->where('vehicle_id',$request->vehicleNumber);
+    }
+
+    $pdf=App::make('dompdf.wrapper');
+    $com = Company::first();
+    view()->share(compact('com','records'),$com,$records);
+    $pdf = PDF::loadView('admin.ureaRefillingpdf');
+    $pdf->setPaper('A4','landscape');
+    return $pdf->stream();
+}
 }

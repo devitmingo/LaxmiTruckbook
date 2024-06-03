@@ -129,6 +129,12 @@
 <script>
     function onSubmit(){
         var id = $('#vehicleNumber').val();
+        var status = true;
+        if(id==''){
+            alert('please select Truck Number.');
+            status = false;
+        }
+        if(status==true){
         $.ajax({
             type:'GET',
             url:'{{ url("get-single-row-value") }}?table=vehicles&value='+id+'&key=id',
@@ -141,6 +147,7 @@
                 $('#table'+response.vehicle_tyre).show();
              }
             });
+        }
     }
     function tireOpeningModal(value){
         $(".tyre_ty").html(value);

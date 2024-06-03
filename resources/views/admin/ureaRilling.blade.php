@@ -19,7 +19,9 @@
                             <x-alert/>
                                 <div class="card">
                                     <div class="card-body">
-                                 
+                                    <a href="{{ route('urea.index') }}"><button  type="button" class="btn btn-primary right"> Urea Refilling</button></a>
+                                        <br>
+                                        </br>
                                         <div class="tab-content">
                                             <div class="tab-pane show active" id="form-row-preview">
 

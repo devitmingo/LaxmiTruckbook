@@ -5,9 +5,56 @@ use App\Http\Controllers\AddShortController;
 @endphp
 @extends('layouts.app')
 @section('body')
+<?php  $date = date('d-m-Y'); ?>
    <!-- Start Content-->
   <div class="container-fluid">
+  <div class="row">
+                            <div class="col-12">
+                                <div class="card">
+                                    <div class="card-body">
+                                 
+                                        <div class="tab-content">
+                                            <div class="tab-pane show active" id="form-row-preview">
+                                               <form action="" method="get">
+                                               
+                                               @csrf
+                                                    <div class="row g-2">
+                                                      <div class="col-md-2">
+                                                             <label for="inputPassword4" class="form-label">From Date</label>
+                                                             <input type="text" name="from_date"  id="from_date" class="form-control datepicker" 
+                                                            value="{{ isset($fromDate) ? date('d-m-Y',strtotime($fromDate)) : $date  }}">
+                                                        </div>
+                                                        
+                                                       <div class="col-md-2">
+                                                            <label for="inputPassword4" class="form-label">To Date</label>
+                                                            <input type="text" name="to_date"  id="to_date" class="form-control datepicker" id="inputCity"
+                                                             value="{{ isset($toDate) ? date('d-m-Y',strtotime($toDate)) : $date  }}">
+                                                       </div>
+                                                        
+                                                      
+                                                        <div class="col-md-2">
+                                                            <label for="inputEmail4" class="form-label">Select Vehicle</label>
+                                                             <select id="vehicleNumber" name="vehicleNumber" class="form-select js-example-basic-single">
+                                                               
+                                                            </select>
+                                                        </div> 
+                                                        <div class="col-md-2" style="margin-top:42px;">
+                                                           
+                                                            <button type="submit" class="btn btn-primary"><i class="mdi mdi-account-search"></i> Search</button>
+                                                            <a href="{{ route('urea.index') }}" type="reset" class="btn btn-warning"><i class="mdi mdi-refresh"></i> Reset</a>
+                                                        </div>
+                                                 </div>
+                                                  
+                                                </form>                      
+                                            </div> <!-- end preview-->
+                                        
+                                           
+                                        </div> <!-- end tab-content-->
 
+                                    </div> <!-- end card-body -->
+                                </div> <!-- end card-->
+                            </div> <!-- end col -->
+                        </div>    
 
                         <div class="row">
                             <div class="col-12">
@@ -15,7 +62,9 @@ use App\Http\Controllers\AddShortController;
                                     <div class="card-body">
                                      <h4>Urea Refilling List</h4>
                                      <a href="{{ route('urea.create') }}"><button  type="button" class="btn btn-primary right"> + Add Urea Refilling</button></a>
-                                        <br>
+                                     <a href="{{ route('pdfUreaReports') }}?from_date=<?php echo isset($_GET['from_date']) ? $_GET['from_date'] : ''  ?>&to_date=<?php echo isset($_GET['to_date']) ? $_GET['to_date'] : ''  ?>&vehicleNumber=<?php echo isset($_GET['vehicleNumber']) ? $_GET['vehicleNumber'] : ''  ?>" target="_blank"><button  type="button" class="btn btn-primary right"> Urea Report PDF</button></a>
+                                      
+                                     <br>
                                         </br>
                                         <ul class="nav nav-tabs nav-bordered mb-3">
                                             
@@ -31,7 +80,7 @@ use App\Http\Controllers\AddShortController;
                                                             <th>Place</th>
                                                             <th>Meter Reading</th>
                                                             <th>Refilling Date</th>
-                                                            <th>Liter</th>
+                                                            <th>Ltr</th>
                                                             <th>Self/Warranty</th>
                                                             <th>Amount</th>
                                                             <th>Payment Type</th>
@@ -42,6 +91,7 @@ use App\Http\Controllers\AddShortController;
                                                 
                                                 
                                                    <tbody>
+                                                    @php $total =0; @endphp
                                                         @foreach($records as $row)
                                                         @php
                                                             $vehicle = AdminController::getValueStatic2('vehicles','vehicleNumber','id',$row->vehicle_id);
@@ -49,6 +99,7 @@ use App\Http\Controllers\AddShortController;
                                                             if(isset($row->vendorName)){
                                                                 $vendor = AdminController::getValueStatic2('vendors','vendorName','id',$row->vendorName);
                                                             }
+                                                            $total +=$row->amount;
                                                         @endphp
                                                         <tr>
                                                             <td>{{ $loop->index+1 }}</td>
@@ -80,6 +131,13 @@ use App\Http\Controllers\AddShortController;
                                                         </tr>
                                                         @php $vendor = ''; @endphp
                                                         @endforeach
+                                                        <tfoot>
+                                                            <tr>
+                                                                <th colspan="8" style="float:right;">Total Amount</th>
+                                                                <th>{{ isset($total) ? $total : ''}} </th>
+                                                                <th colspan="3"></th>
+                                                            </tr>
+                                                        </tfoot>
                                                     </tbody>
                                                 </table>                                           
                                             </div> <!-- end preview-->
@@ -94,4 +152,24 @@ use App\Http\Controllers\AddShortController;
                         <!-- end row-->
 
 </div> 
+<script>
+    function fetchVehicles(id=0){
+  
+        $.ajax({
+        type:'GET',
+        url:'{{ url("common-get-select2") }}?table=vehicles&id=id&column=vehicleNumber',
+        success:function(response){
+            console.log(response);
+            $("#vehicleNumber").html(response);
+            $("#vehicleNumber").val(id);
+            $('#vehicleNumber').trigger('change'); 
+            document.getElementById("vehicleNumber").value = "<?php echo isset($_GET['vehicleNumber']) ? $_GET['vehicleNumber'] : ''  ?>";
+
+        }
+        });
+    }   
+//onload rung party function
+fetchVehicles();
+
+ </script>
 @endsection

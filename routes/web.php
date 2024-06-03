@@ -177,5 +177,12 @@ Route::middleware(['auth'])->group(function () {
 
      //Truck Profit ledger
      Route::get('/admin/truckReportLedger',[AddShortController::class, 'truckReportLedger'])->name('truckReportLedger');
+
+    //PDF for Trip Reports
+    Route::get('/admin/pdf-trip-reports',[AddShortController::class, 'pdfTripReports'])->name('pdfTripReports');
+
+    //PDF for Urea Reports
+    Route::get('/admin/pdf-urea-reports',[AddShortController::class, 'pdfUreaReports'])->name('pdfUreaReports');
+        
   });
 

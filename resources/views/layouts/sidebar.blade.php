@@ -127,7 +127,7 @@
 
                          <li class="side-nav-item">
                             <a href="{{ route('trips.indexAll',1) }}" class="side-nav-link">
-                                <i class="uil-calender"></i>
+                                <i class="mdi mdi-truck"></i>
                                 <span> Trips </span>
                             </a>
                         </li>
@@ -135,7 +135,7 @@
 
                         <li class="side-nav-item">
                             <a href="{{ route('trips.index') }}" class="side-nav-link">
-                                <i class="uil-calender"></i>
+                                <i class="mdi mdi-table-large"></i>
                                 <span> Trip Reports</span>
                             </a>
                         </li>

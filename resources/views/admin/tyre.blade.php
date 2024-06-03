@@ -33,13 +33,13 @@
                                                         </div>
                                                          <div class="mb-3 col-md-1">
                                                          </br>   
-                                                            <button type="button" onclick="onSubmit()" class="btn btn-primary">{{ "Get" }}</button>
+                                                            <button type="button" onclick="onSubmit()" class="btn btn-primary">  <i class="mdi mdi-account-search"></i>{{ "Get" }}</button>
                                                             </div>
                                                             <div class="mb-3 col-md-2">
                                                             </br>  
                                                             <form action="{{ route('tyre.index') }}" method="">
                                                                 <input name="vehicle_no"  id="vehicle_no" type="hidden" />
-                                                                <button  type="submit"  class="btn btn-primary"><span class="vehical_span"><span> {{ "Report" }}</button>
+                                                                <button  type="submit"  class="btn btn-primary"><i class="mdi mdi-sort-variant"></i><span class="vehical_span"><span> {{ "Report" }}</button>
                                                             </form>
                                                         </div>
                                                     </div>

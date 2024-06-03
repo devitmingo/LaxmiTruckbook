@@ -16,10 +16,25 @@ class UrearefillingController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $records = Urearefilling::all();
-        return view('admin.ureaRefillingView',compact('records'));
+        $records = Urearefilling::get();
+        if(isset($request->from_date) && isset($request->to_date))
+        {
+            $fromDate = date('Y-m-d', strtotime($request->from_date));
+            $toDate = date('Y-m-d', strtotime($request->to_date));
+            }else{
+            $startDate = now()->subDays(30);
+            $fromDate = date('Y-m-d', strtotime($startDate));
+            $toDate = date('Y-m-d', strtotime(date('Y-m-d'))); 
+        }
+      
+        $records = $records->WhereBetween('refilling_date',[$fromDate,$toDate]);
+        if(isset($request->vehicleNumber)){
+            $records = $records->where('vehicle_id',$request->vehicleNumber);
+        }
+        //return $records;
+        return view('admin.ureaRefillingView',compact('records','fromDate','toDate'));
     }
 
     /**
@@ -136,4 +151,6 @@ class UrearefillingController extends Controller
         $res = Urearefilling::where('id',$id)->delete();
         return redirect()->back()->with('success','Urea Refilling Deleted successfully');
     }
+
+  
 }

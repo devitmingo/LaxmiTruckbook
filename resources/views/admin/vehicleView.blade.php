@@ -72,23 +72,22 @@ use App\Http\Controllers\AdminController;
                                                             <td>{{ isset($row->engine_no) ? $row->engine_no : '' }}</td>
                                                             <td>
                                                                 @if(isset($row->insurance_expiry_date) && $row->insurance_expiry_date !='1970-01-01' )
-                                                                    {{ "Insurance  Expiry Date".date('d-m-Y',strtotime($row->insurance_expiry_date))."<hr>" }} 
+                                                                    {{ "Insurance  Expiry Date".date('d-m-Y',strtotime($row->insurance_expiry_date)) }} 
                                                                  @endif
-                                                                
+                                                                 <hr>
                                                                 @if(isset($row->tax_pay_expiry_date) && $row->tax_pay_expiry_date !='1970-01-01' ) 
-                                                                    {{ "Tax Pay Expiry Date - ".$row->tax_pay_expiry_date."<hr>" }} 
+                                                                    {{ "Tax Pay Expiry Date - ".$row->tax_pay_expiry_date }} 
                                                                 @endif
-                                                                
+                                                                <hr>
                                                                  @if(isset($row->fitness_expiry_date) && $row->fitness_expiry_date !='1970-01-01' )
-                                                                    {{ "Fitness Expiry Date -".$row->fitness_expiry_date."<hr>" }}
+                                                                    {{ "Fitness Expiry Date -".$row->fitness_expiry_date }}
                                                                 @endif
-
+                                                                <hr>
                                                                 @if(isset($row->permit_expiry_date) && $row->permit_expiry_date !='1970-01-01' )
-                                                                    {{ "Permit Expiry Date -".$row->permit_expiry_date."<hr>" }}
+                                                                    {{ "Permit Expiry Date -".$row->permit_expiry_date }}
                                                                 @endif
                                                             </td>
-                                                            <td><a href="{{ url('vehicle_doc/'.$row->r_c_document) }}" target="_blank">@if($row->r_c_document) {{"R C Documents" }} @endif </a>
-                                                                <hr>
+                                                            <td>
                                                                 <a href="{{ url('vehicle_doc/'.$row->insurance_document) }}" target="_blank">@if($row->insurance_document) {{ "Insurance Documents" }} @endif</a>
                                                                     <hr>
                                                                 <a href="{{ url('vehicle_doc/'.$row->tax_pay_document) }}" target="_blank">@if($row->insurance_document) {{ "Tax Pay Documents" }} @endif</a>
@@ -96,6 +95,9 @@ use App\Http\Controllers\AdminController;
                                                                 <a href="{{ url('vehicle_doc/'.$row->fitness_document) }}" target="_blank">@if($row->fitness_document) {{ "Fitness Documents" }} @endif</a>
                                                                 <hr>
                                                                 <a href="{{ url('vehicle_doc/'.$row->permit_document) }}" target="_blank">@if($row->permit_document) {{ "Permit Documents"  }} @endif</a>
+                                                                <hr>
+                                                                <a href="{{ url('vehicle_doc/'.$row->r_c_document) }}" target="_blank">@if($row->r_c_document) {{"R C Documents" }} @endif </a>
+                                                                
                                                             </td>
                                                             <td>@if($row->status==1)  Enable @else Disable  @endif </td>
 

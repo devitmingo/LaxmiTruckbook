@@ -62,7 +62,7 @@ use App\Http\Controllers\AddShortController;
                                     <div class="card-body">
                                      <h4>Urea Refilling List</h4>
                                      <a href="{{ route('urea.create') }}"><button  type="button" class="btn btn-primary right"> + Add Urea Refilling</button></a>
-                                     <a href="{{ route('pdfUreaReports') }}?from_date=<?php echo isset($_GET['from_date']) ? $_GET['from_date'] : ''  ?>&to_date=<?php echo isset($_GET['to_date']) ? $_GET['to_date'] : ''  ?>&vehicleNumber=<?php echo isset($_GET['vehicleNumber']) ? $_GET['vehicleNumber'] : ''  ?>" target="_blank"><button  type="button" class="btn btn-primary right"> Urea Report PDF</button></a>
+                                     <a href="{{ route('pdfUreaReports') }}?from_date=<?php echo isset($_GET['from_date']) ? $_GET['from_date'] : ''  ?>&to_date=<?php echo isset($_GET['to_date']) ? $_GET['to_date'] : ''  ?>&vehicleNumber=<?php echo isset($_GET['vehicleNumber']) ? $_GET['vehicleNumber'] : ''  ?>" target="_blank"><button  type="button" class="btn btn-warning right"> <i class="mdi mdi-file-pdf"></i> Urea Report PDF</button></a>
                                       
                                      <br>
                                         </br>

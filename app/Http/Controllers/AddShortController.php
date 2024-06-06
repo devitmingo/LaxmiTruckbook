@@ -1143,7 +1143,7 @@ class AddShortController extends Controller
             $row['net_profit'] = (int)$row['total_truck_profit'] - (int)$row['total_tyre_amount'] - (int)$row['total_urearefilling_amount']-(int)$row['total_maintenanceForm_amount'];
         }
         
-        return view('admin.tripReports',compact('records','vehicles'));
+        return view('admin.tripReports',compact('records','vehicles','fromDate','toDate'));
     }
     public  function truckProfit1($id,$fromDate,$toDate){
         $trips = Trip::where('id',$id)->whereBetween('startDate',[$fromDate,$toDate])->get();
@@ -1293,27 +1293,143 @@ class AddShortController extends Controller
 
 
    public function pdfUreaReports(Request $request){
-    $records = Urearefilling::get();
-    if(isset($request->from_date) && isset($request->to_date))
-    {
-        $fromDate = date('Y-m-d', strtotime($request->from_date));
-        $toDate = date('Y-m-d', strtotime($request->to_date));
-        }else{
-        $startDate = now()->subDays(30);
-        $fromDate = date('Y-m-d', strtotime($startDate));
-        $toDate = date('Y-m-d', strtotime(date('Y-m-d'))); 
-    }
-  
-    $records = $records->WhereBetween('refilling_date',[$fromDate,$toDate]);
-    if(isset($request->vehicleNumber)){
-        $records = $records->where('vehicle_id',$request->vehicleNumber);
+        $records = Urearefilling::get();
+        if(isset($request->from_date) && isset($request->to_date))
+        {
+            $fromDate = date('Y-m-d', strtotime($request->from_date));
+            $toDate = date('Y-m-d', strtotime($request->to_date));
+            }else{
+            $startDate = now()->subDays(30);
+            $fromDate = date('Y-m-d', strtotime($startDate));
+            $toDate = date('Y-m-d', strtotime(date('Y-m-d'))); 
+        }
+    
+        $records = $records->WhereBetween('refilling_date',[$fromDate,$toDate]);
+        if(isset($request->vehicleNumber)){
+            $records = $records->where('vehicle_id',$request->vehicleNumber);
+        }
+
+            $pdf=App::make('dompdf.wrapper');
+            $com = Company::first();
+            view()->share(compact('com','records'),$com,$records);
+            $pdf = PDF::loadView('admin.ureaRefillingpdf');
+            $pdf->setPaper('A4','landscape');
+            return $pdf->stream();
     }
 
-    $pdf=App::make('dompdf.wrapper');
-    $com = Company::first();
-    view()->share(compact('com','records'),$com,$records);
-    $pdf = PDF::loadView('admin.ureaRefillingpdf');
-    $pdf->setPaper('A4','landscape');
-    return $pdf->stream();
-}
+    public function pdfTransReports(Request $request){
+        $records = Urearefilling::get();
+        if(isset($request->from_date) && isset($request->to_date))
+        {
+            $fromDate = date('Y-m-d', strtotime($request->from_date));
+            $toDate = date('Y-m-d', strtotime($request->to_date));
+            }else{
+            $startDate = now()->subDays(30);
+            $fromDate = date('Y-m-d', strtotime($startDate));
+            $toDate = date('Y-m-d', strtotime(date('Y-m-d'))); 
+        }
+    
+        $records = $records->WhereBetween('trans_date',[$fromDate,$toDate]);
+
+            $pdf=App::make('dompdf.wrapper');
+            $com = Company::first();
+            view()->share(compact('com','records'),$com,$records);
+            $pdf = PDF::loadView('admin.pdfTransation');
+            $pdf->setPaper('A4','landscape');
+            return $pdf->stream();
+    }
+
+    public function pdfMaintenanceReports(Request $request){
+        $records =MaintenanceForm::all();
+        $vehicle = Vehicle::all();
+        if(isset($request->from_date) && isset($request->to_date))
+        {
+            $fromDate = date('Y-m-d', strtotime($request->from_date));
+            $toDate = date('Y-m-d', strtotime($request->to_date));
+            }else{
+            $startDate = now()->subDays(30);
+            $fromDate = date('Y-m-d', strtotime($startDate));
+            $toDate = date('Y-m-d', strtotime(date('Y-m-d'))); 
+        }
+      
+        $records = $records->WhereBetween('trans_date',[$fromDate,$toDate]);
+        if(isset($request->vehicleNumber)){
+            $records = $records->where('vehicleNumber',$request->vehicleNumber);
+        }
+        $pdf=App::make('dompdf.wrapper');
+        $com = Company::first();
+        view()->share(compact('com','records'),$com,$records);
+        $pdf = PDF::loadView('admin.maintenancePdf');
+        $pdf->setPaper('A4','landscape');
+        return $pdf->stream();
+    }
+
+    public function pdfTruckProfitReports(Request $request){
+        if(isset($request->from_date) && isset($request->to_date))
+        {
+            $fromDate = date('Y-m-d', strtotime($request->from_date));
+            $toDate = date('Y-m-d', strtotime($request->to_date));
+            }else{
+            $fromDate = date('Y-m-d', strtotime(date('Y-m-d')));
+            $toDate = date('Y-m-d', strtotime(date('Y-m-d'))); 
+        }
+        $records = Vehicle::where('status',1)->get();
+        if(isset($request->id)){
+            $records = $records->Where('id',$request->id);
+        }
+        
+        foreach($records as $row){
+            $row['total_truck_profit'] = AddShortController::truckProfit1($row->id,$fromDate,$toDate);
+            $row['no_of_trip'] = Trip::where('id',$row->id)->whereBetween('startDate',[$fromDate,$toDate])->count();
+            $row['total_tyre_amount'] = Tyre::where('vechicle_id',$row->id)->whereBetween('upload_date',[$fromDate,$toDate])->sum('amount');
+            $row['total_urearefilling_amount'] = Urearefilling::where('vehicle_id',$row->id)->whereBetween('refilling_date',[$fromDate,$toDate])->sum('amount');
+            $row['total_maintenanceForm_amount'] = MaintenanceForm::where('vehicleNumber',$row->id)->whereBetween('date',[$fromDate,$toDate])->sum('amount');
+            $row['net_profit'] = (int)$row['total_truck_profit'] - (int)$row['total_tyre_amount'] - (int)$row['total_urearefilling_amount']-(int)$row['total_maintenanceForm_amount'];
+        }
+        
+        $pdf=App::make('dompdf.wrapper');
+        $com = Company::first();
+        view()->share(compact('com','records'),$com,$records);
+        $pdf = PDF::loadView('admin.ruckProfitReportPdf');
+        $pdf->setPaper('A4','landscape');
+        return $pdf->stream();
+    }
+
+    public function pdfTruckProfitLedgerReports(Request $request){
+        if(isset($request->fromDate) && isset($request->toDate))
+        {
+         $fromDate = date('Y-m-d', strtotime($request->fromDate));
+         $toDate = date('Y-m-d', strtotime($request->toDate));
+        }else{
+         $fromDate = date('Y-m-d', strtotime(date('Y-m-d')));
+         $toDate = date('Y-m-d', strtotime(date('Y-m-d'))); 
+        }
+     
+        if(isset($request->vehicleNumber)){
+            //condition
+            $condition="date between '".$fromDate."' AND '".$toDate."' AND vehicleNumber = '".$request->vehicleNumber."'";
+            $condition2="trans_date between '".$fromDate."' AND '".$toDate."' AND head_type ='".$request->vehicleNumber."'";
+            $condition3="refilling_date between '".$fromDate."' AND '".$toDate."' AND vehicle_id = '".$request->vehicleNumber."'";
+            $condition4 ="upload_date between '".$fromDate."' AND '".$toDate."' AND vechicle_id = '".$request->vehicleNumber."'";
+            $condition5 ="startDate between '".$fromDate."' AND '".$toDate."' AND vehicleNumber = ".$request->vehicleNumber."";
+            
+            $openingBalance =0;
+            $records = DB::select("SELECT id AS id, startDate as date, vehicleNumber as name, partyFreightAmount AS amount,paymentType,type,page FROM trips  WHERE $condition5
+            UNION 
+            SELECT id AS id, date as date, vehicleNumber as name, amount AS amount,paymentType,type,page FROM maintenance_forms  WHERE $condition
+            UNION 
+            SELECT id AS id, refilling_date as date, vehicle_id as name, amount AS amount,paymentType,type,page FROM urearefillings  WHERE $condition3
+            UNION
+            SELECT id AS id, upload_date as date, vechicle_id as name, amount AS amount,paymentType,type,page FROM tyres  WHERE $condition4
+            ");  
+            $pdf=App::make('dompdf.wrapper');
+            $com = Company::first();
+            view()->share(compact('com','records','openingBalance'),$com,$records,$openingBalance);
+            $pdf = PDF::loadView('admin.truckProfitLedgerPdf');
+            $pdf->setPaper('A4','landscape');
+            return $pdf->stream();
+        }
+        
+           
+    }
 }

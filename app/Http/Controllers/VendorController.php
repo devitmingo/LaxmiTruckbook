@@ -9,6 +9,9 @@ use App\Models\MaintenanceForm;
 use DB;
 use App\Models\Tyre;
 use App\Models\Urearefilling;
+use App\Models\Company;
+use App;
+use PDF;
 
 class VendorController extends Controller
 {
@@ -132,32 +135,32 @@ class VendorController extends Controller
         $toDate = date('Y-m-d', strtotime(date('Y-m-d'))); 
        }
     
-    if(isset($request->vendorName)){
-       //condition
-        $condition="date between '".$fromDate."' AND '".$toDate."' AND paymentType='credit' AND vendorName = '".$request->vendorName."'";
-        
-        $condition2="trans_date between '".$fromDate."' AND '".$toDate."' AND trans_type = 'Vendor' AND head_type ='".$request->vendorName."'";
-        
-        $condition3="refilling_date between '".$fromDate."' AND '".$toDate."' AND paymentType='credit' AND vendorName = '".$request->vendorName."'";
+        if(isset($request->vendorName)){
+        //condition
+            $condition="date between '".$fromDate."' AND '".$toDate."' AND paymentType='credit' AND vendorName = '".$request->vendorName."'";
+            
+            $condition2="trans_date between '".$fromDate."' AND '".$toDate."' AND trans_type = 'Vendor' AND head_type ='".$request->vendorName."'";
+            
+            $condition3="refilling_date between '".$fromDate."' AND '".$toDate."' AND paymentType='credit' AND vendorName = '".$request->vendorName."'";
 
-        $condition4 ="upload_date between '".$fromDate."' AND '".$toDate."' AND paymentType='credit' AND vendor_name = '".$request->vendorName."'";
+            $condition4 ="upload_date between '".$fromDate."' AND '".$toDate."' AND paymentType='credit' AND vendor_name = '".$request->vendorName."'";
+            
+            $openingBalance = $this->VendorOpening($fromDate,$request->vendorName);
+
+            
+
+
+            $records = DB::select("SELECT id AS id, date as date, vehicleNumber as name, amount AS amount,paymentType,type,page FROM maintenance_forms  WHERE $condition
+            UNION 
+            SELECT id AS id, refilling_date as date, vehicle_id as name, amount AS amount,paymentType,type,page FROM urearefillings  WHERE $condition3
+            UNION
+            SELECT id AS id, upload_date as date, vechicle_id as name, amount AS amount,paymentType,type,page FROM tyres  WHERE $condition4
+            UNION 
+            SELECT id AS id,trans_date AS date,head_type as name ,amount AS amount, pay_type as paymentType,type,page FROM transactions WHERE $condition2 order by date
+            ");  
+            return  view('admin.vendorReport',compact('records','openingBalance'));
+        }
         
-        $openingBalance = $this->VendorOpening($fromDate,$request->vendorName);
-
-        
-
-
-        $records = DB::select("SELECT id AS id, date as date, vehicleNumber as name, amount AS amount,paymentType,type,page FROM maintenance_forms  WHERE $condition
-        UNION 
-        SELECT id AS id, refilling_date as date, vehicle_id as name, amount AS amount,paymentType,type,page FROM urearefillings  WHERE $condition3
-        UNION
-        SELECT id AS id, upload_date as date, vechicle_id as name, amount AS amount,paymentType,type,page FROM tyres  WHERE $condition4
-        UNION 
-        SELECT id AS id,trans_date AS date,head_type as name ,amount AS amount, pay_type as paymentType,type,page FROM transactions WHERE $condition2 order by date
-         ");  
-         return  view('admin.vendorReport',compact('records','openingBalance'));
-    }
-       
         return  view('admin.vendorReport');
     }
 
@@ -168,5 +171,51 @@ class VendorController extends Controller
         $urearefilling = Urearefilling::where('vendorName',$id)->sum('amount');
         $tyre = Tyre::where('vendor_name',$id)->sum('amount');
         return $total = $main + $tyre + $urearefilling - $trans ;
+    }
+
+    public function pdfVendorReports(Request $request){
+
+        if(isset($request->fromDate) && isset($request->toDate))
+       {
+        $fromDate = date('Y-m-d', strtotime($request->fromDate));
+        $toDate = date('Y-m-d', strtotime($request->toDate));
+       }else{
+        $fromDate = date('Y-m-d', strtotime(date('Y-m-d')));
+        $toDate = date('Y-m-d', strtotime(date('Y-m-d'))); 
+       }
+    
+        if(isset($request->vendorName)){
+        //condition
+            $condition="date between '".$fromDate."' AND '".$toDate."' AND paymentType='credit' AND vendorName = '".$request->vendorName."'";
+            
+            $condition2="trans_date between '".$fromDate."' AND '".$toDate."' AND trans_type = 'Vendor' AND head_type ='".$request->vendorName."'";
+            
+            $condition3="refilling_date between '".$fromDate."' AND '".$toDate."' AND paymentType='credit' AND vendorName = '".$request->vendorName."'";
+
+            $condition4 ="upload_date between '".$fromDate."' AND '".$toDate."' AND paymentType='credit' AND vendor_name = '".$request->vendorName."'";
+            
+            $openingBalance = $this->VendorOpening($fromDate,$request->vendorName);
+
+            
+
+
+            $records = DB::select("SELECT id AS id, date as date, vehicleNumber as name, amount AS amount,paymentType,type,page FROM maintenance_forms  WHERE $condition
+            UNION 
+            SELECT id AS id, refilling_date as date, vehicle_id as name, amount AS amount,paymentType,type,page FROM urearefillings  WHERE $condition3
+            UNION
+            SELECT id AS id, upload_date as date, vechicle_id as name, amount AS amount,paymentType,type,page FROM tyres  WHERE $condition4
+            UNION 
+            SELECT id AS id,trans_date AS date,head_type as name ,amount AS amount, pay_type as paymentType,type,page FROM transactions WHERE $condition2 order by date
+            ");  
+
+           $pdf=App::make('dompdf.wrapper');
+           $com = Company::first();
+           view()->share(compact('com','records','openingBalance'),$com,$records,$openingBalance);
+           $pdf = PDF::loadView('admin.vendorReportPdf');
+           $pdf->setPaper('A4','landscape');
+           return $pdf->stream();
+        }
+        
+        return  back();
     }
 }

@@ -183,6 +183,17 @@ Route::middleware(['auth'])->group(function () {
 
     //PDF for Urea Reports
     Route::get('/admin/pdf-urea-reports',[AddShortController::class, 'pdfUreaReports'])->name('pdfUreaReports');
-        
+
+    //PDF for trans Reports
+    Route::get('/admin/pdf-trans-reports',[AddShortController::class, 'pdfTransReports'])->name('trans.pdf');
+    //PDF for maintenaces Reports
+    Route::get('/admin/pdf-maintenaces-reports',[AddShortController::class, 'pdfMaintenanceReports'])->name('pdfMaintenanceReports');
+    //PDF for Vendor Reports
+    Route::get('/admin/pdf-vendor-reports',[VendorController::class, 'pdfVendorReports'])->name('pdfVendorReports');
+    //PDF for trcuk-profit Reports
+    Route::get('/admin/pdf-trcuk-profit-reports',[AddShortController::class, 'pdfTruckProfitReports'])->name('pdfTruckProfitReports');
+    //PDF for truck profit ledger Reports
+    Route::get('/admin/pdf-trcuk-profit-ledger-reports',[AddShortController::class, 'pdfTruckProfitLedgerReports'])->name('pdfTruckProfitLedgerReports');
+         
   });
 

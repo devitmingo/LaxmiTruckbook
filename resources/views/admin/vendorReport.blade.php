@@ -43,7 +43,7 @@ hr{
                         <div class="row">
                             <div class="col-12">
                                 <div class="page-title-box">
-                                    <h4 class="page-title">Trips</h4>
+                                    <h4 class="page-title">Vendor Ledger Report</h4>
                                     
                                 </div>
                                 </div>
@@ -85,8 +85,8 @@ hr{
                                                        
                                                         <div class="col-md-2">
                                                             </br>
-                                                            <button type="submit" class="btn btn-primary">Search</button>
-                                                            <a href="{{ route('vendorReports') }}" type="submit" class="btn btn-danger">Reset</a>
+                                                            <button type="submit" class="btn btn-success"><i class="mdi mdi-account-search"></i>  Search</button>
+                                                            <a href="{{ route('vendorReports') }}" type="submit" class="btn btn-danger"><i class="mdi mdi-refresh"></i> Reset</a>
                                                         </div>
 
                                                         
@@ -110,7 +110,8 @@ hr{
                                     <div class="card-body">
                                        
                                         <ul class="nav nav-tabs nav-bordered mb-3">
-                                            
+                                        <a href="{{ route('pdfVendorReports') }}?from_date=<?php echo isset($_GET['from_date']) ? $_GET['from_date'] : ''  ?>&to_date=<?php echo isset($_GET['to_date']) ? $_GET['to_date'] : ''  ?>&vendorName=<?php echo isset($_GET['vendorName']) ? $_GET['vendorName'] : ''  ?>" target="_blank"><button  type="button" class="btn btn-warning right"> <i class="mdi mdi-file-pdf"></i> Vendor Ledger Report PDF</button></a>
+                                  
                                         </ul> <!-- end nav-->
                                         <div class="tab-content" id="myTable">
                                             <div class="tab-pane show active" id="buttons-table-preview">

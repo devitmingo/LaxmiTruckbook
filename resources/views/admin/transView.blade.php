@@ -14,6 +14,36 @@ use App\Http\Controllers\AddShortController;
                                     <h4 class="page-title">Transaction List</h4>
                                     
                                 </div>
+                                <div class="tab-content">
+                                            <div class="tab-pane show active" id="form-row-preview">
+                                               <form action="" method="get">
+                                               
+                                               @csrf
+                                                    <div class="row g-2">
+                                                      <div class="col-md-2">
+                                                             <label for="inputPassword4" class="form-label">From Date</label>
+                                                             <input type="text" name="from_date"  id="from_date" class="form-control datepicker" 
+                                                            value="{{ isset($fromDate) ? date('d-m-Y',strtotime($fromDate)) : $date  }}">
+                                                        </div>
+                                                        
+                                                       <div class="col-md-2">
+                                                            <label for="inputPassword4" class="form-label">To Date</label>
+                                                            <input type="text" name="to_date"  id="to_date" class="form-control datepicker" id="inputCity"
+                                                             value="{{ isset($toDate) ? date('d-m-Y',strtotime($toDate)) : $date  }}">
+                                                       </div>
+                                                       
+                                                        <div class="col-md-2" style="margin-top:42px;">
+                                                           
+                                                            <button type="submit" class="btn btn-success"><i class="mdi mdi-account-search"></i> Search</button>
+                                                            <a href="{{ route('trans.index') }}" type="reset" class="btn btn-danger"><i class="mdi mdi-refresh"></i> Reset</a>
+                                                        </div>
+                                                 </div>
+                                                  
+                                                </form>                      
+                                            </div> <!-- end preview-->
+                                        
+                                           
+                                        </div> <!-- end tab-content-->
                                 </div>
                         </div>     
                         <!-- end page title --> 
@@ -26,6 +56,8 @@ use App\Http\Controllers\AddShortController;
                                 <div class="card">
                                     <div class="card-body">
                                         <a href="{{ route('trans.create') }}"><button  type="button" class="btn btn-primary right"> + Add Transaction</button></a>
+                                        
+                                        <a href="{{ route('trans.pdf') }}"><button  type="button" class="btn btn-warning right"> <i class="mdi mdi-file-pdf"></i> Transaction Report</button></a>
                                         <br>
                                         </br>
                                         <ul class="nav nav-tabs nav-bordered mb-3">

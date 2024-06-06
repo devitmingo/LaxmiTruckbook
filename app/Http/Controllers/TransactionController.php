@@ -18,7 +18,20 @@ class TransactionController extends Controller
     public function index()
     {
         $records = Transaction::where('status',0)->get();
-       return view('admin.transView',compact('records'));
+        if(isset($request->from_date) && isset($request->to_date))
+        {
+            $fromDate = date('Y-m-d', strtotime($request->from_date));
+            $toDate = date('Y-m-d', strtotime($request->to_date));
+            }else{
+            $startDate = now()->subDays(30);
+            $fromDate = date('Y-m-d', strtotime($startDate));
+            $toDate = date('Y-m-d', strtotime(date('Y-m-d'))); 
+        }
+      
+        $records = $records->WhereBetween('trans_date',[$fromDate,$toDate]);
+        
+        //return $records;
+       return view('admin.transView',compact('records','fromDate','toDate'));
     }
 
     /**

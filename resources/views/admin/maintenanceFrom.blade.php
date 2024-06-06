@@ -7,7 +7,7 @@
                         <div class="row">
                             <div class="col-12">
                                 <div class="page-title-box">
-                                    <h4 class="page-title">Maintenance</h4>  
+                                    <h4 class="page-title">Maintenance Form</h4>  
                                 </div>
                                 </div>
                         </div>     
@@ -19,7 +19,7 @@
                                     <div class="card-body">
 
                               
-                                  <a href="{{ route('maintenanceForm.index') }}"><button  type="button" class="btn btn-primary right">Maintenance Report</button></a>
+                                        <a href="{{ route('maintenanceForm.index') }}"><button  type="button" class="btn btn-primary right"><b><i class="mdi mdi-format-list-bulleted"></i>  Maintenance Report</b></button></a>
                                         <br>
                                         </br>
 
@@ -43,7 +43,7 @@
                                                         <div class="mb-3 col-md-3">
                                                              <label for="inputPassword4" class="form-label">Maintenance Type <span class="imp">*</span></label>
                                                              <select id="maintenance" name="maintenance" class="form-select js-example-basic-single">
-                                                                <option>--Choose Maintenance--</option>
+                                                                <option value="">--Choose Maintenance--</option>
                                                                 @foreach($maintenance as $row)
                                                                 <option value="{{ $row->id }}">{{ $row->name }}</option>
                                                                 @endforeach                                                           
@@ -54,7 +54,7 @@
                                                         <div class="mb-3 col-md-3">
                                                              <label for="inputPassword4" class="form-label">Vehicle Number <span class="imp">*</span></label>
                                                              <select id="vehicleNumber" name="vehicleNumber" class="form-select js-example-basic-single">
-                                                                <option>--Choose Vehicle--</option>
+                                                                <option value="">--Choose Vehicle--</option>
                                                                 @foreach($vehicle as $row)
                                                                 <option value="{{ $row->id }}">{{ $row->vehicleNumber }}</option>
                                                                 @endforeach                                                           
@@ -65,7 +65,7 @@
                                                         <div class="mb-3 col-md-3">
                                                              <label for="inputPassword4" class="form-label">Driver Name <span class="imp">*</span></label>
                                                              <select id="driverName" name="driverName" class="form-select js-example-basic-single">
-                                                                <option>--Choose Supplier--</option>
+                                                                <option value="">--Choose Driver--</option>
                                                                 @foreach($driver as $row)
                                                                 <option value="{{ $row->id }}">{{ $row->driverName }}</option>
                                                                 @endforeach                                                           
@@ -81,7 +81,7 @@
                                                         <div class="mb-3 col-md-3">
                                                              <label for="inputPassword4" class="form-label">Product Type <span class="imp">*</span></label>
                                                              <select id="productType" name="productType" class="form-select js-example-basic-single">
-                                                                <option>--Choose Supplier--</option>
+                                                                <option value="">--Choose Product Type--</option>
                                                                 <option value="New">New</option>
                                                                 <option value="Old">Old</option>             
                                                             </select>
@@ -102,7 +102,7 @@
                                                         <div class="mb-3 col-md-3">
                                                             <label for="inputPassword4" class="form-label" on>Self/Warranty Type<span class="imp">*</span></label>
                                                             <select id="self_warranty" class="form-select" name="self_warranty" onchange="SlefWrrantyOnchange()">
-                                                                <option value="">-Select-</option>
+                                                                <option value="">-Select Self/Warranty-</option>
                                                                 <option value="self">Self</option>
                                                                 <option value="Warranty">Warranty</option>
                                                             </select>
@@ -115,7 +115,7 @@
                                                         <div class="mb-3 col-md-3">
                                                             <label for="inputPassword4" class="form-label" on>Payment Type</label>
                                                             <select id="paymentType" class="form-select" name="paymentType" onchange="paymentOnchange()">
-                                                                <option value="">-Select-</option>
+                                                                <option value="">-Select Payment-</option>
                                                                 <option value="cash">Cash</option>
                                                                 <option value="credit">Credit</option>
                                                                
@@ -126,7 +126,7 @@
                                                         <div class="mb-3 col-md-3" id="vendor_div">
                                                             <label for="inputPassword4" class="form-label">Vendor Name<span class="imp">*</span></label>
                                                             <select id="vendorName" class="form-select js-example-basic-single" name="vendorName">
-                                                                <option value="">-Select-</option>
+                                                                <option value="">-Select Vendor-</option>
                                                                     @foreach($supp as $row)
                                                                         <option value="{{ $row->id }}">{{ $row->vendorName }}</option>
                                                                     @endforeach
@@ -140,7 +140,7 @@
                                                         </div>
                                                          <div class="mb-3 col-md-3">
                                                          </br>   
-                                                            <button type="submit" class="btn btn-primary">{{ isset($data) ? "Update" : "Submit" }}</button>
+                                                            <button type="submit" class="btn btn-success"><span class="mdi mdi-content-save-all"></span> {{ isset($data) ? "Update" : "Submit" }}</button>
                                                          </div>
                                                     </div>
                                                  </form>                      

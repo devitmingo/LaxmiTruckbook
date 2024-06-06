@@ -18,7 +18,7 @@
                                 <div class="card">
                                     <div class="card-body">
                                
-                                 <a href="{{ route('trans.index') }}"><button  type="button" class="btn btn-primary right"> Show Transaction </button></a>
+                                 <a href="{{ route('trans.index') }}"><button  type="button" class="btn btn-primary right"><i class="mdi mdi-format-list-bulleted"></i> Show Transaction </button></a>
                                         <br>
                                         </br>
                                         <div class="tab-content">
@@ -99,7 +99,7 @@
                                                         
                                                          <div class="mb-3 col-md-3">
                                                          </br>   
-                                                            <button type="submit" class="btn btn-primary">{{ isset($data) ? "Update" : "Submit" }}</button>
+                                                            <button type="submit" class="btn btn-success"><span class="mdi mdi-content-save-all"></span> {{ isset($data) ? "Update" : "Submit" }}</button>
                                                          </div>
                                                     </div>
                                                  </form>                      

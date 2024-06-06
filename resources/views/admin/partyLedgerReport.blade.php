@@ -41,8 +41,8 @@ use App\Http\Controllers\AddShortController;
 
                                             </div>
                                             <div class="mb-3 col-md-3">
-                                                <button class="btn btn-primary pull-right">Search</button>  
-                                                <a href="{{ Route('partyLedgerReport') }}" class="btn btn-success pull-right">Reset</a>  
+                                                <button class="btn btn-success pull-right"><i class="mdi mdi-account-search"></i> Search</button>  
+                                                <a href="{{ Route('partyLedgerReport') }}" class="btn btn-danger pull-right"><i class="mdi mdi-refresh"></i> Reset</a>  
                                             </div>
                                         </div>
                                     </div>
@@ -52,7 +52,7 @@ use App\Http\Controllers\AddShortController;
                             <div class="col-12">
                                 <div class="card">
                                     <div class="card-body">
-                                    <a target="_blank" class="btn btn-primary" href="{{ route('partyledgerPdf') }}?id=<?php echo isset($_GET['id']) ? $_GET['id'] : '';  ?>&from_date=<?php echo isset($_GET['from_date']) ? $_GET['from_date'] : ''  ?>&to_date=<?php echo isset($_GET['to_date']) ? $_GET['to_date'] : ''  ?>" >PDF</a>
+                                    <a target="_blank" class="btn btn-warning" href="{{ route('partyledgerPdf') }}?id=<?php echo isset($_GET['id']) ? $_GET['id'] : '';  ?>&from_date=<?php echo isset($_GET['from_date']) ? $_GET['from_date'] : ''  ?>&to_date=<?php echo isset($_GET['to_date']) ? $_GET['to_date'] : ''  ?>" ><i class="mdi mdi-file-pdf"></i> Party Report</a>
                                       
                                         <ul class="nav nav-tabs nav-bordered mb-3">
                                             

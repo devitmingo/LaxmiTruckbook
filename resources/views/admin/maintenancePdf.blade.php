@@ -1,78 +1,104 @@
-@php
-use App\Http\Controllers\AdminController;
-use App\Http\Controllers\AddShortController;
-@endphp
-@extends('layouts.app')
-@section('body')
-   <!-- Start Content-->
-  <div class="container-fluid">
-
-  <!-- start page title -->
-                        <div class="row">
-                            <div class="col-12">
-                                <div class="page-title-box">
-                                    <h4 class="page-title">Maintenance Report</h4>
-                                    
-                                </div>
-                                <div class="tab-content">
-                                            <div class="tab-pane show active" id="form-row-preview">
-                                               <form action="" method="get">
-                                               
-                                               @csrf
-                                                    <div class="row g-2">
-                                                      <div class="col-md-2">
-                                                             <label for="inputPassword4" class="form-label">From Date</label>
-                                                             <input type="text" name="from_date"  id="from_date" class="form-control datepicker" 
-                                                            value="{{ isset($fromDate) ? date('d-m-Y',strtotime($fromDate)) : $date  }}">
-                                                        </div>
-                                                        
-                                                       <div class="col-md-2">
-                                                            <label for="inputPassword4" class="form-label">To Date</label>
-                                                            <input type="text" name="to_date"  id="to_date" class="form-control datepicker" id="inputCity"
-                                                             value="{{ isset($toDate) ? date('d-m-Y',strtotime($toDate)) : $date  }}">
-                                                       </div>
-                                                        
-                                                      
-                                                        <div class="col-md-2">
-                                                            <label for="inputEmail4" class="form-label">Select Vehicle</label>
-                                                             <select id="vehicleNumber" name="vehicleNumber" class="form-select js-example-basic-single">
-                                                                <option value="">--Choose Vehicle--</option> 
-                                                                @foreach($vehicle as $row)
-                                                                    <option value="{{ $row->id }}">{{ $row->vehicleNumber }}</option>
-                                                                @endforeach             
-                                                            </select>
-                                                        </div> 
-                                                        <div class="col-md-2" style="margin-top:42px;">
-                                                           
-                                                            <button type="submit" class="btn btn-success"><i class="mdi mdi-account-search"></i> Search</button>
-                                                            <a href="{{ route('urea.index') }}" type="reset" class="btn btn-danger"><i class="mdi mdi-refresh"></i> Reset</a>
-                                                        </div>
-                                                 </div>
-                                                  
-                                                </form>                      
-                                            </div> <!-- end preview-->
-                                        
-                                           
-                                        </div> <!-- end tab-content-->
-                                </div>
-                        </div>     
-                        <!-- end page title --> 
+<?php 
+   use App\Http\Controllers\AdminController;
+   use App\Http\Controllers\AddShortController;
+   use Illuminate\Http\Request;
+  
+   ?>
+<!DOCTYPE html>
+<html>
+   <body style="font-family: Courier!important;">
+      <style>
+         body{
+         border: 1px solid black;
+         }
+         table,td,th {
+         border-spacing: -1px;
+         font-size: 14px;
+         border: 0.5px solid black;
+         }
+         th{
+         padding-left: 10px;
+         padding-bottom: 6px;
+         padding-top: 6px;
+         padding-right:  6px;
+         text-align: left; 
+         }
+         #background{
+         position:absolute;
+         z-index:0;
+         background:white;
+         display:block;
+         min-height:50%; 
+         min-width:50%;
+         color:yellow;
+         }
+         #content{
+         position:absolute;
+         z-index:1;
+         }
+         #bg-text
+         {
+         color:lightgrey;
+         font-size:120px;
+         transform:rotate(300deg);
+         -webkit-transform:rotate(300deg);
+         }
 
 
+         .tableStyle th{
+         padding-left: 10px;
+         padding-bottom: 6px;
+         padding-top: 6px;
+         padding-right:  6px;
+         text-align: left; 
+         }
+
+         .tableStyle td{
+         padding-left: 10px;
+         padding-bottom: 6px;
+         padding-top: 6px;
+         padding-right:  6px;
+         text-align: left; 
+         }
+      </style>
+      <!-- <div id="background">
+         <p id="bg-text">{{ $com->company_name }}</p> 
+         	</div> -->
+      <div >
+    
+         <table style="width: 100%" style="border:1px solid black">
+            <thead>
+               <tr>
+                  <th colspan="20" style="padding-left:  0px!important; font-size: 16px;">
+                     <center>Reports</center>
+                  </th>
+               </tr>
+               <tr>
+                  <th colspan="20" style="padding-left:  0px!important; font-size: 28px;">
+                     <center>{{ $com->name }}<br><span style="font-size: 14px;">{{ $com->address }}</span></center>
+                  </th>
+               </tr>
+               <tr>
+                  <th colspan="20" style="padding-left:  10px!important;text-align: center;">Mob. No : {{ $com->mobile }},{{ $com->phone }} </th>
+                  </tr>
+                  <tr>
+                  <th colspan="20" style="padding-right:   10px!important; text-align: center; border-bottom: 0.5px solid black">Email :  {{ $com->email }} @if($com->gst_no) || <span style = "margin-right:110px;">GST No.  :    {{ $com->gst_no }} @endif </span> </th>
+                  </tr>
+
+                <tr style="background:black;color:white;">
+                    <th colspan="10" >Maintenance Reports</th>
+                    <th colspan="10" style=" text-align: right; ">Generated on {{ date('d-m-Y H:i:s') }}</th>
+                </tr>
+
+               
+            </thead>
+         </table>
 
                         <div class="row">
                             <x-alert/>
                             <div class="col-12">
                                 <div class="card">
                                     <div class="card-body">
-                                        <a href="{{ route('maintenanceForm.create') }}"><button  type="button" class="btn btn-primary right"> + Add Maintenance</button></a>
-                                        <a href="{{ route('pdfMaintenanceReports') }}?from_date=<?php echo isset($_GET['from_date']) ? $_GET['from_date'] : ''  ?>&to_date=<?php echo isset($_GET['to_date']) ? $_GET['to_date'] : ''  ?>&vehicleNumber=<?php echo isset($_GET['vehicleNumber']) ? $_GET['vehicleNumber'] : ''  ?>" target="_blank"><button  type="button" class="btn btn-warning right"> <i class="mdi mdi-file-pdf"></i> Maintenance Report PDF</button></a>
-                                     
-                                        <br>
-                                        </br>
-                                        <ul class="nav nav-tabs nav-bordered mb-3">
-                                            
-                                        </ul> <!-- end nav-->
                                         <div class="tab-content">
                                             <div class="tab-pane show active" id="buttons-table-preview">
                                                 <table  class="table table-striped dt-responsive nowrap w-100">
@@ -159,6 +185,9 @@ use App\Http\Controllers\AddShortController;
                             </div><!-- end col-->
                         </div>
                         <!-- end row-->
+       
 
-  </div>                  
-@endsection
+        
+      </div>
+   </body>
+</html>

@@ -105,8 +105,8 @@ hr{
 
                                                         
                                                  </div>
-                                                   <button type="submit" class="btn btn-primary"><i class="mdi mdi-account-search"></i> Search</button>
-                                                   <a href="{{ route('trips.index') }}" type="reset" class="btn btn-warning"><i class="mdi mdi-refresh"></i> Reset</a>
+                                                   <button type="submit" class="btn btn-success"><i class="mdi mdi-account-search"></i> Search</button>
+                                                   <a href="{{ route('trips.index') }}" type="reset" class="btn btn-danger"><i class="mdi mdi-refresh"></i> Reset</a>
                                                 </form>                      
                                             </div> <!-- end preview-->
                                         
@@ -124,7 +124,7 @@ hr{
                                 <div class="card">
                                     <div class="card-body">
                                         <a href="{{ route('trips.create') }}"><button  type="button" class="btn btn-primary right"> <i class="mdi mdi-plus-circle"></i> Add Trip</button></a>
-                                        <a target="_blank" class="btn btn-primary" href="{{ route('pdfTripReports') }}?partyName=<?php echo isset($_GET['partyName']) ? $_GET['partyName'] : '';  ?>&from_date=<?php echo isset($_GET['from_date']) ? $_GET['from_date'] : ''  ?>&to_date=<?php echo isset($_GET['to_date']) ? $_GET['to_date'] : ''  ?>&vehicleNumber=<?php echo isset($_GET['vehicleNumber']) ? $_GET['vehicleNumber'] : ''  ?>&status=<?php echo isset($_GET['status']) ? $_GET['status'] : ''  ?>" >
+                                        <a target="_blank" class="btn btn-warning" href="{{ route('pdfTripReports') }}?partyName=<?php echo isset($_GET['partyName']) ? $_GET['partyName'] : '';  ?>&from_date=<?php echo isset($_GET['from_date']) ? $_GET['from_date'] : ''  ?>&to_date=<?php echo isset($_GET['to_date']) ? $_GET['to_date'] : ''  ?>&vehicleNumber=<?php echo isset($_GET['vehicleNumber']) ? $_GET['vehicleNumber'] : ''  ?>&status=<?php echo isset($_GET['status']) ? $_GET['status'] : ''  ?>" >
                                         <i class="mdi mdi-file-pdf"></i> PDF</a>
                                         <br>
                                         </br>

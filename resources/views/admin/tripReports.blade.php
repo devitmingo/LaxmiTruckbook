@@ -1,8 +1,8 @@
 @php
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AddShortController;
-$fromDate = isset($_GET['from_date']) ? date('m/d/Y',strtotime($_GET['from_date'])) : '';
-$toDate = isset($_GET['to_date']) ? date('m/d/Y',strtotime($_GET['to_date'])) : ''; 
+$fromDate = isset($fromDate) ? date('m-d-Y',strtotime($fromDate)) : '';
+$toDate = isset($toDate) ? date('m-d-Y',strtotime($toDate)) : '';
 @endphp
 @extends('layouts.app')
 @section('body')
@@ -37,7 +37,7 @@ $toDate = isset($_GET['to_date']) ? date('m/d/Y',strtotime($_GET['to_date'])) : 
                                     <div class="card-body">
                                         <div class="row">
                                             <div class="mb-2 col-md-2">
-                                                <input class="form-control datepicker" type="text" name="from_date" id="from_date" value="<?php echo $fromDate;  ?>" />
+                                                <input class="form-control datepicker" type="text" name="from_date" id="from_date" value="<?php  echo $fromDate;  ?>" />
                                             </div>
 
                                             <div class="mb-2 col-md-2">
@@ -53,8 +53,8 @@ $toDate = isset($_GET['to_date']) ? date('m/d/Y',strtotime($_GET['to_date'])) : 
                                                 </select>
                                             </div>
                                             <div class="mb-2 col-md-2">
-                                                <button class="btn btn-primary pull-right">Search</button>  
-                                                <a href="{{ Route('supplierledgerReport') }}" class="btn btn-success pull-right">Reset</a>  
+                                                <button class="btn btn-success"><i class="mdi mdi-account-search"></i>  Search</button>  
+                                                <a href="{{ Route('supplierledgerReport') }}" class="btn btn-danger"><i class="mdi mdi-refresh"></i> Reset</a>  
                                             </div>
                                         </div>
                                     </div>
@@ -65,8 +65,8 @@ $toDate = isset($_GET['to_date']) ? date('m/d/Y',strtotime($_GET['to_date'])) : 
                             <div class="col-12">
                                 <div class="card">
                                     <div class="card-body">
-                                      <a target="_blank" class="btn btn-primary" href="{{ route('supplierledgerPdf') }}?id=<?php echo isset($_GET['id']) ? $_GET['id'] : '';  ?>&from_date=<?php echo isset($_GET['from_date']) ? $_GET['from_date'] : ''  ?>&to_date=<?php echo isset($_GET['to_date']) ? $_GET['to_date'] : ''  ?>&status=<?php echo isset($_GET['status']) ? $_GET['status'] : ''  ?>" >PDF</a>
                                         <ul class="nav nav-tabs nav-bordered mb-3">
+                                        <a target="_blank" class="btn btn-warning" href="{{ route('pdfTruckProfitReports') }}?id=<?php echo isset($_GET['id']) ? $_GET['id'] : '';  ?>&from_date=<?php echo isset($_GET['from_date']) ? $_GET['from_date'] : ''  ?>&to_date=<?php echo isset($_GET['to_date']) ? $_GET['to_date'] : ''  ?>" ><i class="mdi mdi-file-pdf"></i> Truck Profit Report</a>
                                             
                                         </ul> <!-- end nav-->
                                         <div class="tab-content">

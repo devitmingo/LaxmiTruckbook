@@ -1,120 +1,110 @@
-@php
-use App\Http\Controllers\AdminController;
-use App\Http\Controllers\AddShortController;
-@endphp
-@extends('layouts.app')
-@section('body')
-<?php  $date = date('d-m-Y'); ?>
-<script>
-$(document).ready(function(){
-  $("#myInput").on("keyup", function() {
-    var value = $(this).val().toLowerCase();
-    $("#myTable tr").filter(function() {
-      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
-    });
-  });
-});
-</script>
-<style>
-table {
-  font-family: arial, sans-serif;
-  border-collapse: collapse;
-  width: 100%;
-}
+<?php 
+   use App\Http\Controllers\AdminController;
+   use App\Http\Controllers\AddShortController;
+   use Illuminate\Http\Request;
+  
+   ?>
+<!DOCTYPE html>
+<html>
+   <body style="font-family: Courier!important;">
+      <style>
+         body{
+         border: 1px solid black;
+         }
+         table,td,th {
+         border-spacing: -1px;
+         font-size: 14px;
+         border: 0.5px solid black;
+         }
+         th{
+         padding-left: 26px;
+         padding-bottom: 6px;
+         padding-top: 6px;
+         padding-right:  6px;
+         text-align: left; 
+         }
+         #background{
+         position:absolute;
+         z-index:0;
+         background:white;
+         display:block;
+         min-height:50%; 
+         min-width:50%;
+         color:yellow;
+         }
+         #content{
+         position:absolute;
+         z-index:1;
+         }
+         #bg-text
+         {
+         color:lightgrey;
+         font-size:120px;
+         transform:rotate(300deg);
+         -webkit-transform:rotate(300deg);
+         }
 
-td, th {
-  border: 1px solid #dddddd;
-  text-align: left;
-  padding: 8px;
-}
 
-tr:nth-child(even) {
-  background-color: #dddddd;
-}
-hr{
-    margin: 0rem 0!important;
- }
-</style>
+         .tableStyle th{
+         padding-left: 10px;
+         padding-bottom: 6px;
+         padding-top: 6px;
+         padding-right:  6px;
+         text-align: left; 
+         }
 
-   <!-- Start Content-->
-  <div class="container-fluid">
+         .tableStyle td{
+         padding-left: 10px;
+         padding-bottom: 6px;
+         padding-top: 6px;
+         padding-right:  6px;
+         text-align: left; 
+         }
+      </style>
+      <!-- <div id="background">
+         <p id="bg-text">{{ $com->company_name }}</p> 
+         	</div> -->
+      <div >
+    
+         <table style="width: 100%" style="border:1px solid black">
+            <thead>
+               <tr>
+                  <th colspan="20" style="padding-left:  0px!important; font-size: 16px;">
+                     <center>Reports</center>
+                  </th>
+               </tr>
+               <tr>
+                  <th colspan="20" style="padding-left:  0px!important; font-size: 28px;">
+                     <center>{{ $com->name }}<br><span style="font-size: 14px;">{{ $com->address }}</span></center>
+                  </th>
+               </tr>
+               <tr>
+                  <th colspan="20" style="padding-left:  10px!important;text-align: center;">Mob. No : {{ $com->mobile }},{{ $com->phone }} </th>
+                  </tr>
+                  <tr>
+                  <th colspan="20" style="padding-right:   10px!important; text-align: center; border-bottom: 0.5px solid black">Email :  {{ $com->email }} @if($com->gst_no) || <span style = "margin-right:110px;">GST No.  :    {{ $com->gst_no }} @endif </span> </th>
+                  </tr>
 
-  <!-- start page title -->
-                        <div class="row">
-                            <div class="col-12">
-                                <div class="page-title-box">
-                                    <h4 class="page-title">Truck Profit Ledger</h4>
-                                    
-                                </div>
-                                </div>
-                        </div>     
-                        <!-- end page title --> 
+                <tr style="background:black;color:white;">
+                    <th colspan="10" >Truck Profit Ledger Reports</th>
+                    <th colspan="10" style=" text-align: right; ">Generated on {{ date('d-m-Y H:i:s') }}</th>
+                </tr>
 
-                        <div class="row">
-                            <div class="col-12">
-                                <div class="card">
-                                    <div class="card-body">
-                                 
-                                        <div class="tab-content">
-                                            <div class="tab-pane show active" id="form-row-preview">
-                                               <form action="" method="get" autocomplete="off">
-                                               
-                                               @csrf
-                                                    <div class="row g-2">
-                                                      <div class="col-md-2">
-                                                            <input type="hidden" id="myInput" class="form-control" onkeyup="myFunction()" placeholder="Search..">
-                                                       
-                                                            <label for="inputPassword4" class="form-label">From Date</label>
-                                                             <input type="text" name="fromDate"  id="fromDate" class="form-control datepicker" 
-                                                            value="{{ isset($_GET['fromDate']) ? $_GET['fromDate'] : $date  }}">
-                                                        </div>
-                                                        
-                                                       <div class="col-md-2">
-                                                            <label for="inputPassword4" class="form-label">To Date</label>
-                                                            <input type="text" name="toDate"  id="toDate" class="form-control datepicker" 
-                                                             value="{{ isset($_GET['toDate']) ? $_GET['toDate'] : $date  }}">
-                                                       </div>
-                                                        
-                                                       <div class="col-md-2">
-                                                            <label for="inputEmail4" class="form-label">Select Vendor</label>
-                                                             <select id="vehicleNumber" name="vehicleNumber" class="form-select js-example-basic-single">
-                                                               
-                                                            </select>
-                                                             <script> $("#vehicleNumber").val(<?php echo isset($_GET['vehicleNumber']) ? $_GET['vehicleNumber'] : ''  ?>);</script>
-                                                        </div>
-                                                       
-                                                        <div class="col-md-2">
-                                                            </br>
-                                                            <button type="submit" class="btn btn-success"><i class="mdi mdi-account-search"></i>  Search</button>
-                                                            <a href="{{ route('vendorReports') }}" type="submit" class="btn btn-danger"><i class="mdi mdi-refresh"></i> Reset</a>
-                                                        </div>
-
-                                                        
-                                                 </div>
-                                                   
-                                                </form>                      
-                                            </div> <!-- end preview-->
-                                        
-                                           
-                                        </div> <!-- end tab-content-->
-
-                                    </div> <!-- end card-body -->
-                                </div> <!-- end card-->
-                            </div> <!-- end col -->
-                        </div>
-
-                    @if(isset($records))
+               
+            </thead>
+         </table>
+                     @if(isset($records))
                         <div class="row">
                             <div class="col-12">
                                 <div class="card">
                                     <div class="card-body">
                                        
                                         <ul class="nav nav-tabs nav-bordered mb-3">
-                                        <a target="_blank" class="btn btn-primary" href="{{ route('pdfTruckProfitLedgerReports') }}?vehicleNumber=<?php echo isset($_GET['vehicleNumber']) ? $_GET['vehicleNumber'] : '';  ?>&from_date=<?php echo isset($_GET['fromDate']) ? $_GET['fromDate'] : ''  ?>&to_date=<?php echo isset($_GET['toDate']) ? $_GET['toDate'] : ''  ?>" >Truck Profit Ledger Report</a>
+                                            
                                         </ul> <!-- end nav-->
                                         <div class="tab-content" id="myTable">
                                             <div class="tab-pane show active" id="buttons-table-preview">
-                                                <table  id="datatable-buttons" class="table table-striped dt-responsive nowrap w-100">
+                                                <table  width="100%" id="datatable-buttons" class="table table-striped dt-responsive nowrap w-100">
                                                     <thead>
                                                         <tr>
                                                             <th>Date</th>
@@ -198,29 +188,8 @@ hr{
                         </div>
                         <!-- end row-->
                     @endif
-  </div>         
-  <script>
-        //Fetch Parties list 
 
-        function fetchParty(id=0){
         
-                    $.ajax({
-                    type:'GET',
-                    url:'{{ url("common-get-select2") }}?table=vehicles&id=id&column=vehicleNumber',
-                    success:function(response){
-                        console.log(response);
-                        $("#vehicleNumber").html(response);
-                        $("#vehicleNumber").val(id);
-                        $('#vehicleNumber').trigger('change'); 
-                        document.getElementById("vehicleNumber").value = "<?php echo isset($_GET['vehicleNumber']) ? $_GET['vehicleNumber'] : ''?>";
-
-                    }
-                    });
-                }   
-        //onload rung party function
-        fetchParty();
-
-  </script>  
-  
-  
-@endsection
+      </div>
+   </body>
+</html>

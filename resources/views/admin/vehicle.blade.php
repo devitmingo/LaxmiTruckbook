@@ -51,14 +51,14 @@
                                                             <script>document.getElementById("vehicleType").value = "{{ old('vehicleType',isset($data->vehicleType) ? $data->vehicleType : '' )}}"; </script>
                                                         </div>
 
-                                                         <div class="mb-3 col-md-3">
+                                                         <div class="mb-3 col-md-3" style="display:none;">
                                                              <label for="inputPassword4" class="form-label">OwnerShip<span class="imp">*</span></label>
                                                             <select id="ownership" onchange = "getDriver()" name="ownership" class="form-select js-example-basic-single">
                                                                 <option value="My Truck" selected="selected">My Truck</option>
                                                                 <option value="Market Truck">Market Truck</option>
                                                             
                                                             </select>
-                                                            <script>document.getElementById("ownership").value = "{{ old('ownership',isset($data->ownership) ? $data->ownership : '' )}}"; </script>
+                                                            <script>document.getElementById("ownership").value = "{{ old('ownership',isset($data->ownership) ? $data->ownership : 'My Truck' )}}"; </script>
                                                         </div>
 
 
@@ -138,7 +138,7 @@
                                                            <input type="file" class="form-control" accept="image/jpeg,image/jpg,image/png,application/pdf" name="r_c_document" id="r_c_document" value="{{ old('r_c_document',isset($data->r_c_document) ? $data->r_c_document : '' )}}">
                                                          </div>
                                                          <div class="mb-3 col-md-3">
-                                                            <label for="inputPassword4" class="form-label">RC Expiry Date</label>
+                                                            <label for="inputPassword4" class="form-label"  style="display:none;">RC Expiry Date</label>
                                                            <input type="text" class="form-control datepicker" name="r_c_expiry_date" id="r_c_expiry_date" value="{{ old('r_c_expiry_date',isset($data->r_c_expiry_date) ? $data->r_c_expiry_date : '' )}}">
                                                          </div>
                                                          <div class="mb-3 col-md-3" style="display:none;">

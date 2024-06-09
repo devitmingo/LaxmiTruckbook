@@ -88,7 +88,7 @@
     var load_qty = $("#load_weight").val();
     var total = rate*qty;
 
-     $("#total_receive").val(total);
+     $("#total_receive").val(total.toFixed(2));
         if(qty!=''){
             short_weight=load_qty-qty;
             $("#shortage_qty").val(short_weight);
@@ -265,6 +265,6 @@
         var diesel_rate = $('#extra_diesel_rate').val();
         var diesel_ltr = $('#extra_diesel_ltr').val();
         var diesel = diesel_rate*diesel_ltr;
-        $('#extra_diesel_amout').val(diesel);
+        $('#extra_diesel_amout').val(diesel.toFixed(2));
     }
 </script>

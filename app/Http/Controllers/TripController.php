@@ -177,6 +177,7 @@ class TripController extends Controller
         unset($input['supplier_name']);
         unset($input['_method']);
         $input['startDate'] = date('Y-m-d',strtotime($request->startDate));
+        $input['diesel_adv_transport'] = isset($request->diesel_adv_transport) ? $request->diesel_adv_transport : $request->diesel_rate * $request->diesel_ltr; 
         $res = Trip::where('id',$id)->update($input);
         
        

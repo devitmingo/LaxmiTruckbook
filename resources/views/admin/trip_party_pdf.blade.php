@@ -172,6 +172,14 @@
                </tr>
                <tr>
                   <th colspan="14" style=" border: 0.5px solid black;padding-left:4px;">
+                   Diesel Advance 
+                  </th>
+                  <th colspan="6" style=" border: 0.5px solid black; text-align:right; padding-right:4px;">
+                        {{ number_format($diesel_adv_transport,2) }}
+                  </th>
+               </tr>
+               <tr>
+                  <th colspan="14" style=" border: 0.5px solid black;padding-left:4px;">
                    Driver Cash 
                   </th>
                   <th colspan="6" style=" border: 0.5px solid black; text-align:right; padding-right:4px;">

@@ -96,7 +96,7 @@ function onFreightRatechange(){
 
     var total = rate*qty;
 
-     $("#partyFreightAmount").val(total);
+     $("#partyFreightAmount").val(total.toFixed(2));
 }
 
 
@@ -124,7 +124,7 @@ function onTruckHireAmoutn(){
 
     var total = rate*qty;
 
-     $("#truckHireAmount").val(total);
+     $("#truckHireAmount").val(total.toFixed(2));
 }
 
 
@@ -201,7 +201,7 @@ fetchSupplier();
             type:'GET',
             url:'{{ url("common-get-select2") }}?table=drivers&id=id&column=driverName',
             success:function(response){
-                console.log(response);
+                //console.log(response);
                 $("#driverName").html(response);
                 $("#driverName").val(id);
                 $('#driverName').trigger('change'); 
@@ -287,7 +287,7 @@ fetchPartyBillingType();
             url:'{{ url("common-get-vehicle") }}?id='+vehicleNumber,
             success:function(response){
                var x = JSON.parse(response);
-                console.log(response);
+                //console.log(response);
                 $("#optionData").html(x.data);
                 $("#optionData").val(vehicleNumber);
                 $('#optionData').trigger('change'); 

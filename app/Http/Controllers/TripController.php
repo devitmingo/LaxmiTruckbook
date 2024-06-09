@@ -100,13 +100,14 @@ class TripController extends Controller
         $input['comapany_id'] = isset($company) ? $company : '';
         $input['created_by'] = isset(auth()->user()->id) ? auth()->user()->id : 0;
         $input['session_id'] = isset($session) ? $session : '';
+        $input['diesel_adv_transport'] = isset($request->diesel_adv_transport) ? $request->diesel_adv_transport : $request->diesel_rate * $request->diesel_ltr; 
         $input['status']=1;
         unset($input['_token']);
         unset($input['lrNo']);
         unset($input['lr_table_id']);
         unset($input['materialName']);
         unset($input['note']);
-         unset($input['supplier_name']);
+        unset($input['supplier_name']);
          $input['startDate'] = date('Y-m-d',strtotime($request->startDate));
         $res = Trip::create($input);
         

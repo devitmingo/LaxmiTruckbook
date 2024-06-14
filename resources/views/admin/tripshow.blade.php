@@ -164,10 +164,10 @@ hr{
                                                    
                                                    $destination = AdminController::getValueStatic2('routes','name','id',$row->destination);
                                                    $material = AdminController::getValueStatic2('l_r_lists','material','trip_id',$row->id);
-                                                 
+
                                                    $supplierBalance= AddShortController::supplierBalance($row->id);
 
-                                                  $loadig_weight = isset($row->party_unit_per) ? $row->party_unit_per : $truck_rate_per ;
+                                                  $loadig_weight = isset($row->party_unit_per) ? $row->party_unit_per : $row->truck_rate_per ;
                                                   $unloading_weight = $row->unload_weight_per;
                                                   $rate = isset($row->party_rate_per) ? $row->party_rate_per : $row->truck_unit_per;
                                                   $diesel_adv_transport = $row->diesel_adv_transport;

@@ -148,6 +148,8 @@ class TransactionController extends Controller
         $input['comapany_id'] = isset($company) ? $company : '0';
         $input['createdby'] = isset(auth()->user()->id) ? auth()->user()->id : 0;
         $input['session_id'] = isset($session) ? $session : '0';
+        unset($input['_method']);
+        unset($input['_token']);
         Transaction::where('id',$id)->update($input);
  
         return redirect(route('trams.index'))->with('success','Transaction updated successfully');

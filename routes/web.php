@@ -194,6 +194,11 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/admin/pdf-trcuk-profit-reports',[AddShortController::class, 'pdfTruckProfitReports'])->name('pdfTruckProfitReports');
     //PDF for truck profit ledger Reports
     Route::get('/admin/pdf-trcuk-profit-ledger-reports',[AddShortController::class, 'pdfTruckProfitLedgerReports'])->name('pdfTruckProfitLedgerReports');
+
+    //change password
+    Route::get('/admin/change-password',[AdminController::class, 'changePassword'])->name('changePassword');
+
+    Route::post('/admin/change-password',[AdminController::class, 'changePass'])->name('changePass');
          
   });
 

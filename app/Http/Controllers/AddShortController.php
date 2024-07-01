@@ -324,7 +324,7 @@ class AddShortController extends Controller
     }
 
     public static function totalPartyBalance($id){
-        $records = Trip::where('partyName',$id)->where('status','>','2')->get();
+        $records = Trip::where('partyName',$id)->where('status','>=','2')->get();
         $partyFreightAmount = 0;
         $totalChargesAdd =0;
         $totalChargesDection =0;
@@ -356,7 +356,7 @@ class AddShortController extends Controller
         $totalChargesDection =AddShortController::sumfucntion('party_charges','trip_id','chargesAmount',$data->id,'billtype',2);
         $totalPartyAdvance = AddShortController::sumfucntion2('party_advances','trip_id','amount',$data->id);
         $totalPartypayment = AddShortController::sumfucntion2('party_payments','trip_id','amount',$data->id);
-        return $partyBalance += $partyFreightAmount - $short_amount- $shortage_amount  -$diesel_adv_transport -$builty_commission - $driver_cash_transport + $totalChargesAdd - $totalChargesDection - $totalPartyAdvance - $totalPartypayment ;
+         $partyBalance += $partyFreightAmount - $short_amount- $shortage_amount  -$diesel_adv_transport -$builty_commission - $driver_cash_transport + $totalChargesAdd - $totalChargesDection - $totalPartyAdvance - $totalPartypayment ;
   
         }
         
@@ -1146,7 +1146,7 @@ class AddShortController extends Controller
         return view('admin.tripReports',compact('records','vehicles','fromDate','toDate'));
     }
     public  function truckProfit1($id,$fromDate,$toDate){
-        $trips = Trip::where('id',$id)->whereBetween('startDate',[$fromDate,$toDate])->get();
+        $trips = Trip::where('vehicleNumber',$id)->where('status','>=',2)->whereBetween('startDate',[$fromDate,$toDate])->get();
         $partyBalance=0;
         foreach($trips as $data){
             $status = $data->status; 

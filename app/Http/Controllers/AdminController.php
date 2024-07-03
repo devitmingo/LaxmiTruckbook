@@ -49,6 +49,8 @@ class AdminController extends Controller
             [
                 'email' => 'required|email|max:255',
                 'password' => 'required',
+                'company' => 'required',
+                'session' => 'required',
             ]);
 
         if ($validator->fails()) {
@@ -289,4 +291,32 @@ class AdminController extends Controller
                  ->get();
      }
 
+    public function changePassword(){
+        return view('admin.changePassword');
+    }
+
+    public function changePass(Request $request){
+        $input=$request->all();
+        $validator = Validator::make($input,
+            [
+                'oldPassword' => 'required',
+                'password' => 'required|confirmed|min:6',
+            ]);
+
+        if ($validator->fails()) {
+            return redirect()->back()
+                ->withErrors($validator)
+                ->withInput();
+        }
+        if (Auth::attempt(['email' => Auth()->user()->email, 'password' => $request->oldPassword])) {
+            $newPass = Hash::make($request->password);
+            User::where('id',Auth::user()->id)->update(['password'=>$newPass]);
+            Auth::logout();
+            Session::forget('id');
+            return redirect(route('login'))->with('error', 'Password change Succesfully. Please login again.');
+        }else {
+            return redirect()->back()->with('error', 'Old Password does not match.');
+        }
+
+    }
 }

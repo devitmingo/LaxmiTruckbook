@@ -25,7 +25,11 @@
                                     </span>
                                 </a>
                                 <div class="dropdown-menu dropdown-menu-end dropdown-menu-animated topbar-dropdown-menu profile-dropdown">
-                                                                      <!-- item-->
+                                     <!-- item-->
+                                     <a href="{{ route('changePassword') }}" class="dropdown-item notify-item">
+                                        <i class="mdi mdi-logout me-1"></i>
+                                        <span>Change Password</span>
+                                     </a>
                                     <a href="{{ route('admin.logout') }}" class="dropdown-item notify-item">
                                         <i class="mdi mdi-logout me-1"></i>
                                         <span>Logout</span>

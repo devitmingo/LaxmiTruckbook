@@ -54,7 +54,7 @@ $toDate = isset($toDate) ? date('m-d-Y',strtotime($toDate)) : '';
                                             </div>
                                             <div class="mb-2 col-md-2">
                                                 <button class="btn btn-success"><i class="mdi mdi-account-search"></i>  Search</button>  
-                                                <a href="{{ Route('supplierledgerReport') }}" class="btn btn-danger"><i class="mdi mdi-refresh"></i> Reset</a>  
+                                                <a href="{{ Route('truckReports') }}" class="btn btn-danger"><i class="mdi mdi-refresh"></i> Reset</a>  
                                             </div>
                                         </div>
                                     </div>

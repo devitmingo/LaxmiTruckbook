@@ -70,9 +70,7 @@ use App\Http\Controllers\AddShortController;
                                                             <th>Truck No.</th>
                                                             <th>Destionation</th>
                                                             <th>Fright</th>
-                                                            <th>Total Advance</th>
-                                                            <th>Total Charges</th>
-                                                            <th>Total Payment</th>
+                                                            
                                                             <th>Balance</th>
                                                             <th>Trips Status</th>
                                                             <th>View</th>
@@ -90,9 +88,21 @@ use App\Http\Controllers\AddShortController;
                                                     $total_charges=0;
                                                     $total_payment=0;
                                                     $total_supplierBalance=0;
+                                                    $partyBalance = 0;
                                                    @endphp
                                                    @foreach($records as $row)
                                                    @php
+
+                                                    $partyFreightAmount = $row->partyFreightAmount;
+                                                    $diesel_adv_transport = $row->diesel_adv_transport;
+                                                    $driver_cash_transport = $row->driver_cash_transport;
+                                                    $unload_rate_per = $row->unload_rate_per;
+                                                    $unload_unit_per = $row->unload_unit_per;
+                                                    $shortage_qty = $row->shortage_qty;
+                                                    $shortage_amount = $row->shortage_amount;
+                                                    $extra_diesel_amout = $row->extra_diesel_amout;
+                                                    $builty_commission = $row->builty_commission;
+                                                    $unload_weight_per = $row->unload_weight_per;
                                                    $partyName = AdminController::getValueStatic2('parties','partyName','id',$row->partyName);
                                                  
                                                    $vehicleNumber = AdminController::getValueStatic2('vehicles','vehicleNumber','id',$row->vehicleNumber);
@@ -105,16 +115,18 @@ use App\Http\Controllers\AddShortController;
                                                    $partyBalance= AddShortController::partyBalance($row->id);
                                                    $supplierBalance= AddShortController::supplierBalance($row->id);
                                                   
+                                                   $short_amount = isset($unload_weight_per) ? $partyFreightAmount - $unload_rate_per*$unload_weight_per : 0;
 
                                                    $partyFreightAmount = $row->partyFreightAmount;
                                                     $totalChargesAdd =AddShortController::sumfucntion('party_charges','trip_id','chargesAmount',$row->id,'billtype',1);
                                                     $totalChargesDection =AddShortController::sumfucntion('party_charges','trip_id','chargesAmount',$row->id,'billtype',2);
                                                     $totalPartyAdvance = AddShortController::sumfucntion2('party_advances','trip_id','amount',$row->id);
                                                     $totalPartypayment = AddShortController::sumfucntion2('party_payments','trip_id','amount',$row->id);
-                                                     $partyBalance = $partyFreightAmount + $totalChargesAdd - $totalChargesDection - $totalPartyAdvance - $totalPartypayment ;
-                                                    
+                                                    $partyBalance += $partyFreightAmount - $short_amount- $shortage_amount  -$diesel_adv_transport -$builty_commission - $driver_cash_transport + $totalChargesAdd - $totalChargesDection - $totalPartyAdvance - $totalPartypayment ;
+  
 
                                                 @endphp
+                                                        
                                                         @php
                                                         $total_partyBalance += $partyBalance;
                                                     $total_freight+=$partyFreightAmount;
@@ -130,9 +142,6 @@ use App\Http\Controllers\AddShortController;
                                                             <td>{{ isset($vehicleNumber) ? $vehicleNumber : ''  }} <span style="color:blue;">( {{ isset($ownership) ? $ownership : ''  }} )</span></td>
                                                             <td>{{ isset($origin) ? $origin : '' }} => {{ isset($destination) ? $destination : '' }}  </td>
                                                             <td>₹ {{ $partyFreightAmount }}</td>
-                                                            <td>₹ {{ $totalPartyAdvance }}</td>
-                                                            <td>₹ {{ $totalChargesAdd - $totalChargesDection  }}</td>
-                                                            <td>₹ {{ $totalPartypayment }}</td>
                                                             
                                                             <td> ₹ {{ isset($partyBalance) ? round($partyBalance) : '0' }}</td>
                                                         
@@ -152,7 +161,7 @@ use App\Http\Controllers\AddShortController;
                                                              <td><a href="{{ route('trips.show',$row->id) }}"><span class="btn btn-primary" > View </span></a></td>
                                                         </tr>
                                                             
-                                                        
+                                                      
                                                     @endforeach
                                                     </tbody>
                                                     <tfoot>

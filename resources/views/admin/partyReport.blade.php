@@ -52,7 +52,7 @@ use App\Http\Controllers\AddShortController;
                                                           
                                                         $total_PartyBalance+=$partyBalance;
                                                         @endphp
-                                                        @if($partyBalance!=0)
+                                                       
                                                         
                                                             <tr>
                                                                 <td>{{ $i }}</td>
@@ -61,7 +61,6 @@ use App\Http\Controllers\AddShortController;
                                                                 {{ isset($partyBalance) ? round($partyBalance) : ''  }}  </a></td>
                                                             </tr>
                                                             @php $i++; @endphp
-                                                        @endif
                                                        
                                                     @endforeach
                                                     </tbody>

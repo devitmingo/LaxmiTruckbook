@@ -102,7 +102,7 @@ use App\Http\Controllers\AddShortController;
                                                    $origin = AdminController::getValueStatic2('routes','name','id',$row->origin);
                                                    
                                                    $destination = AdminController::getValueStatic2('routes','name','id',$row->destination);
-                                                   //$partyBalance= AddShortController::partyBalance($row->id);
+                                                   $partyBalance= AddShortController::partyBalance($row->id);
                                                    $supplierBalance= AddShortController::supplierBalance($row->id);
                                                   
 
@@ -115,7 +115,6 @@ use App\Http\Controllers\AddShortController;
                                                     
 
                                                 @endphp
-                                                        @if($partyBalance==0)
                                                         @php
                                                         $total_partyBalance += $partyBalance;
                                                     $total_freight+=$partyFreightAmount;
@@ -153,7 +152,7 @@ use App\Http\Controllers\AddShortController;
                                                              <td><a href="{{ route('trips.show',$row->id) }}"><span class="btn btn-primary" > View </span></a></td>
                                                         </tr>
                                                             
-                                                        @endif
+                                                        
                                                     @endforeach
                                                     </tbody>
                                                     <tfoot>

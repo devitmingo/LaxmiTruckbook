@@ -220,7 +220,7 @@
         var diesel_rate = $('#diesel_rate').val();
         var diesel_ltr = $('#diesel_ltr').val();
         var diesel = diesel_rate*diesel_ltr;
-        $('#diesel_adv_transport').val(diesel.toFixed(2));
+        $('#diesel_adv_transport').val(Math.round(diesel));
     }
     diesal_cal();
 </script>

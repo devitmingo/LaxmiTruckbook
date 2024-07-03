@@ -452,7 +452,7 @@ class AddShortController extends Controller
 
    public function partyledgerPdf(Request $request){
     $com = Company::first();
-    $records = Trip::where('status',5)->get();
+    $records = Trip::where('status','>',2)->get();
     
     if(isset($request->id)){
         $records =$records->where('partyName',$request->id);

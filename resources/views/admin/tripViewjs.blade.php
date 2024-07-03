@@ -265,6 +265,6 @@
         var diesel_rate = $('#extra_diesel_rate').val();
         var diesel_ltr = $('#extra_diesel_ltr').val();
         var diesel = diesel_rate*diesel_ltr;
-        $('#extra_diesel_amout').val(diesel.toFixed(2));
+        $('#extra_diesel_amout').val(Math.round(diesel));
     }
 </script>

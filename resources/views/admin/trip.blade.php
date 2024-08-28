@@ -141,13 +141,13 @@
                                                             <br></br>
                                                             <br></br>
                                                             <hr>
-                                                            <div class="col-md-4">
+                                                            <div class="col-md-4" style="display:none;">
                                                                 <label for="inputPassword4" class="form-label">Diesel Rate</label>
                                                                 <input type="text" name="diesel_rate"  id="diesel_rate" onclick="diesal_cal()" class="form-control" 
                                                                 value="{{ old('diesel_rate',isset($data->diesel_rate) ? $data->diesel_rate :'' )  }}"
                                                                 >
                                                             </div>
-                                                            <div class="col-md-4">
+                                                            <div class="col-md-4" style="display:none;">
                                                                 <label for="inputPassword4" class="form-label">Diesel LTR</label>
                                                                 <input type="text" name="diesel_ltr"  id="diesel_ltr" onkeyup="diesal_cal()" class="form-control" 
                                                                 value="{{ old('diesel_ltr',isset($data->diesel_ltr) ? $data->diesel_ltr :'' )  }}"

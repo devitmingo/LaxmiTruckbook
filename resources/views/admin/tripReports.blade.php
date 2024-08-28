@@ -1,8 +1,8 @@
 @php
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AddShortController;
-$fromDate = isset($fromDate) ? date('m-d-Y',strtotime($fromDate)) : '';
-$toDate = isset($toDate) ? date('m-d-Y',strtotime($toDate)) : '';
+$fromDate = isset($fromDate) ? date('d-m-Y',strtotime($fromDate)) : '';
+$toDate = isset($toDate) ? date('d-m-Y',strtotime($toDate)) : '';
 @endphp
 @extends('layouts.app')
 @section('body')

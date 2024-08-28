@@ -114,19 +114,19 @@
                                                             <input type="text" class="form-control" placeholder="Total Receive"  name="shortage_amount" id="shortage_amount" required />
                                                         </div>
                                                     </div>
-                                                    <div class="col-4">
+                                                    <div class="col-4" style="display:none;">
                                                         <div class="mb-3">
                                                             <label class="control-label form-label">Diesel Rate</label>
                                                             <input type="text" class="form-control" placeholder="Diesel Rate" onkeyup="extra_diesal_cal()" name="extra_diesel_rate" id="extra_diesel_rate" required />
                                                         </div>
                                                     </div>
-                                                    <div class="col-4">
+                                                    <div class="col-4" style="display:none;">
                                                         <div class="mb-3">
                                                             <label class="control-label form-label">Diesel LTR</label>
                                                             <input type="text" class="form-control" placeholder="Diesel LTR" onkeyup="extra_diesal_cal()" name="extra_diesel_ltr" id="extra_diesel_ltr" required />
                                                         </div>
                                                     </div>
-                                                    <div class="col-4">
+                                                    <div class="col-6">
                                                         <div class="mb-3">
                                                             <label class="control-label form-label">Extra Diesel</label>
                                                             <input type="text" class="form-control" placeholder="Diesel Total"  name="extra_diesel_amout" id="extra_diesel_amout" required />

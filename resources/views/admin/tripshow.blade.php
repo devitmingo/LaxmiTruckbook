@@ -209,13 +209,12 @@ hr{
                                                         </td>
                                                             <td>{{ isset($shortage_amount) ? "₹".number_format($shortage_amount,2) : ''  }}</td>
                                                             
-                                                            <td>Diesel  - {{ isset($diesel_adv_transport) ? "₹".number_format($diesel_adv_transport,2) : ''  }} </br><span style="font-size:11px;">({{isset($row->diesel_rate) ? "₹".$row->diesel_rate : '' }} x {{isset($row->diesel_ltr) ? $row->diesel_ltr."Ltr": '' }}) </span> <hr>
+                                                            <td>Diesel  - {{ isset($diesel_adv_transport) ? "₹".number_format($diesel_adv_transport,2) : ''  }}  <hr>
                                                             Driver Cash - {{ isset($driver_cash_transport) ? "₹".number_format($driver_cash_transport,2) : ''  }} <hr>
                                                             Builty Commission {{ isset($builty_commission) ? "₹".number_format($builty_commission,2) : ''  }}
                                                         </td>
                                                             
-                                                            <td>Extra Diesel  = {{ isset($extra_diesel_amout) ? "₹".number_format($extra_diesel_amout,2) : ''  }} </br>
-                                                            <span style="font-size:11px;">({{isset($row->extra_diesel_rate) ? "₹".$row->extra_diesel_rate : '' }} x {{isset($row->extra_diesel_ltr) ? $row->extra_diesel_ltr."Ltr": '' }})</span>
+                                                            <td>Extra Diesel  = {{ isset($extra_diesel_amout) ? "₹".number_format($extra_diesel_amout,2) : ''  }} 
                                                             <hr>
                                                             Extra Expenses {{ isset($extra_expenses) ? "₹".number_format($extra_expenses,2) : ''  }}<hr>
                                                             Toll Amount - {{ isset($toll_amount) ? "₹".number_format($toll_amount,2) : ''  }}</td>

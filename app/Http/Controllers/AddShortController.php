@@ -1390,7 +1390,7 @@ class AddShortController extends Controller
         $pdf=App::make('dompdf.wrapper');
         $com = Company::first();
         view()->share(compact('com','records'),$com,$records);
-        $pdf = PDF::loadView('admin.ruckProfitReportPdf');
+        $pdf = PDF::loadView('admin.truckProfitReportPdf');
         $pdf->setPaper('A4','landscape');
         return $pdf->stream();
     }

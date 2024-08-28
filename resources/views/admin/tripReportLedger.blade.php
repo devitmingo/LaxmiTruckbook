@@ -110,7 +110,7 @@ hr{
                                     <div class="card-body">
                                        
                                         <ul class="nav nav-tabs nav-bordered mb-3">
-                                        <a target="_blank" class="btn btn-primary" href="{{ route('pdfTruckProfitLedgerReports') }}?vehicleNumber=<?php echo isset($_GET['vehicleNumber']) ? $_GET['vehicleNumber'] : '';  ?>&from_date=<?php echo isset($_GET['fromDate']) ? $_GET['fromDate'] : ''  ?>&to_date=<?php echo isset($_GET['toDate']) ? $_GET['toDate'] : ''  ?>" >Truck Profit Ledger Report</a>
+                                        <a target="_blank" class="btn btn-primary" href="{{ route('pdfTruckProfitLedgerReports') }}?vehicleNumber=<?php echo isset($_GET['vehicleNumber']) ? $_GET['vehicleNumber'] : '';  ?>&fromDate=<?php echo isset($_GET['fromDate']) ? $_GET['fromDate'] : ''  ?>&toDate=<?php echo isset($_GET['toDate']) ? $_GET['toDate'] : ''  ?>" >Truck Profit Ledger Report</a>
                                         </ul> <!-- end nav-->
                                         <div class="tab-content" id="myTable">
                                             <div class="tab-pane show active" id="buttons-table-preview">
